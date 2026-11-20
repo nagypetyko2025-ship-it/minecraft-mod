@@ -23,7 +23,8 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.40.1)
+## Tartalom (0.40.2)
+- Javítva: más postaládájának névmezőjébe kattintva beragadt az ablak (se kattintás, se Esc nem működött)
 - Az érlelő hordó bármilyen fa rönkjéből elkészíthető (End-fákból is), nem csak sötéttölgyből
 - **Automatikus frissítés**: ha a szerveren újabb End Realms fut, a játék belépéskor magától letölti GitHubról; értesítés jön, hogy kész, utána csak újra kell indítani a játékot (a 0.40.0-t még egyszer kézzel kell feltenni)
 - Javítva: a fermentáló állomásból az utolsó hozzávalót kivéve összeomlott a játék

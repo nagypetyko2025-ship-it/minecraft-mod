@@ -80,8 +80,13 @@ public class PhaseMailboxScreen extends AbstractContainerScreen<PhaseMailboxMenu
 		if (ready && !nameBox.isFocused()) {
 			nameBox.setValue(state.name());
 		}
-		nameBox.setEditable(ready && state.owner());
-		saveButton.active = ready && state.owner();
+		boolean owner = ready && state.owner();
+		nameBox.setEditable(owner);
+		nameBox.active = owner;          // someone else's mailbox: the name cannot even be clicked into
+		if (!owner && nameBox.isFocused()) {
+			unfocusName();
+		}
+		saveButton.active = owner;
 		if (ready && selected != null && !state.names().contains(selected)) {
 			selected = null;
 		}
@@ -149,8 +154,18 @@ public class PhaseMailboxScreen extends AbstractContainerScreen<PhaseMailboxMenu
 		}
 	}
 
+	private void unfocusName() {
+		nameBox.setFocused(false);
+		if (getFocused() == nameBox) {
+			setFocused(null);
+		}
+	}
+
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubled) {
+		if (nameBox != null && nameBox.isFocused() && !nameBox.isMouseOver(event.x(), event.y())) {
+			unfocusName();              // clicking anywhere else lets go of the name
+		}
 		int listX = leftPos + SIDE_X;
 		int listY = topPos + LIST_Y + 1;
 		if (event.x() >= listX && event.x() < listX + SIDE_W && event.y() >= listY && event.y() < listY + ROW * ROWS) {
@@ -176,10 +191,14 @@ public class PhaseMailboxScreen extends AbstractContainerScreen<PhaseMailboxMenu
 	/** While typing the name, letters must not close the window or trigger hotbar keys. */
 	@Override
 	public boolean keyPressed(KeyEvent event) {
-		if (nameBox != null && nameBox.isFocused() && event.key() != 256) {
+		if (event.key() == 256) {                     // Escape always closes the window
+			onClose();
+			return true;
+		}
+		if (nameBox != null && nameBox.canConsumeInput()) {
 			if (event.key() == 257 || event.key() == 335) {
 				saveButton.onPress(null);
-				nameBox.setFocused(false);
+				unfocusName();
 				return true;
 			}
 			return nameBox.keyPressed(event) || true;
