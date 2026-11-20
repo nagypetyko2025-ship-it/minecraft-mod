@@ -1,17 +1,21 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    [
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  A  ",
+    " BCB ",
+    "CCXCC",
+    " BCB ",
+    "  A  "
+  ],
+  "key": {
+    "X": "minecraft:diamond",
+    "C": "minecraft:lapis_lazuli",
+    "B": "endrealms:prism_shard",
+    "A": [
       "endrealms:phasite_ore",
       "endrealms:phasite_shard"
-    ],
-    "minecraft:lapis_lazuli",
-    "minecraft:lapis_lazuli",
-    "minecraft:diamond",
-    "endrealms:prism_shard",
-    "endrealms:prism_shard"
-  ],
+    ]
+  },
   "result": {
     "id": "endrealms:star_sapphire"
   }

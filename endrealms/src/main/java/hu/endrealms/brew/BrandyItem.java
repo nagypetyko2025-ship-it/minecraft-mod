@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * A brandy: its own effects, nausea for just as long, and Drunkenness. Drinking another while still drunk raises
- * Drunkenness by one level, up to IV, and starts its time over.
+ * Drunkenness by one level, up to IV, and starts its time over. Reaching IV makes you pass out ({@link Blackout}).
  * <p>
  * Aged brandy is better ({@link Brewing#QUALITY}): quality 2 lasts half again as long and its first effect that has levels
  * is one level higher; quality 3 lasts twice as long and every effect that has levels is one level higher.
@@ -120,6 +120,9 @@ public class BrandyItem extends Item {
 			int level2 = drunk == null ? 0 : Math.min(Brewing.MAX_DRUNK_LEVEL, drunk.getAmplifier() + 1);
 			entity.removeEffect(Brewing.DRUNKENNESS);     // so that the time starts over even at the top level
 			entity.addEffect(new MobEffectInstance(Brewing.DRUNKENNESS, Brewing.DURATION, level2));
+			if (level2 >= Brewing.MAX_DRUNK_LEVEL && entity instanceof net.minecraft.server.level.ServerPlayer player) {
+				Blackout.start(player);          // Drunkenness IV: you pass out
+			}
 		}
 		return result;
 	}

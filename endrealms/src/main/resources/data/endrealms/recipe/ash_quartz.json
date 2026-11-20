@@ -1,14 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "endrealms:chorusite_shard",
-    "minecraft:quartz",
-    "minecraft:quartz",
-    "minecraft:coal",
-    "endrealms:ash_dust",
-    "endrealms:ash_dust"
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  A  ",
+    " BCB ",
+    "ACXCA",
+    " BCB ",
+    "  A  "
   ],
+  "key": {
+    "X": "endrealms:chorusite_shard",
+    "C": "endrealms:ash_dust",
+    "B": "minecraft:quartz",
+    "A": "minecraft:coal"
+  },
   "result": {
     "id": "endrealms:ash_quartz"
   }

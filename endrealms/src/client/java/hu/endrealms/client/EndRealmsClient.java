@@ -41,6 +41,16 @@ public class EndRealmsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// Answers the server's version question while logging in, and fetches a newer End Realms (see VersionCheck, AutoUpdate).
 		hu.endrealms.client.update.ClientUpdate.init();
+		// Passing out at Drunkenness IV: the whole screen goes black, fading in over half a second (see Blackout).
+		net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry.addLast(hu.endrealms.EndRealms.id("blackout"), (g, delta) -> {
+			net.minecraft.client.player.LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
+			net.minecraft.world.effect.MobEffectInstance out = player == null ? null : player.getEffect(hu.endrealms.brew.Blackout.EFFECT);
+			if (out != null) {
+				int elapsed = hu.endrealms.brew.Blackout.TICKS + 10 - out.getDuration();
+				int alpha = Math.max(0, Math.min(255, elapsed * 255 / 10));
+				g.fill(0, 0, g.guiWidth(), g.guiHeight(), alpha << 24);
+			}
+		});
 		FluidRenderingRegistry.register(ModFluids.ASTRAL_WATER, ModFluids.FLOWING_ASTRAL_WATER, new FluidModel.Unbaked(
 				new Material(Identifier.withDefaultNamespace("block/water_still")),
 				new Material(Identifier.withDefaultNamespace("block/water_flow")),

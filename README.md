@@ -23,7 +23,9 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.40.2)
+## Tartalom (0.41.0)
+- **Ékkövek 5×5-ben**: a 7 barkácsolható ékkő (Koronakő kivételével) mostantól az End-barkácsasztalon, 5×5-ös gyémánt mintában készül, kb. kétszeres alapanyagból
+- **Ájulás**: Részegség IV elérésekor 4 másodpercre teljesen elsötétül a kép, és nem tudsz mozogni; utána 100 blokkon belül máshol térsz magadhoz, összekevert táskával, és minden hatás eltűnik rólad
 - Javítva: más postaládájának névmezőjébe kattintva beragadt az ablak (se kattintás, se Esc nem működött)
 - Az érlelő hordó bármilyen fa rönkjéből elkészíthető (End-fákból is), nem csak sötéttölgyből
 - **Automatikus frissítés**: ha a szerveren újabb End Realms fut, a játék belépéskor magától letölti GitHubról; értesítés jön, hogy kész, utána csak újra kell indítani a játékot (a 0.40.0-t még egyszer kézzel kell feltenni)

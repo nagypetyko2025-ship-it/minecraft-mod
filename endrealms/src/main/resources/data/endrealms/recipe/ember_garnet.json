@@ -1,14 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "endrealms:chorusite_shard",
-    "minecraft:redstone",
-    "minecraft:redstone",
-    "minecraft:raw_gold",
-    "minecraft:raw_gold",
-    "endrealms:ember_rock"
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  A  ",
+    " BCB ",
+    "ACXCA",
+    " BCB ",
+    "  A  "
   ],
+  "key": {
+    "X": "endrealms:chorusite_shard",
+    "C": "endrealms:ember_rock",
+    "B": "minecraft:raw_gold",
+    "A": "minecraft:redstone"
+  },
   "result": {
     "id": "endrealms:ember_garnet"
   }

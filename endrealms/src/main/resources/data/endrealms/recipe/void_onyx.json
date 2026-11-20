@@ -1,14 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "endrealms:chorusite_shard",
-    "minecraft:raw_iron",
-    "minecraft:raw_iron",
-    "minecraft:obsidian",
-    "endrealms:voidstone",
-    "endrealms:voidstone"
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  A  ",
+    " BCB ",
+    "ACXCA",
+    " BCB ",
+    "  A  "
   ],
+  "key": {
+    "X": "endrealms:chorusite_shard",
+    "C": "minecraft:obsidian",
+    "B": "minecraft:raw_iron",
+    "A": "endrealms:voidstone"
+  },
   "result": {
     "id": "endrealms:void_onyx"
   }

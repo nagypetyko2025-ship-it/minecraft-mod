@@ -605,13 +605,18 @@
       "xp": 500,
       "recipes": [
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
             [
-              "endrealms:deepglow_shard"
+              "endrealms:prism_shard"
             ],
+            [],
+            [],
+            [],
             [
-              "endrealms:deepglow_shard"
+              "endrealms:prism_shard"
             ],
             [
               "endrealms:deepglow_shard"
@@ -619,14 +624,39 @@
             [
               "endrealms:prism_shard"
             ],
+            [],
             [
               "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:deepglow_shard"
             ],
             [
               "endrealms:phasite_ore",
               "endrealms:phasite_shard"
             ],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
             [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
             [],
             []
           ],
@@ -2336,39 +2366,84 @@
       "xp": 400,
       "recipes": [
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
-            [
-              "endrealms:chorusite_shard"
-            ],
-            [
-              "minecraft:redstone"
-            ],
+            [],
+            [],
             [
               "minecraft:redstone"
             ],
-            [
-              "minecraft:raw_gold"
-            ],
+            [],
+            [],
+            [],
             [
               "minecraft:raw_gold"
             ],
             [
               "endrealms:ember_rock"
             ],
+            [
+              "minecraft:raw_gold"
+            ],
             [],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [],
+            [
+              "minecraft:raw_gold"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "minecraft:raw_gold"
+            ],
+            [],
+            [],
+            [],
+            [
+              "minecraft:redstone"
+            ],
             [],
             []
           ],
           "result": "endrealms:ember_garnet"
         },
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
             [
               "endrealms:phasite_ore",
               "endrealms:phasite_shard"
             ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:lapis_lazuli"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
             [
               "minecraft:lapis_lazuli"
             ],
@@ -2379,26 +2454,44 @@
               "minecraft:diamond"
             ],
             [
+              "minecraft:lapis_lazuli"
+            ],
+            [
+              "minecraft:lapis_lazuli"
+            ],
+            [],
+            [
               "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:lapis_lazuli"
             ],
             [
               "endrealms:prism_shard"
             ],
             [],
+            [],
+            [],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
             [],
             []
           ],
           "result": "endrealms:star_sapphire"
         },
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
             [
-              "endrealms:chorusite_shard"
+              "endrealms:voidstone"
             ],
-            [
-              "minecraft:raw_iron"
-            ],
+            [],
+            [],
+            [],
             [
               "minecraft:raw_iron"
             ],
@@ -2406,12 +2499,40 @@
               "minecraft:obsidian"
             ],
             [
+              "minecraft:raw_iron"
+            ],
+            [],
+            [
               "endrealms:voidstone"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:obsidian"
             ],
             [
               "endrealms:voidstone"
             ],
             [],
+            [
+              "minecraft:raw_iron"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "minecraft:raw_iron"
+            ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:voidstone"
+            ],
             [],
             []
           ],
@@ -2489,8 +2610,32 @@
       "xp": 3000,
       "recipes": [
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
+            [
+              "endrealms:moonbell"
+            ],
+            [],
+            [],
+            [],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:quartz"
+            ],
             [
               "endrealms:phasite_ore",
               "endrealms:phasite_shard"
@@ -2501,33 +2646,48 @@
             [
               "minecraft:quartz"
             ],
+            [],
             [
               "minecraft:amethyst_shard"
             ],
             [
+              "minecraft:quartz"
+            ],
+            [
               "minecraft:amethyst_shard"
             ],
+            [],
+            [],
+            [],
             [
               "endrealms:moonbell"
             ],
-            [],
             [],
             []
           ],
           "result": "endrealms:moon_opal"
         },
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
             [
-              "endrealms:chorusite_shard"
+              "minecraft:coal"
             ],
+            [],
+            [],
+            [],
             [
               "minecraft:quartz"
             ],
             [
+              "endrealms:ash_dust"
+            ],
+            [
               "minecraft:quartz"
             ],
+            [],
             [
               "minecraft:coal"
             ],
@@ -2535,28 +2695,64 @@
               "endrealms:ash_dust"
             ],
             [
+              "endrealms:chorusite_shard"
+            ],
+            [
               "endrealms:ash_dust"
             ],
+            [
+              "minecraft:coal"
+            ],
             [],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [],
+            [],
+            [],
+            [
+              "minecraft:coal"
+            ],
             [],
             []
           ],
           "result": "endrealms:ash_quartz"
         },
         {
-          "kind": "crafting",
+          "kind": "end_crafting",
           "slots": [
+            [],
+            [],
             [
-              "endrealms:chorusite_shard"
+              "minecraft:nether_wart"
             ],
-            [
-              "minecraft:raw_copper"
-            ],
+            [],
+            [],
+            [],
             [
               "minecraft:raw_copper"
             ],
             [
               "minecraft:redstone"
+            ],
+            [
+              "minecraft:raw_copper"
+            ],
+            [],
+            [
+              "minecraft:nether_wart"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "endrealms:chorusite_shard"
             ],
             [
               "minecraft:redstone"
@@ -2565,6 +2761,21 @@
               "minecraft:nether_wart"
             ],
             [],
+            [
+              "minecraft:raw_copper"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "minecraft:raw_copper"
+            ],
+            [],
+            [],
+            [],
+            [
+              "minecraft:nether_wart"
+            ],
             [],
             []
           ],

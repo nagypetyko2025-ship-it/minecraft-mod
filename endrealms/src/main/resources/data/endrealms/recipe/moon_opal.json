@@ -1,17 +1,21 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    [
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  A  ",
+    " BCB ",
+    "CCXCC",
+    " BCB ",
+    "  A  "
+  ],
+  "key": {
+    "X": [
       "endrealms:phasite_ore",
       "endrealms:phasite_shard"
     ],
-    "minecraft:quartz",
-    "minecraft:quartz",
-    "minecraft:amethyst_shard",
-    "minecraft:amethyst_shard",
-    "endrealms:moonbell"
-  ],
+    "C": "minecraft:quartz",
+    "B": "minecraft:amethyst_shard",
+    "A": "endrealms:moonbell"
+  },
   "result": {
     "id": "endrealms:moon_opal"
   }
