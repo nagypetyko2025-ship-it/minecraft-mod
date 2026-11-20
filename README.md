@@ -23,7 +23,8 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.41.0)
+## Tartalom (0.41.1)
+- Javítva: az érlelő hordóban a kész üvegek „Legjobb” feliratai egymásba lógtak (a helyek most távolabb vannak)
 - **Ékkövek 5×5-ben**: a 7 barkácsolható ékkő (Koronakő kivételével) mostantól az End-barkácsasztalon, 5×5-ös gyémánt mintában készül, kb. kétszeres alapanyagból
 - **Ájulás**: Részegség IV elérésekor 4 másodpercre teljesen elsötétül a kép, és nem tudsz mozogni; utána 100 blokkon belül máshol térsz magadhoz, összekevert táskával, és minden hatás eltűnik rólad
 - Javítva: más postaládájának névmezőjébe kattintva beragadt az ablak (se kattintás, se Esc nem működött)

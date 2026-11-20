@@ -14,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 /** The window: three bottle slots side by side, each with a bar to its next quality under it, the player's inventory below. */
 public class AgingBarrelMenu extends AbstractContainerMenu {
 	public static final int HEIGHT = 176;
-	public static final int SLOT_X = 44;
-	public static final int SLOT_STEP = 36;
+	public static final int SLOT_X = 32;
+	public static final int SLOT_STEP = 48;
 	public static final int SLOT_Y = 26;
 	public static final int INVENTORY_Y = HEIGHT - 82;
 	private static final int PLAYER_START = AgingBarrelBlockEntity.SIZE;
