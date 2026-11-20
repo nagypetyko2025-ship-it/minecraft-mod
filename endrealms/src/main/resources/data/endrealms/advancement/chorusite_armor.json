@@ -1,0 +1,41 @@
+{
+  "parent": "endrealms:chorusite_ingot",
+  "display": {
+    "icon": {
+      "id": "endrealms:chorusite_chestplate"
+    },
+    "title": {
+      "translate": "advancements.endrealms.chorusite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.chorusite_armor.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "full_set": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "endrealms:chorusite_helmet"
+          },
+          {
+            "items": "endrealms:chorusite_chestplate"
+          },
+          {
+            "items": "endrealms:chorusite_leggings"
+          },
+          {
+            "items": "endrealms:chorusite_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "full_set"
+    ]
+  ]
+}

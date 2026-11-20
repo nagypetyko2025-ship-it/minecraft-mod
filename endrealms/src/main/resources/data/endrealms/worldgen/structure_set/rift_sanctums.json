@@ -1,0 +1,20 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 26410933,
+    "separation": 24,
+    "spacing": 56,
+    "spread_type": "triangular",
+    "locate_offset": [
+      8,
+      0,
+      8
+    ]
+  },
+  "structures": [
+    {
+      "structure": "endrealms:rift_sanctum",
+      "weight": 1
+    }
+  ]
+}

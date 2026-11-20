@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [ "#endrealms:astral_logs" ],
+  "result": { "count": 4, "id": "endrealms:astral_planks" }
+}

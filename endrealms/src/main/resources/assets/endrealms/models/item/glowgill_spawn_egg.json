@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "endrealms:item/glowgill_spawn_egg"
+  }
+}

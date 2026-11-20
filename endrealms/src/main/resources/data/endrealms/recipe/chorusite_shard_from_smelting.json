@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "chorusite_shard",
+  "ingredient": "endrealms:chorusite_ore",
+  "result": { "id": "endrealms:chorusite_shard" }
+}

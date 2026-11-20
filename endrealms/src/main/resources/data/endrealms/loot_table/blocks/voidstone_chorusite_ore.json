@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "endrealms:voidstone_chorusite_ore"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:chorusite_shard",
+              "modifier": [
+                {
+                  "type": "minecraft:explosion_decay"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:blocks/voidstone_chorusite_ore"
+}

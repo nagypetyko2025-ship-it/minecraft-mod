@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "endrealms:block/void_sand"
+      },
+      {
+        "model": "endrealms:block/void_sand",
+        "y": 90
+      },
+      {
+        "model": "endrealms:block/void_sand",
+        "y": 180
+      },
+      {
+        "model": "endrealms:block/void_sand",
+        "y": 270
+      }
+    ]
+  }
+}

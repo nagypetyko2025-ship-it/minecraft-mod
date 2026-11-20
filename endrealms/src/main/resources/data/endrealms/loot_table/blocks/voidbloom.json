@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:block",
+  "pools": [ { "rolls": 1, "entries": [ { "type": "minecraft:item", "condition": "minecraft:tool/can_shear", "name": "endrealms:voidbloom" } ] } ],
+  "random_sequence": "endrealms:blocks/voidbloom"
+}

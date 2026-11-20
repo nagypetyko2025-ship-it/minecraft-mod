@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:ash_block"
+  ],
+  "result": {
+    "id": "endrealms:ash_dust",
+    "count": 4
+  }
+}

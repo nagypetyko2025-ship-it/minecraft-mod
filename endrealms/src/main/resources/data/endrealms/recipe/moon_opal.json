@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ],
+    "minecraft:quartz",
+    "minecraft:quartz",
+    "minecraft:amethyst_shard",
+    "minecraft:amethyst_shard",
+    "endrealms:moonbell"
+  ],
+  "result": {
+    "id": "endrealms:moon_opal"
+  }
+}

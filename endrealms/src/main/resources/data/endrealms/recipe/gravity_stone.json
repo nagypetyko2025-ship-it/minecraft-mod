@@ -1,0 +1,20 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "F D F",
+    " PCP ",
+    "DCSCD",
+    " PCP ",
+    "F D F"
+  ],
+  "key": {
+    "F": "minecraft:feather",
+    "D": "endrealms:deepglow_shard",
+    "P": "endrealms:phasite_shard",
+    "C": "endrealms:crystalline_voidstone",
+    "S": "minecraft:slime_block"
+  },
+  "result": {
+    "id": "endrealms:gravity_stone"
+  }
+}

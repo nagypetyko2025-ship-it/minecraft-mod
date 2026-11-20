@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "endrealms:chorusite"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "endrealms:chorusite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "endrealms:chorusite"
+      }
+    ]
+  }
+}

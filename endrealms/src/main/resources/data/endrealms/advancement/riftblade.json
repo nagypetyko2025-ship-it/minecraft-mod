@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:rift_lord",
+  "display": {
+    "icon": {
+      "id": "endrealms:riftblade"
+    },
+    "title": {
+      "translate": "advancements.endrealms.riftblade.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.riftblade.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:riftblade"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

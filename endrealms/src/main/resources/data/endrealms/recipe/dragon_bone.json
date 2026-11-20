@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:dragon_bone_block"
+  ],
+  "result": {
+    "id": "endrealms:dragon_bone",
+    "count": 9
+  }
+}

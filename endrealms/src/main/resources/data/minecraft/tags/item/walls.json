@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:voidstone_brick_wall",
+    "endrealms:voidstone_wall",
+    "endrealms:polished_voidstone_wall",
+    "endrealms:void_sandstone_wall"
+  ]
+}

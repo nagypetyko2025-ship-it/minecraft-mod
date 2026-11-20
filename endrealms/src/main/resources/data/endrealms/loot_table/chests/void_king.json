@@ -1,0 +1,145 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_ingot",
+          "weight": 1,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:crownstone",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 5,
+        "max": 7
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_block",
+          "weight": 8,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_golden_apple",
+          "weight": 6,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:phasite_shard",
+          "weight": 10,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:chorusite_shard",
+          "weight": 8,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:chorusite_upgrade_smithing_template",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:ember_garnet",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:star_sapphire",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:void_onyx",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:moon_opal",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:ash_quartz",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:bloodstone",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:deep_aquamarine",
+          "weight": 5
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:chests/void_king"
+}

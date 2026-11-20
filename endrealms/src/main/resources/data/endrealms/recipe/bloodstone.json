@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:chorusite_shard",
+    "minecraft:raw_copper",
+    "minecraft:raw_copper",
+    "minecraft:redstone",
+    "minecraft:redstone",
+    "minecraft:nether_wart"
+  ],
+  "result": {
+    "id": "endrealms:bloodstone"
+  }
+}

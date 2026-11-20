@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "endrealms:block/polished_voidstone",
+    "side": "endrealms:block/end_crafting_table_side",
+    "top": "endrealms:block/end_crafting_table_top"
+  }
+}

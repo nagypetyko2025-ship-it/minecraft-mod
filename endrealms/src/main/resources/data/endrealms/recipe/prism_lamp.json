@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "endrealms:prism_shard",
+    "R": "minecraft:end_rod"
+  },
+  "pattern": [
+    " # ",
+    "#R#",
+    " # "
+  ],
+  "result": {
+    "id": "endrealms:prism_lamp"
+  }
+}

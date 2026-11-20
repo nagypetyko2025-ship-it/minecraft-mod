@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ],
+    "endrealms:prism_shard",
+    "endrealms:prism_shard",
+    "minecraft:popped_chorus_fruit"
+  ],
+  "result": {
+    "id": "endrealms:phasite_gem"
+  }
+}

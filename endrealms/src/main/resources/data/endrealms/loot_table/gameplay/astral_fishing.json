@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:raw_starfin",
+          "weight": 50
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:raw_void_eel",
+          "weight": 35
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:raw_glowgill",
+          "weight": 15
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:gameplay/astral_fishing"
+}

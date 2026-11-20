@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "endrealms:cut_void_sandstone",
+  "result": {
+    "count": 2,
+    "id": "endrealms:cut_void_sandstone_slab"
+  }
+}

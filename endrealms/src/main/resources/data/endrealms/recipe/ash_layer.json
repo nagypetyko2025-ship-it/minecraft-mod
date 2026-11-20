@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "endrealms:ash_block"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "id": "endrealms:ash_layer",
+    "count": 6
+  }
+}

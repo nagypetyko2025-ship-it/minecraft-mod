@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "endrealms:block/aging_barrel_top",
+    "bottom": "endrealms:block/aging_barrel_bottom",
+    "side": "endrealms:block/aging_barrel_side",
+    "front": "endrealms:block/aging_barrel_front"
+  }
+}

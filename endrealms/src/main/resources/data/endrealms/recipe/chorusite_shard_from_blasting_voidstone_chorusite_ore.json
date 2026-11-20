@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "chorusite_shard",
+  "ingredient": "endrealms:voidstone_chorusite_ore",
+  "result": { "id": "endrealms:chorusite_shard" }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ],
+    "minecraft:lapis_lazuli",
+    "minecraft:lapis_lazuli",
+    "minecraft:diamond",
+    "endrealms:prism_shard",
+    "endrealms:prism_shard"
+  ],
+  "result": {
+    "id": "endrealms:star_sapphire"
+  }
+}

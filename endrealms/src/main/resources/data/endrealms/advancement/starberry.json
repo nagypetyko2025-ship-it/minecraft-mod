@@ -1,0 +1,30 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:starberry"
+    },
+    "title": {
+      "translate": "advancements.endrealms.starberry.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.starberry.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "endrealms:starberry"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "endrealms:block/void_sandstone_top",
+    "side": "endrealms:block/chiseled_void_sandstone"
+  }
+}

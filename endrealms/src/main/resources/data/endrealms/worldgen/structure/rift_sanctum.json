@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:rift_sanctum",
+  "biomes": "#endrealms:has_structure/rift_sanctum",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

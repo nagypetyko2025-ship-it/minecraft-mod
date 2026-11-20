@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "endrealms:chorusite_ore"
+    },
+    "title": {
+      "translate": "advancements.endrealms.root.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.root.description"
+    },
+    "frame": "task",
+    "background": "minecraft:gui/advancements/backgrounds/end",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
+}

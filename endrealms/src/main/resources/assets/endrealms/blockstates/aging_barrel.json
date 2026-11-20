@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "endrealms:block/aging_barrel"
+    },
+    "facing=east": {
+      "model": "endrealms:block/aging_barrel",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "endrealms:block/aging_barrel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "endrealms:block/aging_barrel",
+      "y": 270
+    }
+  }
+}

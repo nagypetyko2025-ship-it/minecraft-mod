@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:chorusite_block"
+  ],
+  "result": {
+    "id": "endrealms:chorusite_ingot",
+    "count": 9
+  }
+}

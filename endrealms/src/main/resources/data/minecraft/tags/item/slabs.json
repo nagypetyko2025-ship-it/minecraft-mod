@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:voidstone_brick_slab",
+    "endrealms:voidstone_slab",
+    "endrealms:polished_voidstone_slab",
+    "endrealms:void_sandstone_slab",
+    "endrealms:cut_void_sandstone_slab",
+    "endrealms:smooth_void_sandstone_slab"
+  ]
+}

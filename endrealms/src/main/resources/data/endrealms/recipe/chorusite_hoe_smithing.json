@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "endrealms:chorusite_upgrade_smithing_template",
+  "base": "minecraft:netherite_hoe",
+  "addition": "#endrealms:chorusite_tool_materials",
+  "result": { "id": "endrealms:chorusite_hoe" }
+}

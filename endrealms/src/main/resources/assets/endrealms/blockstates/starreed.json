@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "grown=false,top=false": {
+      "model": "endrealms:block/starreed_sprout"
+    },
+    "grown=true,top=false": {
+      "model": "endrealms:block/starreed_stalk"
+    },
+    "grown=false,top=true": {
+      "model": "endrealms:block/starreed_sprout"
+    },
+    "grown=true,top=true": {
+      "model": "endrealms:block/starreed_top"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:deepglow_shard",
+    "endrealms:deepglow_shard",
+    "endrealms:deepglow_shard",
+    "endrealms:prism_shard",
+    "endrealms:prism_shard",
+    [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ]
+  ],
+  "result": {
+    "id": "endrealms:deep_aquamarine"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "VVVVV",
+    "VRORV",
+    "VOPOV",
+    "VRORV",
+    "VVVVV"
+  ],
+  "key": {
+    "V": "endrealms:polished_voidstone",
+    "R": "endrealms:prism_shard",
+    "O": "minecraft:obsidian",
+    "P": [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ]
+  },
+  "result": {
+    "id": "endrealms:phase_anchor"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross_emissive",
+  "textures": {
+    "cross": "endrealms:block/starreed_sprout",
+    "cross_emissive": "endrealms:block/starreed_sprout_glow"
+  }
+}

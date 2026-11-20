@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:end_village",
+  "biomes": "#endrealms:has_structure/end_village",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

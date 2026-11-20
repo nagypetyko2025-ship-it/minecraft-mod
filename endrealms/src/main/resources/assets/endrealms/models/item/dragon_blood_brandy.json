@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "endrealms:item/dragon_blood_brandy"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:crypt",
+  "biomes": "#endrealms:has_structure/crypt",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

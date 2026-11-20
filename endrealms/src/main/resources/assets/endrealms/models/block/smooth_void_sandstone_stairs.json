@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "endrealms:block/void_sandstone_top",
+    "side": "endrealms:block/void_sandstone_top",
+    "top": "endrealms:block/void_sandstone_top"
+  }
+}

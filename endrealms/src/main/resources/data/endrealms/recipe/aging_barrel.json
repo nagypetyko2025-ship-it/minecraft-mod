@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LIL",
+    "LBL",
+    "LIL"
+  ],
+  "key": {
+    "L": "#minecraft:dark_oak_logs",
+    "I": "minecraft:iron_ingot",
+    "B": "minecraft:barrel"
+  },
+  "result": {
+    "id": "endrealms:aging_barrel"
+  }
+}

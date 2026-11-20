@@ -1,0 +1,4 @@
+{
+  "feature": "endrealms:astral_tree",
+  "placement": [ { "type": "minecraft:block_predicate_filter", "predicate": { "type": "minecraft:would_survive", "state": "endrealms:astral_sapling" } } ]
+}

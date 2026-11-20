@@ -1,0 +1,30 @@
+{
+  "parent": "endrealms:starberry",
+  "display": {
+    "icon": {
+      "id": "endrealms:moonbell_nectar"
+    },
+    "title": {
+      "translate": "advancements.endrealms.moonbell_nectar.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.moonbell_nectar.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "endrealms:moonbell_nectar"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

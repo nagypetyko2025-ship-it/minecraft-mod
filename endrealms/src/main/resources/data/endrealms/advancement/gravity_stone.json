@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:phase_anchor",
+  "display": {
+    "icon": {
+      "id": "endrealms:gravity_stone"
+    },
+    "title": {
+      "translate": "advancements.endrealms.gravity_stone.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.gravity_stone.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "has": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:gravity_stone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ]
+}

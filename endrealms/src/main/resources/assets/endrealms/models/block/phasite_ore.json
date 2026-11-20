@@ -1,0 +1,88 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "endrealms:block/voidstone",
+    "base": "endrealms:block/voidstone",
+    "veins": "endrealms:block/phasite_ore_veins"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#base",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#base",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#base",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#base",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#base",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#base",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "light_emission": 15,
+      "shade": false,
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#veins",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#veins",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#veins",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#veins",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#veins",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#veins",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "endrealms:block/phase_mailbox"
+    },
+    "facing=east": {
+      "model": "endrealms:block/phase_mailbox",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "endrealms:block/phase_mailbox",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "endrealms:block/phase_mailbox",
+      "y": 270
+    }
+  }
+}

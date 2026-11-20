@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "triggered=false": {
+      "model": "endrealms:block/crumbling_planks"
+    },
+    "triggered=true": {
+      "model": "endrealms:block/crumbling_planks"
+    }
+  }
+}

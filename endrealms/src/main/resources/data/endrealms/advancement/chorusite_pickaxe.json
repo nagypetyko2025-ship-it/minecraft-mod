@@ -1,0 +1,32 @@
+{
+  "parent": "endrealms:chorusite_ingot",
+  "display": {
+    "icon": {
+      "id": "endrealms:chorusite_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.endrealms.chorusite_pickaxe.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.chorusite_pickaxe.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "endrealms:chorusite_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pickaxe"
+    ]
+  ]
+}

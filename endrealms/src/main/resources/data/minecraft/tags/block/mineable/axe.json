@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:astral_log",
+    "endrealms:astral_planks",
+    "endrealms:crumbling_planks",
+    "endrealms:carved_pumpkin",
+    "endrealms:canvas",
+    "endrealms:large_canvas",
+    "endrealms:end_crafting_table",
+    "endrealms:fermentation_station",
+    "endrealms:aging_barrel"
+  ]
+}

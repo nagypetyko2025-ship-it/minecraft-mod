@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:end_soil",
+    "endrealms:void_sand",
+    "endrealms:ash_block",
+    "endrealms:ash_layer"
+  ]
+}

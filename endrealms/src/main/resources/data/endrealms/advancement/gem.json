@@ -1,0 +1,41 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:ember_garnet"
+    },
+    "title": {
+      "translate": "advancements.endrealms.gem.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.gem.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:ember_garnet",
+              "endrealms:star_sapphire",
+              "endrealms:void_onyx",
+              "endrealms:moon_opal",
+              "endrealms:ash_quartz",
+              "endrealms:deep_aquamarine",
+              "endrealms:bloodstone",
+              "endrealms:crownstone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

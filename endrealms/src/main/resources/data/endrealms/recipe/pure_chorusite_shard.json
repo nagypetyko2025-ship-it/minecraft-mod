@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:chorusite_shard",
+    "endrealms:chorusite_shard",
+    "endrealms:chorusite_shard",
+    "endrealms:chorusite_shard",
+    "minecraft:diamond",
+    "minecraft:diamond",
+    "minecraft:diamond",
+    "minecraft:diamond",
+    [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ]
+  ],
+  "result": {
+    "id": "endrealms:pure_chorusite_shard"
+  }
+}

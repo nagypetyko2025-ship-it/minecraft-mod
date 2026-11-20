@@ -1,0 +1,18 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    "  G  ",
+    " RHR ",
+    "G S G",
+    " R R "
+  ],
+  "key": {
+    "G": "endrealms:phasite_gem",
+    "H": "endrealms:rift_heart",
+    "S": "endrealms:chorusite_sword",
+    "R": "endrealms:prism_shard"
+  },
+  "result": {
+    "id": "endrealms:riftblade"
+  }
+}

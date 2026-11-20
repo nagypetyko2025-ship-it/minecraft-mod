@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CEC",
+    "VTV",
+    "VVV"
+  ],
+  "key": {
+    "C": "minecraft:popped_chorus_fruit",
+    "E": "minecraft:ender_pearl",
+    "T": "minecraft:crafting_table",
+    "V": "endrealms:polished_voidstone"
+  },
+  "result": {
+    "id": "endrealms:end_crafting_table"
+  }
+}

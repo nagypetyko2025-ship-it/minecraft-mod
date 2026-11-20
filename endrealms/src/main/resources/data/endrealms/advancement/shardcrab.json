@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:prism_shard"
+    },
+    "title": {
+      "translate": "advancements.endrealms.shardcrab.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.shardcrab.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:shardcrab"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

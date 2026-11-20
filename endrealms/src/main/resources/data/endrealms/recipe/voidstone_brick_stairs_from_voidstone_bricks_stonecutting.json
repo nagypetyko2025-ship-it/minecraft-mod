@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "endrealms:voidstone_bricks",
+  "result": {
+    "id": "endrealms:voidstone_brick_stairs"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "top=false": {
+      "model": "endrealms:block/starweed"
+    },
+    "top=true": {
+      "model": "endrealms:block/starweed_top"
+    }
+  }
+}

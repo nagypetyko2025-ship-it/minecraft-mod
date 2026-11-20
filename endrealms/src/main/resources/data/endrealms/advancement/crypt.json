@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:volcanic_vent"
+    },
+    "title": {
+      "translate": "advancements.endrealms.crypt.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.crypt.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "endrealms:crypt"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

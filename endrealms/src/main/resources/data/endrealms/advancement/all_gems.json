@@ -1,0 +1,124 @@
+{
+  "parent": "endrealms:gem_socket",
+  "display": {
+    "icon": {
+      "id": "endrealms:bloodstone"
+    },
+    "title": {
+      "translate": "advancements.endrealms.all_gems.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.all_gems.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "ember_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:ember_garnet"
+            ]
+          }
+        ]
+      }
+    },
+    "star_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:star_sapphire"
+            ]
+          }
+        ]
+      }
+    },
+    "void_onyx": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:void_onyx"
+            ]
+          }
+        ]
+      }
+    },
+    "moon_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:moon_opal"
+            ]
+          }
+        ]
+      }
+    },
+    "ash_quartz": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:ash_quartz"
+            ]
+          }
+        ]
+      }
+    },
+    "bloodstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:bloodstone"
+            ]
+          }
+        ]
+      }
+    },
+    "deep_aquamarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:deep_aquamarine"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ember_garnet"
+    ],
+    [
+      "star_sapphire"
+    ],
+    [
+      "void_onyx"
+    ],
+    [
+      "moon_opal"
+    ],
+    [
+      "ash_quartz"
+    ],
+    [
+      "bloodstone"
+    ],
+    [
+      "deep_aquamarine"
+    ]
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:void_citadel",
+  "biomes": "#endrealms:has_structure/void_citadel",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

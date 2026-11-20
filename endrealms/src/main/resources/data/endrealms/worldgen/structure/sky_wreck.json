@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:sky_wreck",
+  "biomes": "#endrealms:has_structure/sky_wreck",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "endrealms:block/stripped_astral_log",
+    "side": "endrealms:block/stripped_astral_log"
+  }
+}

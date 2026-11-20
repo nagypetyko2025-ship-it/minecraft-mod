@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "endrealms:voidstone",
+    "endrealms:prism_shard"
+  ],
+  "result": {
+    "id": "endrealms:crystalline_voidstone"
+  }
+}

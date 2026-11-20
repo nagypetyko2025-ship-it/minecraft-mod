@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:void_bastion",
+  "display": {
+    "icon": {
+      "id": "endrealms:void_sentinel_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.endrealms.void_sentinel.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.void_sentinel.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:void_sentinel"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

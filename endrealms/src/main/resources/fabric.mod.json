@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "endrealms",
+	"version": "${version}",
+	"name": "End Realms",
+	"description": "Expands the End with new ores, blocks and biomes.",
+	"authors": ["Peti"],
+	"license": "CC0-1.0",
+	"icon": "assets/endrealms/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["hu.endrealms.EndRealms"],
+		"client": ["hu.endrealms.client.EndRealmsClient"],
+		"server": ["hu.endrealms.admin.AdminPanel"]
+	},
+	"mixins": ["endrealms.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

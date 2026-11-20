@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "endrealms:block/astral_door_bottom",
+    "top": "endrealms:block/astral_door_top"
+  }
+}

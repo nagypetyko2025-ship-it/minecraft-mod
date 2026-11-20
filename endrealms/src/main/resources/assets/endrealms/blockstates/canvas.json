@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "endrealms:block/canvas",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "endrealms:block/canvas",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "endrealms:block/canvas",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "endrealms:block/canvas",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "type": "minecraft:sequence",
+  "sequence": [
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:stone_depth",
+        "add_surface_depth": false,
+        "offset": 2,
+        "secondary_depth_range": 0,
+        "surface_type": "floor"
+      },
+      "then_run": {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": "endrealms:astral_forest"
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "endrealms:end_soil"
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": "endrealms:prism_wastes"
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "endrealms:crystalline_voidstone"
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": "endrealms:scorched_barrens"
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "endrealms:scorched_end_stone"
+            }
+          },
+          {
+            "type": "minecraft:block",
+            "result_state": "minecraft:end_stone"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:noise_threshold",
+        "noise": "minecraft:gravel",
+        "min_threshold": -0.25,
+        "max_threshold": 1.7976931348623157e+308
+      },
+      "then_run": {
+        "type": "minecraft:block",
+        "result_state": "endrealms:voidstone"
+      }
+    },
+    {
+      "type": "minecraft:block",
+      "result_state": "minecraft:end_stone"
+    }
+  ]
+}

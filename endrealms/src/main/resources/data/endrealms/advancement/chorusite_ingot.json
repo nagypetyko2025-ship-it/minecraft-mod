@@ -1,0 +1,32 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:chorusite_ingot"
+    },
+    "title": {
+      "translate": "advancements.endrealms.chorusite_ingot.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.chorusite_ingot.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "endrealms:chorusite_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot"
+    ]
+  ]
+}

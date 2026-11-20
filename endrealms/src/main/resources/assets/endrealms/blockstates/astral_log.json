@@ -1,0 +1,4 @@
+{ "variants": {
+  "axis=x": { "model": "endrealms:block/astral_log_x" },
+  "axis=y": { "model": "endrealms:block/astral_log_y" },
+  "axis=z": { "model": "endrealms:block/astral_log_z" } } }

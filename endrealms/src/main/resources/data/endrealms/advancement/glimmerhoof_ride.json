@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:saddle"
+    },
+    "title": {
+      "translate": "advancements.endrealms.glimmerhoof_ride.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.glimmerhoof_ride.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "rode": {
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:vehicle": {
+              "minecraft:entity_type": "endrealms:glimmerhoof"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rode"
+    ]
+  ]
+}

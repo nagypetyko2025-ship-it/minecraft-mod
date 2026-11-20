@@ -1,0 +1,21 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    " RDR ",
+    "PEAEP",
+    "VVCVV",
+    "VVVVV"
+  ],
+  "key": {
+    "R": "endrealms:prism_shard",
+    "D": "minecraft:diamond",
+    "P": "endrealms:phasite_shard",
+    "E": "minecraft:ender_eye",
+    "A": "endrealms:phase_anchor",
+    "C": "minecraft:chest",
+    "V": "endrealms:polished_voidstone"
+  },
+  "result": {
+    "id": "endrealms:phase_mailbox"
+  }
+}

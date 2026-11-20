@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "endrealms:block/fermentation_station_top",
+    "bottom": "endrealms:block/fermentation_station_bottom",
+    "side": "endrealms:block/fermentation_station_side",
+    "front": "endrealms:block/fermentation_station_front"
+  }
+}

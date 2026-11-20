@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0.3,
+  "size": 5,
+  "targets": [
+    {
+      "state": "endrealms:chorusite_ore",
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "minecraft:end_stone"
+      }
+    },
+    {
+      "state": "endrealms:voidstone_chorusite_ore",
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "endrealms:voidstone"
+      }
+    }
+  ]
+}

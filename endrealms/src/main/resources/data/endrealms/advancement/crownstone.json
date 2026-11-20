@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:void_king",
+  "display": {
+    "icon": {
+      "id": "endrealms:crownstone"
+    },
+    "title": {
+      "translate": "advancements.endrealms.crownstone.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.crownstone.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:crownstone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

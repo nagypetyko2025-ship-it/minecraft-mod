@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "erupting=false": {
+      "model": "endrealms:block/volcanic_vent"
+    },
+    "erupting=true": {
+      "model": "endrealms:block/volcanic_vent"
+    }
+  }
+}

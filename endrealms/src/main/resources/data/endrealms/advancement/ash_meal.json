@@ -1,0 +1,32 @@
+{
+  "parent": "endrealms:ash_wraith",
+  "display": {
+    "icon": {
+      "id": "endrealms:ash_meal"
+    },
+    "title": {
+      "translate": "advancements.endrealms.ash_meal.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.ash_meal.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "endrealms:ash_meal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

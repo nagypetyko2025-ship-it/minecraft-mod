@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "endrealms:item/shardcrab_spawn_egg"
+  }
+}

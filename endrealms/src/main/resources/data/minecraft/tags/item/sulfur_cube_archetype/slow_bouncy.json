@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:chiseled_void_sandstone",
+    "endrealms:cut_void_sandstone",
+    "endrealms:void_sandstone",
+    "endrealms:smooth_void_sandstone"
+  ]
+}

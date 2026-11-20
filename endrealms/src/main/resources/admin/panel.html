@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>End Realms szerver</title>
+<style>
+:root{--bg:#0d0a18;--panel:#17112b;--panel2:#211a3d;--line:#3a2d68;--text:#ece8f7;--muted:#9f96bd;--accent:#7fe0e8;--good:#7ee29a;--warn:#f2c46b;--bad:#f07a7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,"Segoe UI",sans-serif}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:14px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:18px;color:var(--accent)}
+#conn{font-size:13px;padding:3px 9px;border-radius:99px;background:var(--panel2)}
+nav{display:flex;flex-wrap:wrap;gap:4px;padding:10px 20px 0}
+nav button{background:none;color:var(--muted);border:0;border-bottom:2px solid transparent;padding:8px 14px;font:inherit;cursor:pointer}
+nav button.on{color:var(--text);border-color:var(--accent)}
+main{padding:18px 20px;max-width:1150px}
+section{display:none}section.on{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:11px 14px}
+.card b{display:block;font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.card span{color:var(--muted);font-size:13px}
+h2{font-size:15px;margin:20px 0 9px;color:var(--muted);font-weight:600}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px 11px;border-bottom:1px solid #2a2150;white-space:nowrap}
+th{color:var(--muted);font-weight:500;font-size:13px}
+tr:last-child td{border-bottom:0}
+button.b,select,input[type=text],input[type=number]{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:5px 10px;font:inherit}
+button.b{cursor:pointer}button.b:hover{border-color:var(--accent)}
+button.danger{color:var(--bad)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pad{padding:13px}
+.tag{font-size:12px;padding:1px 7px;border-radius:99px;background:var(--panel2);color:var(--muted);margin-left:5px}
+.tag.on{color:var(--good)}.tag.op{color:var(--warn)}.tag.ban{color:var(--bad)}
+.rule{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:7px 12px;border-bottom:1px solid #2a2150}
+.rule small{color:var(--muted);display:block;font-size:12px}
+.rule.changed span:first-child{color:var(--warn)}
+#log{height:430px;overflow:auto;font:12.5px/1.4 Consolas,monospace;padding:11px;white-space:pre-wrap;word-break:break-word}
+#toast{position:fixed;right:18px;bottom:18px;background:var(--panel2);border:1px solid var(--accent);padding:9px 14px;border-radius:7px;display:none}
+.empty{padding:14px;color:var(--muted)}
+.field{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 13px;border-bottom:1px solid #2a2150}
+.field input,.field select{width:240px;max-width:55%}
+a.pl{color:var(--accent);text-decoration:none;cursor:pointer}a.pl:hover{text-decoration:underline}
+.phead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}.phead b{font-size:20px}
+.tops{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.tops table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.wcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.wcard{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.wcard:hover{border-color:var(--accent)}.wcard b{display:block;font-size:17px;margin-bottom:4px}.wcard span{color:var(--muted);font-size:13px;display:block}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;padding:13px}.kv span:nth-child(odd){color:var(--muted)}.kv code{font:13px Consolas,monospace;word-break:break-all}
+.adv{display:flex;flex-wrap:wrap;gap:5px}.adv span{font-size:12.5px;padding:2px 8px;border-radius:99px;background:var(--panel2);border:1px solid var(--line)}
+input[type=checkbox]{width:18px;height:18px;accent-color:#7fe0e8}
+</style>
+</head>
+<body>
+<header><h1>End Realms szerver</h1><span id="conn">csatlakozás…</span><span id="motd" style="color:var(--muted)"></span></header>
+<nav id="tabs"></nav>
+<main>
+<section id="home">
+  <div class="cards" id="cards"></div>
+  <h2>Most játszanak</h2><div class="box" id="online"></div>
+  <h2>Világ</h2>
+  <div class="box pad"><div class="row">
+    <button class="b" data-a="day">Nappal</button><button class="b" data-a="night">Éjszaka</button>
+    <button class="b" data-a="clear">Derült</button><button class="b" data-a="rain">Eső</button><button class="b" data-a="thunder">Vihar</button>
+    <select id="diff"><option value="peaceful">Békés</option><option value="easy">Könnyű</option><option value="normal">Normál</option><option value="hard">Nehéz</option></select>
+    <button class="b" data-a="save">Világ mentése</button>
+  </div>
+  <div class="row" style="margin-top:9px"><input type="text" id="say" placeholder="Üzenet mindenkinek" style="flex:1;min-width:200px" maxlength="200"><button class="b" id="saybtn">Küldés</button></div></div>
+  <h2>Szerver</h2>
+  <div class="box pad row"><button class="b" id="restart">Újraindítás</button><button class="b danger" id="shutdown">Leállítás</button></div>
+</section>
+<section id="players"><div id="pdetail" style="display:none"></div><div class="box" id="allplayers"></div></section>
+<section id="worlds"><div id="wdetail" style="display:none"></div><div id="wlist"></div></section>
+<section id="rules">
+  <div class="row" style="margin-bottom:10px"><input type="text" id="rulesearch" placeholder="Keresés a szabályok között" style="flex:1"></div>
+  <div class="box" id="rulelist"></div>
+</section>
+<section id="settings">
+  <div class="box" id="setlist"></div>
+  <div class="row" style="margin-top:10px"><button class="b" id="savesettings">Mentés</button><span style="color:var(--muted)">A változások a következő újraindításkor lépnek életbe.</span></div>
+</section>
+<section id="console">
+  <div class="box"><div id="log"></div></div>
+  <div class="row" style="margin-top:10px"><input type="text" id="cmd" placeholder="Parancs, például: time set day" style="flex:1"><button class="b" id="cmdbtn">Futtatás</button></div>
+</section>
+</main>
+<div id="toast"></div>
+<script>
+const qs=new URLSearchParams(location.search);
+if(qs.get('t')){sessionStorage.setItem('t',qs.get('t'));history.replaceState(null,'','/')}
+const T=sessionStorage.getItem('t')||'';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(p,b){const r=await fetch('/api/'+p,{method:b?'POST':'GET',headers:{'X-Token':T},body:b?JSON.stringify(b):undefined});
+  const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j}
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._);t._=setTimeout(()=>t.style.display='none',2600)}
+const act=(a,e={})=>api('action',{action:a,...e}).then(()=>{toast('Kész');setTimeout(load,500)}).catch(x=>toast('Hiba: '+x.message));
+const TABS=[['home','Áttekintés'],['players','Játékosok'],['worlds','Világok'],['rules','Világszabályok'],['settings','Beállítások'],['console','Konzol']];
+let tab='home';
+$('tabs').innerHTML=TABS.map(([i,n])=>`<button data-t="${i}">${n}</button>`).join('');
+function show(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));load()}
+$('tabs').onclick=e=>{if(e.target.dataset.t)show(e.target.dataset.t)};
+const DIM={overworld:'Felszín',the_nether:'Nether',the_end:'End'};
+const MODE={survival:'Túlélő',creative:'Kreatív',adventure:'Kaland',spectator:'Szemlélő'};
+const WEATHER={clear:'Derült',rain:'Eső',thunder:'Vihar'};
+function dur(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?`${h} ó ${m} p`:`${m} p`}
+function clock(t){const m=Math.floor(((t+6000)%24000)*1440/24000);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+async function home(){const s=await api('status');$('motd').textContent=s.motd.replace(/§./g,'');
+  $('cards').innerHTML=[[s.online.length+' / '+s.max,'játékos'],[s.tps,'TPS (cél: 20)'],[s.mspt+' ms','tick idő'],[s.memUsed+' / '+s.memMax+' MB','memória'],[dur(s.uptime),'futásidő'],[clock(s.time)+', '+s.day+'. nap',WEATHER[s.weather]]].map(([v,l])=>`<div class="card"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+  if(document.activeElement!==$('diff'))$('diff').value=s.difficulty;
+  $('online').innerHTML=s.online.length?'<table><tr><th>Név</th><th>Ping</th><th>Mód</th><th>Élet</th><th>Világ</th><th>Hely</th><th></th></tr>'+s.online.map(p=>`<tr><td>${esc(p.name)}</td><td>${p.ping} ms</td><td>${MODE[p.mode]||esc(p.mode)}</td><td>${p.health}</td><td>${p.world?esc(p.world):'–'}</td><td>${(p.kind&&KIND[p.kind])||DIM[p.dimension]||esc(p.dimension)} ${p.x}, ${p.y}, ${p.z}</td><td class="row"><select data-gm="${esc(p.name)}"><option value="">Mód…</option><option value="survival">Túlélő</option><option value="creative">Kreatív</option><option value="spectator">Szemlélő</option></select><button class="b" data-kick="${esc(p.name)}">Kirúgás</button></td></tr>`).join('')+'</table>':'<div class="empty">Most senki sincs fent.</div>'}
+async function players(){const l=await api('players');
+  $('allplayers').innerHTML=l.length?'<table><tr><th>Név</th><th>Utoljára</th><th>Játékidő</th><th>Műveletek</th></tr>'+l.map(p=>`<tr><td><a class="pl" data-pl="${esc(p.uuid)}" title="Adatlap megnyitása">${esc(p.name)}</a>${p.online?'<span class="tag on">online</span>':''}${p.op?'<span class="tag op">operátor</span>':''}${p.banned?'<span class="tag ban">kitiltva</span>':''}${p.whitelisted?'<span class="tag">engedélyezett</span>':''}</td><td>${p.online?'most':new Date(p.lastPlayed).toLocaleString('hu-HU')}</td><td>${dur(p.playMinutes*60)}</td><td class="row"><button class="b" data-do="${p.op?'deop':'op'}" data-p="${esc(p.name)}">${p.op?'Operátor elvétele':'Operátor'}</button><button class="b" data-do="${p.whitelisted?'whitelist-remove':'whitelist-add'}" data-p="${esc(p.name)}">${p.whitelisted?'Engedély elvétele':'Engedélyezés'}</button><button class="b danger" data-do="${p.banned?'pardon':'ban'}" data-p="${esc(p.name)}">${p.banned?'Kitiltás feloldása':'Kitiltás'}</button></td></tr>`).join('')+'</table>':'<div class="empty">Még senki nem játszott a szerveren.</div>'}
+const HU={'minecraft:zombie':'Zombi','minecraft:skeleton':'Csontváz','minecraft:creeper':'Creeper','minecraft:spider':'Pók','minecraft:cave_spider':'Barlangi pók','minecraft:enderman':'Enderman','minecraft:ender_dragon':'Endersárkány','minecraft:shulker':'Shulker','minecraft:endermite':'Endermite','minecraft:phantom':'Fantom','minecraft:witch':'Boszorkány','minecraft:slime':'Nyálkaszörny','minecraft:drowned':'Vízihulla','minecraft:husk':'Múmia','minecraft:stray':'Kóborló','minecraft:zombie_villager':'Zombifalusi','minecraft:pillager':'Fosztogató','minecraft:vindicator':'Bosszúálló','minecraft:evoker':'Idéző','minecraft:ravager':'Pusztító','minecraft:blaze':'Őrláng','minecraft:ghast':'Ghast','minecraft:piglin':'Piglin','minecraft:piglin_brute':'Piglin bandita','minecraft:zombified_piglin':'Zombipiglin','minecraft:hoglin':'Hoglin','minecraft:magma_cube':'Magmakocka','minecraft:wither_skeleton':'Wither-csontváz','minecraft:wither':'Wither','minecraft:warden':'Őrző','minecraft:guardian':'Őrszem','minecraft:elder_guardian':'Ősi őrszem','minecraft:breeze':'Szellő','minecraft:bogged':'Mocsári csontváz','minecraft:iron_golem':'Vasgólem','minecraft:villager':'Falusi','minecraft:cow':'Tehén','minecraft:pig':'Malac','minecraft:sheep':'Birka','minecraft:chicken':'Csirke','minecraft:rabbit':'Nyúl','minecraft:horse':'Ló','minecraft:wolf':'Farkas','minecraft:player':'Játékos','minecraft:stone':'Kő','minecraft:deepslate':'Mélypala','minecraft:dirt':'Föld','minecraft:grass_block':'Fűblokk','minecraft:sand':'Homok','minecraft:gravel':'Kavics','minecraft:netherrack':'Netherkő','minecraft:end_stone':'Endkő','minecraft:obsidian':'Obszidián','minecraft:oak_log':'Tölgyfarönk','minecraft:birch_log':'Nyírfarönk','minecraft:spruce_log':'Fenyőfarönk','minecraft:coal_ore':'Szénérc','minecraft:iron_ore':'Vasérc','minecraft:diamond_ore':'Gyémántérc','minecraft:deepslate_diamond_ore':'Mélypalás gyémántérc','minecraft:chorus_plant':'Chorusnövény','minecraft:chorus_flower':'Chorusvirág','minecraft:short_grass':'Fű','minecraft:tall_grass':'Magas fű','minecraft:andesite':'Andezit','minecraft:diorite':'Diorit','minecraft:granite':'Gránit','minecraft:cobblestone':'Zúzottkő','minecraft:tuff':'Tufa'};
+const DIM2={...DIM,the_end:'End'};
+const huName=e=>HU[e.id]||e.name;
+let OPEN=null;
+function allDays(p){const s=new Set(p.days);const c=window.endrealmsDays;if(c)for(const k in c)if(c[k].some(n=>n.toLowerCase()===p.name.toLowerCase()))s.add(k);return [...s].sort()}
+const day=k=>{const[y,m,d]=k.split('-');return `${y}. ${m}. ${d}.`};
+const num=n=>Number(n).toLocaleString('hu-HU');
+async function openPlayer(uuid){OPEN=uuid;let p;try{p=await api('player?uuid='+encodeURIComponent(uuid))}catch(e){toast('Hiba: '+e.message);return}
+  const s=p.stats,a=p.advancements,days=allDays(p),pl=p.place;
+  const cards=[[dur(s.playTicks/20),'játékidő'],[num(s.deaths),'halál'],[num(s.playerKills),'megölt játékos'],[num(s.mobKills),'megölt lény'],[num((s.distanceCm/100000).toFixed(1))+' km','megtett táv'],[a.done+' / '+a.total,'előrelépés'],[days.length,'játéknap'],[num(s.logins),'belépés'],[s.deaths?dur(s.sinceDeathTicks/20):'–','az utolsó halál óta'],[num(Math.round(s.damageDealt/20)),'okozott sebzés (szív)'],[num(Math.round(s.damageTaken/20)),'elszenvedett sebzés (szív)'],[num(s.jumps),'ugrás'],[num(s.mined),'kitermelt blokk'],[num(s.placed),'használt / lerakott tárgy'],[num(s.crafted),'barkácsolt tárgy'],[num(s.trades),'kereskedés falusival'],[num(s.fish),'kifogott hal'],[num(s.bred),'tenyésztett állat']];
+  const top=(title,list,empty)=>`<div><h2>${title}</h2><div class="box">${list.length?'<table>'+list.map(e=>`<tr><td>${esc(huName(e))}</td><td>${num(e.count)}</td></tr>`).join('')+'</table>':`<div class="empty">${empty}</div>`}</div></div>`;
+  $('pdetail').innerHTML=`<div class="phead"><button class="b" id="pback">‹ Vissza</button><b>${esc(p.name)}</b>${p.online?'<span class="tag on">online</span>':''}<span style="color:var(--muted)">${days.length?`első nap: ${day(days[0])} · utoljára: ${day(days[days.length-1])}`:''}</span></div>`
+    +(pl?`<div class="box pad" style="margin-bottom:12px">${p.online?'Most itt van':'Itt lépett ki'}: <b>${DIM2[pl.dimension]||esc(pl.dimension)} ${pl.x}, ${pl.y}, ${pl.z}</b> · élet: ${pl.health} / 20 · szint: ${pl.level}</div>`:'')
+    +`<div class="cards">${cards.map(([v,l])=>`<div class="card"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`
+    +`<div class="tops">${top('Legtöbbet megölt lények',p.topKilled,'Még senkit nem ölt meg.')}${top('Ami a legtöbbször megölte',p.topKilledBy,'Még nem halt meg.')}${top('Legtöbbet kitermelt blokkok',p.topMined,'Még nem bányászott.')}</div>`
+    +`<h2>Megszerzett előrelépések (${a.done})</h2><div class="box pad">${a.earned.length?'<div class="adv">'+a.earned.map(t=>`<span>${esc(t)}</span>`).join('')+'</div>':'<span style="color:var(--muted)">Még egy sincs.</span>'}</div>`
+    +`<p style="color:var(--muted);font-size:12.5px">A kint lévő játékosok adatai a legutóbbi mentés szerintiek (kilépéskor és 5 percenként).</p>`;
+  $('pdetail').style.display='block';$('allplayers').style.display='none';$('pback').onclick=closePlayer;scrollTo(0,0)}
+function closePlayer(){OPEN=null;$('pdetail').style.display='none';$('allplayers').style.display=''}
+document.body.addEventListener('click',e=>{const u=e.target.dataset&&e.target.dataset.pl;if(u){e.preventDefault();openPlayer(u)}});
+$('tabs').addEventListener('click',e=>{if(e.target.dataset.t==='players')closePlayer()});
+const DIMNAME={'minecraft:overworld':'Felszín','minecraft:the_nether':'Nether','minecraft:the_end':'End'};
+const DIFF={peaceful:'Békés',easy:'Könnyű',normal:'Normál',hard:'Nehéz'};
+const size=b=>b<0?'számolás…':b>=1073741824?(b/1073741824).toLocaleString('hu-HU',{maximumFractionDigits:2})+' GB':(b/1048576).toLocaleString('hu-HU',{maximumFractionDigits:1})+' MB';
+let WOPEN=null,WMULTI=false,WTIMER=null;
+const KIND={overworld:'Felszín',nether:'Nether',end:'End',other:'Egyéb'};
+const WTYPE={normal:'Normál',flat:'Lapos',amplified:'Felerősített (magas hegyek)',large_biomes:'Óriás biomok'};
+const when=ms=>ms?new Date(ms).toLocaleString('hu-HU'):'–';
+async function worlds(){const r=await api('worlds');WMULTI=r.multiworld;const l=r.worlds;
+  const card=w=>w.creating?`<div class="wcard" style="cursor:default"><b>${esc(w.name)}</b><span>⏳ Készül… (a Nether és az End is)</span></div>`
+    :w.error?`<div class="wcard" style="cursor:default;border-color:var(--bad)"><b>${esc(w.name)}</b><span style="color:var(--bad)">Nem sikerült létrehozni: ${esc(w.error)}</span></div>`
+    :`<button class="wcard" data-world="${esc(w.id)}"><b data-world="${esc(w.id)}">${esc(w.name)}</b>${w.main?'<span class="tag on" style="margin:0 0 6px;display:inline-block">fő világ</span>':''}<span data-world="${esc(w.id)}">${w.dimensions} dimenzió${w.day!=null?' · '+w.day+'. nap':''} · ${size(w.sizeBytes)}</span><span data-world="${esc(w.id)}">${w.loaded?w.online+' játékos van most benne':'alszik (senki nincs benne)'}</span></button>`;
+  $('wlist').innerHTML=`<div class="row" style="margin-bottom:12px"><button class="b" id="wnew" ${WMULTI?'':'disabled title="Ehhez a Worlds mod kell a szerverre"'}>+ Új világ létrehozása</button>${WMULTI?'':'<span style="color:var(--muted)">Új világhoz a Worlds mod kell a szerverre.</span>'}</div>`
+    +'<div id="wform"></div><div class="wcards">'+l.map(card).join('')+'</div>';
+  if(WMULTI)$('wnew').onclick=newWorldForm;
+  clearTimeout(WTIMER);if(tab==='worlds'&&l.some(w=>w.creating))WTIMER=setTimeout(()=>{if(tab==='worlds'&&!WOPEN)worlds()},2500);
+  if(WOPEN)openWorld(WOPEN,true)}
+function newWorldForm(){$('wform').innerHTML=`<div class="box pad" style="margin-bottom:12px"><h2 style="margin-top:0">Új világ</h2>
+  <div class="field" style="border:0;padding:6px 0"><span>Név</span><input type="text" id="nwname" maxlength="40" placeholder="például Kalandvilág"></div>
+  <div class="field" style="border:0;padding:6px 0"><span>Típus</span><select id="nwtype">${Object.entries(WTYPE).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></div>
+  <div class="field" style="border:0;padding:6px 0"><span>Seed (nem kötelező)</span><input type="text" id="nwseed" maxlength="40" placeholder="üresen: véletlen"></div>
+  <div class="field" style="border:0;padding:6px 0"><span>Saját Nether és End is (portálokkal összekötve)</span><input type="checkbox" id="nwdims" checked></div>
+  <p style="color:var(--muted);font-size:13px;margin:6px 0 10px">Teljesen külön világ lesz: a játékosok üres leltárral kezdenek benne, és a fő világban hagyott cuccaik megmaradnak, amikor visszajönnek.</p>
+  <div class="row"><button class="b" id="nwgo">Létrehozás</button><button class="b" id="nwcancel">Mégse</button></div></div>`;
+  $('nwname').focus();$('nwcancel').onclick=()=>$('wform').innerHTML='';
+  const go=()=>{const name=$('nwname').value.trim();if(!name){toast('Adj nevet a világnak');return}
+    $('nwgo').disabled=true;api('world-create',{name,type:$('nwtype').value,seed:$('nwseed').value,netherEnd:$('nwdims').checked}).then(()=>{toast('A világ készül…');$('wform').innerHTML='';worlds()}).catch(x=>{$('nwgo').disabled=false;toast('Hiba: '+x.message)})};
+  $('nwgo').onclick=go;$('nwname').onkeydown=e=>{if(e.key==='Enter')go()}}
+async function openWorld(id,quiet){WOPEN=id;let w;try{w=await api('world?id='+encodeURIComponent(id))}catch(e){if(!quiet)toast('Hiba: '+e.message);return}
+  if(document.activeElement&&['wname','wtpp'].includes(document.activeElement.id))return;
+  const sp=w.spawn,dn=d=>DIMNAME[d]||KIND[(w.dimensions.find(x=>x.id===d)||{}).kind]||esc(d);
+  const rows=[['Név a panelen',`<input type="text" id="wname" value="${esc(w.name)}" maxlength="40" style="width:240px"> <button class="b" id="wsave">Átnevezés</button>`]];
+  if(w.main)rows.push(['A játék szerinti név',esc(w.levelName)]);
+  if(!w.main)rows.push(['Azonosító',`<code>${esc(w.worldId)}</code>`],['Típus',WTYPE[w.type]||'–'],['Létrehozva',when(w.created)]);
+  rows.push(['Állapot',w.loaded?'<span style="color:var(--good)">betöltve</span>':'alszik: senki nincs benne, ezért nem fut (belépéskor magától betöltődik)'],
+    ['Mappa',`<code>${esc(w.folder)}</code>`+(w.realFolder&&w.realFolder!==w.folder?`<br><small style="color:var(--muted)">valójában itt: <code>${esc(w.realFolder)}</code></small>`:'')],
+    ['Méret a lemezen',size(w.sizeBytes)],['Seed',w.seed?`<code>${esc(w.seed)}</code> <button class="b" id="wseed" style="padding:1px 8px">Másolás</button>`:'–'],
+    ['Minecraft-verzió',esc(w.gameVersion)],['End Realms verzió',esc(w.modVersion)],['Nehézség',(DIFF[w.difficulty]||esc(w.difficulty))+(w.hardcore?' · <b style="color:var(--bad)">hardcore</b>':'')],
+    ['Alap játékmód',MODE[w.gameMode]||esc(w.gameMode)]);
+  if(w.day!=null)rows.push(['Hányadik nap a világban',w.day+'. nap']);
+  if(w.gameTicks!=null)rows.push(['Világban eltelt idő',dur(w.gameTicks/20)],['Időjárás most',WEATHER[w.weather]],['Világhatár',num(w.border)+' blokk széles']);
+  if(sp)rows.push(['Kezdőpont (spawn)',`${dn(sp.dimension)} ${sp.x}, ${sp.y}, ${sp.z}`]);
+  if(w.main)rows.push(['Első szervernap',w.firstDay?day(w.firstDay):'–'],['Utolsó mentés',when(w.lastSave)],['Játékosok, akik már jártak benne',w.knownPlayers]);
+  const tp=w.multiworld&&w.travelTo?`<h2>Játékos átküldése ide</h2><div class="box pad row">${w.onlinePlayers.length?`<select id="wtpp">${w.onlinePlayers.map(p=>`<option>${esc(p)}</option>`).join('')}</select><button class="b" id="wtp">Átküldés a kezdőpontra</button><span style="color:var(--muted);font-size:13px">A leltára is vált: minden világnak saját leltára van.</span>`:'<span style="color:var(--muted)">Most senki sincs fent.</span>'}</div>`:'';
+  $('wdetail').innerHTML=`<div class="phead"><button class="b" id="wback">‹ Vissza</button><b>${esc(w.name)}</b>${w.main?'<span class="tag on">fő világ</span>':''}</div>`
+    +`<div class="box"><div class="kv">${rows.map(([k,v])=>`<span>${k}</span><span>${v}</span>`).join('')}</div></div>`+tp
+    +`<h2>Dimenziók</h2><div class="box"><table><tr><th>Dimenzió</th><th>Méret</th><th>Állapot</th><th>Betöltött chunkok</th><th>Entitások</th><th>Játékosok most</th></tr>${w.dimensions.map(d=>`<tr><td>${dn(d.id)}${DIMNAME[d.id]?'':` <small style="color:var(--muted)">${esc(d.id)}</small>`}</td><td>${size(d.sizeBytes)}</td><td>${d.loaded?'betöltve':'alszik'}</td><td>${d.loaded?num(d.loadedChunks):'–'}</td><td>${d.loaded?num(d.entities):'–'}</td><td>${d.loaded&&d.players.length?esc(d.players.join(', ')):'–'}</td></tr>`).join('')}</table></div>`;
+  $('wdetail').style.display='block';$('wlist').style.display='none';
+  $('wback').onclick=closeWorld;
+  if($('wseed'))$('wseed').onclick=()=>{navigator.clipboard.writeText(w.seed).then(()=>toast('Seed kimásolva'),()=>toast('Nem sikerült másolni'))};
+  if($('wtp'))$('wtp').onclick=()=>{const p=$('wtpp').value;api('world-tp',{id:w.id,player:p}).then(()=>{toast(p+' átküldve: '+w.name);setTimeout(()=>openWorld(w.id,true),1200)}).catch(x=>toast('Hiba: '+x.message))};
+  const save=()=>{const v=$('wname').value.trim();api('world-rename',{id:w.id,name:v}).then(()=>{toast(v?'Átnevezve: '+v:'Visszaállítva az eredeti névre');$('wname').blur();worlds()}).catch(x=>toast('Hiba: '+x.message))};
+  $('wsave').onclick=save;$('wname').onkeydown=e=>{if(e.key==='Enter')save()}}
+function closeWorld(){WOPEN=null;$('wdetail').style.display='none';$('wlist').style.display=''}
+document.body.addEventListener('click',e=>{const id=e.target.dataset&&e.target.dataset.world;if(id)openWorld(id)});
+$('tabs').addEventListener('click',e=>{if(e.target.dataset.t==='worlds')closeWorld()});
+let RULES=[];
+function drawRules(){const q=$('rulesearch').value.toLowerCase();
+  $('rulelist').innerHTML=RULES.filter(r=>(r.label+r.id).toLowerCase().includes(q)).map(r=>`<div class="rule ${r.value!==r.default?'changed':''}"><span><span>${esc(r.label)}</span><small>${esc(r.id)} · alapérték: ${esc(r.default)}</small></span>${r.bool?`<input type="checkbox" data-rule="${esc(r.id)}" ${r.value==='true'?'checked':''}>`:`<input type="number" data-rule="${esc(r.id)}" value="${esc(r.value)}" style="width:110px">`}</div>`).join('')}
+async function rules(){RULES=await api('gamerules');drawRules()}
+const LABELS={'motd':'Szerver üzenet','max-players':'Max. játékos','view-distance':'Látótávolság','simulation-distance':'Szimulációs távolság','difficulty':'Nehézség','gamemode':'Alap játékmód','spawn-protection':'Spawn-védelem sugara','allow-flight':'Repülés engedélyezése (modokhoz)','white-list':'Csak engedélyezett játékosok','enforce-whitelist':'Engedélylista kikényszerítése','player-idle-timeout':'AFK kirúgás (perc, 0 = soha)','hide-online-players':'Játékoslista elrejtése','pause-when-empty-seconds':'Szünet üresen (mp, -1 = soha)','force-gamemode':'Alap játékmód kényszerítése'};
+const OPT={difficulty:['peaceful','easy','normal','hard'],gamemode:['survival','creative','adventure','spectator']};
+async function settings(){const s=await api('settings');
+  $('setlist').innerHTML=Object.keys(s).sort().map(k=>{const v=s[k];let c;if(v==='true'||v==='false')c=`<input type="checkbox" data-set="${k}" ${v==='true'?'checked':''}>`;else if(OPT[k])c=`<select data-set="${k}">${OPT[k].map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`;else c=`<input type="text" data-set="${k}" value="${esc(v)}">`;return `<div class="field"><span>${LABELS[k]||esc(k)}</span>${c}</div>`}).join('')}
+async function log(){const l=await api('log');const e=$('log');const b=e.scrollTop+e.clientHeight>=e.scrollHeight-30;e.textContent=l.lines.join('\n');if(b)e.scrollTop=e.scrollHeight}
+const LOAD={home,players,worlds,rules,settings,console:log};
+let on=true;
+async function load(){try{await LOAD[tab]();$('conn').textContent='● fut';$('conn').style.color='var(--good)';on=true}catch(e){$('conn').textContent='● nem elérhető';$('conn').style.color='var(--bad)';on=false}}
+setInterval(()=>{if(tab==='home'||tab==='console'||!on)load()},2500);
+document.body.addEventListener('click',e=>{const d=e.target.dataset;if(!d)return;
+  if(d.a)act(d.a);
+  if(d.kick&&confirm('Kirúgod: '+d.kick+'?'))act('kick',{player:d.kick});
+  if(d.do&&(d.do!=='ban'||confirm('Kitiltod: '+d.p+'?')))act(d.do,{player:d.p}).then(players)});
+document.body.addEventListener('change',e=>{const d=e.target.dataset;
+  if(d.gm&&e.target.value)act(e.target.value,{player:d.gm});
+  if(d.rule){const v=e.target.type==='checkbox'?String(e.target.checked):e.target.value;api('gamerule',{id:d.rule,value:v}).then(()=>{toast('Szabály módosítva');setTimeout(rules,400)}).catch(x=>toast('Hiba: '+x.message))}});
+$('diff').onchange=e=>act(e.target.value);
+$('rulesearch').oninput=drawRules;
+$('saybtn').onclick=()=>{const t=$('say').value;if(t)act('say',{text:t}).then(()=>$('say').value='')};
+$('restart').onclick=()=>{if(confirm('Újraindítod a szervert? Mindenkit lecsatlakoztat.'))act('restart')};
+$('shutdown').onclick=()=>{if(confirm('Leállítod a szervert? Innen nem tudod újra elindítani.'))act('shutdown')};
+$('savesettings').onclick=()=>{const b={};document.querySelectorAll('[data-set]').forEach(i=>b[i.dataset.set]=i.type==='checkbox'?String(i.checked):i.value);api('settings',b).then(()=>toast('Elmentve, újraindítás után érvényes')).catch(x=>toast('Hiba: '+x.message))};
+const run=()=>{const c=$('cmd').value;if(c)api('command',{command:c}).then(()=>{$('cmd').value='';setTimeout(log,500)}).catch(x=>toast('Hiba: '+x.message))};
+$('cmdbtn').onclick=run;$('cmd').onkeydown=e=>{if(e.key==='Enter')run()};
+if(!T){$('conn').textContent='Hiányzó kulcs: nyisd meg a PANEL.url fájlt'}else show('home');
+</script>
+</body>
+</html>

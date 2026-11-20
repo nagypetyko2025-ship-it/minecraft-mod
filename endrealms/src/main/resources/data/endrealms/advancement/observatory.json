@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:prism_lamp"
+    },
+    "title": {
+      "translate": "advancements.endrealms.observatory.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.observatory.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "endrealms:observatory"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

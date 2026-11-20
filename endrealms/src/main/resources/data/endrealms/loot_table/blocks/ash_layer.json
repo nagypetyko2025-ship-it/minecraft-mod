@@ -1,0 +1,152 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "1"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "2"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 2
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "3"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 3
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "4"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 4
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "5"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 5
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "6"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 6
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "7"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 7
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:ash_layer",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "endrealms:ash_layer",
+                "state": {
+                  "layers": "8"
+                }
+              },
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": 8
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:blocks/ash_layer"
+}

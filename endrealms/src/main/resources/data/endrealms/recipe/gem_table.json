@@ -1,0 +1,20 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    " RGR ",
+    "RAGAR",
+    "VVSVV",
+    "V   V",
+    "V   V"
+  ],
+  "key": {
+    "R": "endrealms:prism_shard",
+    "G": "minecraft:diamond",
+    "A": "minecraft:amethyst_shard",
+    "V": "endrealms:polished_voidstone",
+    "S": "minecraft:smithing_table"
+  },
+  "result": {
+    "id": "endrealms:gem_table"
+  }
+}

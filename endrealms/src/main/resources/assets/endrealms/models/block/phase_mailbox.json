@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "endrealms:block/phase_mailbox_front",
+    "side": "endrealms:block/phase_mailbox_side",
+    "top": "endrealms:block/phase_mailbox_top"
+  }
+}

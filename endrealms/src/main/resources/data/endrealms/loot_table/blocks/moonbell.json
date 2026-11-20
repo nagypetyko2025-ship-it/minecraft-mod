@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "endrealms:moonbell",
+        "state": {
+          "part": "0"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:inverted",
+                "term": {
+                  "type": "minecraft:match_block",
+                  "blocks": "endrealms:moonbell",
+                  "state": {
+                    "age": "2"
+                  }
+                }
+              },
+              "name": "endrealms:moonbell_nectar"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_shear",
+              "name": "endrealms:moonbell"
+            },
+            {
+              "type": "minecraft:item",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              },
+              "name": "endrealms:moonbell_nectar"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:blocks/moonbell"
+}

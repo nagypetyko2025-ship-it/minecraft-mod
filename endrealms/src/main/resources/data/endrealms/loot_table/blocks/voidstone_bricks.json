@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:block",
+  "pools": [ { "rolls": 1, "condition": { "type": "minecraft:survives_explosion" },
+    "entries": [ { "type": "minecraft:item", "name": "endrealms:voidstone_bricks" } ] } ],
+  "random_sequence": "endrealms:blocks/voidstone_bricks"
+}

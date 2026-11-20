@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:end_village",
+  "display": {
+    "icon": {
+      "id": "endrealms:chorusite_shard"
+    },
+    "title": {
+      "translate": "advancements.endrealms.end_trade.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.end_trade.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:villager_trade",
+      "conditions": {
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:end_villager"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

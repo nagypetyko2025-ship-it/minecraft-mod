@@ -1,0 +1,104 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:astral_sapling"
+    },
+    "title": {
+      "translate": "advancements.endrealms.all_biomes.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.all_biomes.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "astral_forest": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:astral_forest"
+            }
+          }
+        }
+      }
+    },
+    "astral_basin": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:astral_basin"
+            }
+          }
+        }
+      }
+    },
+    "prism_wastes": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:prism_wastes"
+            }
+          }
+        }
+      }
+    },
+    "scorched_barrens": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:scorched_barrens"
+            }
+          }
+        }
+      }
+    },
+    "dragon_graveyard": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:dragon_graveyard"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "astral_forest"
+    ],
+    [
+      "astral_basin"
+    ],
+    [
+      "prism_wastes"
+    ],
+    [
+      "scorched_barrens"
+    ],
+    [
+      "dragon_graveyard"
+    ]
+  ]
+}

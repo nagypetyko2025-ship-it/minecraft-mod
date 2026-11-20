@@ -1,0 +1,19 @@
+# Only the mod's source, the tools that draw and generate its content, and the published updates go to GitHub.
+# Never the server (worlds, playit.secret, panel token), the TLauncher folder or the JDK.
+/*
+!/.gitignore
+!/README.md
+!/endrealms/
+!/tools/
+!/updates/
+
+/endrealms/build/
+/endrealms/run/
+/endrealms/run-worlds/
+/endrealms/.gradle/
+/endrealms/libs/
+
+/tools/*
+!/tools/*.py
+!/tools/texture_scripts/
+__pycache__/

@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:chorusite_armor",
+  "display": {
+    "icon": {
+      "id": "endrealms:gem_table"
+    },
+    "title": {
+      "translate": "advancements.endrealms.rift_sanctum.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.rift_sanctum.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "endrealms:rift_sanctum"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

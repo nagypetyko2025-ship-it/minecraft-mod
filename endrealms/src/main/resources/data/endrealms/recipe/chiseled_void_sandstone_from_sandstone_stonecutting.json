@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "endrealms:void_sandstone",
+  "result": {
+    "id": "endrealms:chiseled_void_sandstone"
+  }
+}

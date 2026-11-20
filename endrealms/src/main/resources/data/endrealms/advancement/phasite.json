@@ -1,0 +1,35 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:phasite_shard"
+    },
+    "title": {
+      "translate": "advancements.endrealms.phasite.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.phasite.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

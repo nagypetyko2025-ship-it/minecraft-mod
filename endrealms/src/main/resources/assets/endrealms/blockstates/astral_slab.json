@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "endrealms:block/astral_slab"
+    },
+    "type=double": {
+      "model": "endrealms:block/astral_planks"
+    },
+    "type=top": {
+      "model": "endrealms:block/astral_slab_top"
+    }
+  }
+}

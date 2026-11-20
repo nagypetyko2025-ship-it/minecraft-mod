@@ -1,0 +1,1 @@
+{ "parent": "minecraft:item/handheld", "textures": { "layer0": "endrealms:item/chorusite_axe" } }

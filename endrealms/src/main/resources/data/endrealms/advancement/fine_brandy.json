@@ -1,0 +1,39 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:apple_brandy",
+      "components": {
+        "endrealms:brandy_quality": 3,
+        "minecraft:enchantment_glint_override": true
+      }
+    },
+    "title": {
+      "translate": "advancements.endrealms.fine_brandy.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.fine_brandy.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "fine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#endrealms:brandies",
+            "components": {
+              "endrealms:brandy_quality": 3
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fine"
+    ]
+  ]
+}

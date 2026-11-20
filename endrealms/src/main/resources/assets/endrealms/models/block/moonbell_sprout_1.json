@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross_emissive",
+  "textures": {
+    "cross": "endrealms:block/moonbell_sprout_1",
+    "cross_emissive": "endrealms:block/moonbell_sprout_1_glow"
+  }
+}

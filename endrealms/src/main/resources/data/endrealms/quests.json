@@ -1,0 +1,3952 @@
+{
+  "chapters": [
+    {
+      "id": "path",
+      "icon": "endrealms:end_guide"
+    },
+    {
+      "id": "start",
+      "icon": "minecraft:ender_eye"
+    },
+    {
+      "id": "isles",
+      "icon": "endrealms:astral_sapling"
+    },
+    {
+      "id": "ruins",
+      "icon": "endrealms:voidstone_bricks"
+    },
+    {
+      "id": "chorusite",
+      "icon": "endrealms:chorusite_ingot"
+    },
+    {
+      "id": "jewels",
+      "icon": "endrealms:ember_garnet"
+    },
+    {
+      "id": "rift",
+      "icon": "endrealms:rift_heart"
+    },
+    {
+      "id": "brew",
+      "icon": "endrealms:fermentation_station"
+    },
+    {
+      "id": "misc",
+      "icon": "endrealms:backpack"
+    }
+  ],
+  "tiers": [
+    {
+      "id": 1,
+      "x": 0
+    },
+    {
+      "id": 2,
+      "x": 6
+    },
+    {
+      "id": 3,
+      "x": 11
+    },
+    {
+      "id": 4,
+      "x": 16
+    },
+    {
+      "id": 5,
+      "x": 21
+    }
+  ],
+  "quests": [
+    {
+      "id": "enter_end",
+      "chapter": "start",
+      "icon": "minecraft:ender_eye",
+      "x": 0.0,
+      "y": 0.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "minecraft:end/root"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 100,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:book"
+            ],
+            [
+              "minecraft:end_stone"
+            ],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:end_guide"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 1
+    },
+    {
+      "id": "dragon",
+      "chapter": "start",
+      "icon": "minecraft:dragon_head",
+      "x": 1.0,
+      "y": 0.0,
+      "requires": [
+        "enter_end"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "minecraft:end/kill_dragon"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 1
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 1
+        }
+      ],
+      "xp": 1000,
+      "recipes": [],
+      "path_x": 1.0,
+      "path_y": 0.0,
+      "tier": 1
+    },
+    {
+      "id": "gateway",
+      "chapter": "start",
+      "icon": "minecraft:ender_pearl",
+      "x": 2.0,
+      "y": 0.0,
+      "requires": [
+        "dragon"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "minecraft:end/enter_end_gateway"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        },
+        {
+          "item": "endrealms:cooked_glimmerhoof",
+          "count": 16
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 2.0,
+      "path_y": 0.0,
+      "tier": 1
+    },
+    {
+      "id": "end_city",
+      "chapter": "start",
+      "icon": "minecraft:purpur_block",
+      "x": 3.0,
+      "y": 0.0,
+      "requires": [
+        "gateway"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "minecraft:end/find_end_city"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:shulker_shell",
+          "count": 4
+        },
+        {
+          "item": "minecraft:firework_rocket",
+          "count": 32
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 3.0,
+      "path_y": -3.0,
+      "tier": 1
+    },
+    {
+      "id": "elytra",
+      "chapter": "start",
+      "icon": "minecraft:elytra",
+      "x": 4.0,
+      "y": 0.0,
+      "requires": [
+        "end_city"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "minecraft:end/elytra"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:firework_rocket",
+          "count": 64
+        },
+        {
+          "item": "minecraft:phantom_membrane",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        }
+      ],
+      "xp": 500,
+      "recipes": [],
+      "path_x": 4.0,
+      "path_y": -3.0,
+      "tier": 1
+    },
+    {
+      "id": "forest",
+      "chapter": "isles",
+      "icon": "endrealms:astral_sapling",
+      "x": 0.0,
+      "y": 1.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_biomes",
+          "criterion": "astral_forest"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:astral_sapling",
+          "count": 8
+        },
+        {
+          "item": "endrealms:end_soil",
+          "count": 32
+        },
+        {
+          "item": "endrealms:voidbloom",
+          "count": 8
+        },
+        {
+          "item": "endrealms:cooked_glimmerhoof",
+          "count": 16
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 3.0,
+      "path_y": -1.0,
+      "tier": 1,
+      "after": "gateway"
+    },
+    {
+      "id": "astral_wood",
+      "chapter": "isles",
+      "icon": "endrealms:astral_log",
+      "x": 1.0,
+      "y": 0.0,
+      "requires": [
+        "forest"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:astral_log",
+          "count": 16
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:astral_planks",
+          "count": 64
+        },
+        {
+          "item": "endrealms:polished_voidstone",
+          "count": 32
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 4.0,
+      "path_y": -2.0,
+      "tier": 1
+    },
+    {
+      "id": "glimmerhoof",
+      "chapter": "isles",
+      "icon": "endrealms:cooked_glimmerhoof",
+      "x": 1.0,
+      "y": 1.0,
+      "requires": [
+        "forest"
+      ],
+      "objectives": [
+        {
+          "type": "kill",
+          "id": "endrealms:glimmerhoof",
+          "count": 3
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:cooked_glimmerhoof",
+          "count": 32
+        },
+        {
+          "item": "minecraft:leather",
+          "count": 16
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 4.0,
+      "path_y": -1.0,
+      "tier": 1
+    },
+    {
+      "id": "glimmer_ride",
+      "chapter": "isles",
+      "icon": "minecraft:saddle",
+      "x": 2.0,
+      "y": 1.0,
+      "requires": [
+        "glimmerhoof"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:glimmerhoof_ride"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:chorus_fruit",
+          "count": 32
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 5.0,
+      "path_y": -1.0,
+      "tier": 1
+    },
+    {
+      "id": "starberry",
+      "chapter": "isles",
+      "icon": "endrealms:starberry",
+      "x": 1.0,
+      "y": 2.0,
+      "requires": [
+        "forest"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:starberry"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:starberry",
+          "count": 16
+        },
+        {
+          "item": "endrealms:moonbell_nectar",
+          "count": 4
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 4.0,
+      "path_y": 0.0,
+      "tier": 1
+    },
+    {
+      "id": "nectar",
+      "chapter": "isles",
+      "icon": "endrealms:moonbell_nectar",
+      "x": 2.0,
+      "y": 2.0,
+      "requires": [
+        "starberry"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:moonbell_nectar"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:moonbell_nectar",
+          "count": 8
+        },
+        {
+          "item": "minecraft:golden_carrot",
+          "count": 16
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 5.0,
+      "path_y": 0.0,
+      "tier": 1
+    },
+    {
+      "id": "basin",
+      "chapter": "isles",
+      "icon": "endrealms:raw_starfin",
+      "x": 0.0,
+      "y": 3.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_biomes",
+          "criterion": "astral_basin"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:fishing_rod",
+          "count": 1
+        },
+        {
+          "item": "endrealms:cooked_glowgill",
+          "count": 16
+        },
+        {
+          "item": "endrealms:astral_water_bucket",
+          "count": 1
+        },
+        {
+          "item": "endrealms:prism_shard",
+          "count": 16
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 250,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": -3.5,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "fishing",
+      "chapter": "isles",
+      "icon": "endrealms:raw_glowgill",
+      "x": 1.0,
+      "y": 3.0,
+      "requires": [
+        "basin"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:astral_fish"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:cooked_starfin",
+          "count": 32
+        },
+        {
+          "item": "endrealms:cooked_void_eel",
+          "count": 32
+        },
+        {
+          "item": "endrealms:cooked_glowgill",
+          "count": 8
+        }
+      ],
+      "xp": 200,
+      "recipes": [
+        {
+          "kind": "furnace",
+          "slots": [
+            [
+              "endrealms:raw_starfin"
+            ]
+          ],
+          "result": "endrealms:cooked_starfin"
+        }
+      ],
+      "path_x": 7.0,
+      "path_y": -3.5,
+      "tier": 2
+    },
+    {
+      "id": "lurker",
+      "chapter": "isles",
+      "icon": "endrealms:deep_lurker_spawn_egg",
+      "x": 2.0,
+      "y": 3.0,
+      "requires": [
+        "fishing"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:deep_lurker"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:cooked_glowgill",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        },
+        {
+          "item": "endrealms:deepglow_shard",
+          "count": 2
+        }
+      ],
+      "xp": 400,
+      "recipes": [],
+      "path_x": 11.0,
+      "path_y": -2.5,
+      "tier": 3
+    },
+    {
+      "id": "deepglow",
+      "chapter": "isles",
+      "icon": "endrealms:deepglow_shard",
+      "x": 3.0,
+      "y": 3.0,
+      "requires": [
+        "lurker"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:deepglow_shard",
+          "count": 3
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:deepglow_shard",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "endrealms:prism_shard",
+          "count": 32
+        }
+      ],
+      "xp": 500,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:deep_aquamarine"
+        }
+      ],
+      "path_x": 16.0,
+      "path_y": -1.5,
+      "tier": 4
+    },
+    {
+      "id": "prism",
+      "chapter": "isles",
+      "icon": "endrealms:prism_shard",
+      "x": 0.0,
+      "y": 4.5,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_biomes",
+          "criterion": "prism_wastes"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:prism_shard",
+          "count": 32
+        },
+        {
+          "item": "endrealms:prism_lamp",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 3.0,
+      "path_y": 1.0,
+      "tier": 1,
+      "after": "gateway"
+    },
+    {
+      "id": "prism_shards",
+      "chapter": "isles",
+      "icon": "endrealms:prism_cluster",
+      "x": 1.0,
+      "y": 4.0,
+      "requires": [
+        "prism"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:prism_shard",
+          "count": 16
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:prism_lamp",
+          "count": 16
+        },
+        {
+          "item": "endrealms:prism_shard",
+          "count": 16
+        }
+      ],
+      "xp": 150,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:end_rod"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            []
+          ],
+          "result": "endrealms:prism_lamp"
+        }
+      ],
+      "path_x": 4.0,
+      "path_y": 1.0,
+      "tier": 1
+    },
+    {
+      "id": "shardcrab",
+      "chapter": "isles",
+      "icon": "endrealms:shardcrab_spawn_egg",
+      "x": 1.0,
+      "y": 5.0,
+      "requires": [
+        "prism"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:shardcrab"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:prism_shard",
+          "count": 32
+        },
+        {
+          "item": "endrealms:prism_crystal_block",
+          "count": 8
+        }
+      ],
+      "xp": 250,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 3.5,
+      "tier": 2
+    },
+    {
+      "id": "scorched",
+      "chapter": "isles",
+      "icon": "endrealms:ember_rock",
+      "x": 0.0,
+      "y": 6.5,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_biomes",
+          "criterion": "scorched_barrens"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:ember_rock",
+          "count": 16
+        },
+        {
+          "item": "endrealms:ash_block",
+          "count": 16
+        },
+        {
+          "item": "endrealms:ash_meal",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": -2.0,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "wraith",
+      "chapter": "isles",
+      "icon": "endrealms:ash_wraith_spawn_egg",
+      "x": 1.0,
+      "y": 6.5,
+      "requires": [
+        "scorched"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:ash_wraith"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:ash_dust",
+          "count": 27
+        },
+        {
+          "item": "endrealms:ash_meal",
+          "count": 8
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "count": 8
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 7.0,
+      "path_y": -2.0,
+      "tier": 2
+    },
+    {
+      "id": "ash_meal",
+      "chapter": "isles",
+      "icon": "endrealms:ash_meal",
+      "x": 2.0,
+      "y": 6.0,
+      "requires": [
+        "wraith"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:ash_meal",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:ash_meal",
+          "count": 16
+        },
+        {
+          "item": "minecraft:bone_block",
+          "count": 16
+        }
+      ],
+      "xp": 200,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ]
+          ],
+          "result": "endrealms:ash_meal"
+        }
+      ],
+      "path_x": 8.0,
+      "path_y": -2.5,
+      "tier": 2
+    },
+    {
+      "id": "vent",
+      "chapter": "isles",
+      "icon": "endrealms:volcanic_vent",
+      "x": 2.0,
+      "y": 7.0,
+      "requires": [
+        "wraith"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:volcanic_vent",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:volcanic_vent",
+          "count": 2
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "count": 16
+        },
+        {
+          "item": "minecraft:magma_block",
+          "count": 16
+        }
+      ],
+      "xp": 300,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [
+              "endrealms:ember_rock"
+            ],
+            [],
+            [
+              "endrealms:scorched_end_stone"
+            ],
+            [],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "minecraft:blaze_powder"
+            ],
+            [
+              "minecraft:magma_block"
+            ],
+            [
+              "minecraft:blaze_powder"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "minecraft:magma_block"
+            ],
+            [
+              "minecraft:lava_bucket"
+            ],
+            [
+              "minecraft:magma_block"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "minecraft:blaze_powder"
+            ],
+            [
+              "minecraft:magma_block"
+            ],
+            [
+              "minecraft:blaze_powder"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [
+              "endrealms:ember_rock"
+            ]
+          ],
+          "result": "endrealms:volcanic_vent"
+        }
+      ],
+      "path_x": 8.0,
+      "path_y": -1.5,
+      "tier": 2
+    },
+    {
+      "id": "graveyard",
+      "chapter": "isles",
+      "icon": "endrealms:bone_soil",
+      "x": 0.0,
+      "y": 8.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_biomes",
+          "criterion": "dragon_graveyard"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:bone_soil",
+          "count": 32
+        },
+        {
+          "item": "minecraft:bone_block",
+          "count": 16
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": -0.5,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "whelp",
+      "chapter": "isles",
+      "icon": "endrealms:spectral_whelp_spawn_egg",
+      "x": 1.0,
+      "y": 8.0,
+      "requires": [
+        "graveyard"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:spectral_whelp"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:phantom_membrane",
+          "count": 8
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 7.0,
+      "path_y": -0.5,
+      "tier": 2
+    },
+    {
+      "id": "dragon_bones",
+      "chapter": "isles",
+      "icon": "endrealms:dragon_bone",
+      "x": 2.0,
+      "y": 8.0,
+      "requires": [
+        "whelp"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:dragon_bone",
+          "count": 9
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:dragon_bone_block",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 16
+        }
+      ],
+      "xp": 400,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ],
+            [
+              "endrealms:dragon_bone"
+            ]
+          ],
+          "result": "endrealms:dragon_bone_block"
+        }
+      ],
+      "path_x": 8.0,
+      "path_y": -0.5,
+      "tier": 2
+    },
+    {
+      "id": "drake",
+      "chapter": "isles",
+      "icon": "endrealms:bone_drake_spawn_egg",
+      "x": 3.0,
+      "y": 8.0,
+      "requires": [
+        "dragon_bones"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:bone_drake"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:dragon_bone",
+          "count": 8
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        }
+      ],
+      "xp": 500,
+      "recipes": [],
+      "path_x": 9.0,
+      "path_y": -0.5,
+      "tier": 2
+    },
+    {
+      "id": "village",
+      "chapter": "ruins",
+      "icon": "endrealms:end_villager_spawn_egg",
+      "x": 0.0,
+      "y": 0.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:end_village"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 4
+        },
+        {
+          "item": "endrealms:prism_shard",
+          "count": 16
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 3.0,
+      "path_y": 2.0,
+      "tier": 1,
+      "after": "gateway"
+    },
+    {
+      "id": "trade",
+      "chapter": "ruins",
+      "icon": "endrealms:chorusite_shard",
+      "x": 1.0,
+      "y": 0.0,
+      "requires": [
+        "village"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:end_trade"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 6
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 4.0,
+      "path_y": 2.0,
+      "tier": 1
+    },
+    {
+      "id": "bastion",
+      "chapter": "ruins",
+      "icon": "endrealms:voidstone_bricks",
+      "x": 0.0,
+      "y": 1.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:void_bastion"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:voidstone_bricks",
+          "count": 64
+        },
+        {
+          "item": "endrealms:polished_voidstone",
+          "count": 64
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 250,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 0.5,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "sentinel",
+      "chapter": "ruins",
+      "icon": "endrealms:void_sentinel_spawn_egg",
+      "x": 1.0,
+      "y": 1.0,
+      "requires": [
+        "bastion"
+      ],
+      "objectives": [
+        {
+          "type": "kill",
+          "id": "endrealms:void_sentinel",
+          "count": 3
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        }
+      ],
+      "xp": 500,
+      "recipes": [],
+      "path_x": 7.0,
+      "path_y": 0.5,
+      "tier": 2
+    },
+    {
+      "id": "template",
+      "chapter": "ruins",
+      "icon": "endrealms:chorusite_upgrade_smithing_template",
+      "x": 2.0,
+      "y": 1.0,
+      "requires": [
+        "sentinel"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:chorusite_upgrade_smithing_template",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:chorusite_upgrade_smithing_template",
+          "count": 1
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 4
+        }
+      ],
+      "xp": 500,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "endrealms:chorusite_upgrade_smithing_template"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:end_stone"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ]
+          ],
+          "result": "endrealms:chorusite_upgrade_smithing_template"
+        }
+      ],
+      "path_x": 11.0,
+      "path_y": -0.5,
+      "tier": 3
+    },
+    {
+      "id": "observatory",
+      "chapter": "ruins",
+      "icon": "endrealms:prism_lamp",
+      "x": 0.0,
+      "y": 2.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:observatory"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:book",
+          "count": 16
+        },
+        {
+          "item": "minecraft:lapis_lazuli",
+          "count": 32
+        },
+        {
+          "item": "minecraft:amethyst_shard",
+          "count": 16
+        },
+        {
+          "item": "endrealms:star_sapphire",
+          "count": 1
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 1.5,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "wreck",
+      "chapter": "ruins",
+      "icon": "endrealms:crumbling_planks",
+      "x": 0.0,
+      "y": 3.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sky_wreck"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        },
+        {
+          "item": "minecraft:shulker_shell",
+          "count": 4
+        },
+        {
+          "item": "minecraft:gold_block",
+          "count": 4
+        },
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 2
+        }
+      ],
+      "xp": 350,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 2.5,
+      "tier": 2,
+      "after": "gateway"
+    },
+    {
+      "id": "crypt",
+      "chapter": "ruins",
+      "icon": "endrealms:volcanic_vent",
+      "x": 0.0,
+      "y": 4.0,
+      "requires": [
+        "scorched"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:crypt"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:bone_block",
+          "count": 16
+        },
+        {
+          "item": "endrealms:ash_meal",
+          "count": 8
+        },
+        {
+          "item": "minecraft:gold_block",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 350,
+      "recipes": [],
+      "path_x": 11.0,
+      "path_y": -1.5,
+      "tier": 3
+    },
+    {
+      "id": "crypt_guards",
+      "chapter": "ruins",
+      "icon": "endrealms:ash_dust",
+      "x": 1.0,
+      "y": 4.0,
+      "requires": [
+        "crypt"
+      ],
+      "objectives": [
+        {
+          "type": "kill",
+          "id": "endrealms:ash_wraith",
+          "count": 8
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:ash_quartz",
+          "count": 2
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "endrealms:ash_meal",
+          "count": 16
+        }
+      ],
+      "xp": 600,
+      "recipes": [],
+      "path_x": 12.0,
+      "path_y": -1.5,
+      "tier": 3
+    },
+    {
+      "id": "shards",
+      "chapter": "chorusite",
+      "icon": "endrealms:chorusite_shard",
+      "x": 0.0,
+      "y": 0.5,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:chorusite_shard",
+          "count": 4
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 12
+        },
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 2
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 8
+        }
+      ],
+      "xp": 500,
+      "recipes": [],
+      "path_x": 11.0,
+      "path_y": 0.5,
+      "tier": 3,
+      "after": "bastion"
+    },
+    {
+      "id": "pure",
+      "chapter": "chorusite",
+      "icon": "endrealms:pure_chorusite_shard",
+      "x": 1.0,
+      "y": 0.5,
+      "requires": [
+        "shards",
+        "phasite"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:pure_chorusite_shard",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 12
+        },
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 4
+        }
+      ],
+      "xp": 400,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ]
+          ],
+          "result": "endrealms:pure_chorusite_shard"
+        }
+      ],
+      "path_x": 16.0,
+      "path_y": 0.0,
+      "tier": 4
+    },
+    {
+      "id": "ingot",
+      "chapter": "chorusite",
+      "icon": "endrealms:chorusite_ingot",
+      "x": 2.0,
+      "y": 0.5,
+      "requires": [
+        "pure"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:chorusite_ingot"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 6
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 1
+        }
+      ],
+      "xp": 800,
+      "recipes": [
+        {
+          "kind": "furnace",
+          "slots": [
+            [
+              "endrealms:pure_chorusite_shard"
+            ]
+          ],
+          "result": "endrealms:chorusite_ingot"
+        }
+      ],
+      "path_x": 17.0,
+      "path_y": 0.0,
+      "tier": 4
+    },
+    {
+      "id": "pickaxe",
+      "chapter": "chorusite",
+      "icon": "endrealms:chorusite_pickaxe",
+      "x": 3.0,
+      "y": 0.0,
+      "requires": [
+        "ingot"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:chorusite_pickaxe"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 1
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        }
+      ],
+      "xp": 600,
+      "recipes": [
+        {
+          "kind": "smithing",
+          "slots": [
+            [
+              "endrealms:chorusite_upgrade_smithing_template"
+            ],
+            [
+              "minecraft:netherite_pickaxe"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ]
+          ],
+          "result": "endrealms:chorusite_pickaxe"
+        }
+      ],
+      "path_x": 18.0,
+      "path_y": -0.5,
+      "tier": 4
+    },
+    {
+      "id": "armor",
+      "chapter": "chorusite",
+      "icon": "endrealms:chorusite_chestplate",
+      "x": 3.0,
+      "y": 1.0,
+      "requires": [
+        "ingot",
+        "template"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:chorusite_armor"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 32
+        }
+      ],
+      "xp": 2000,
+      "recipes": [
+        {
+          "kind": "smithing",
+          "slots": [
+            [
+              "endrealms:chorusite_upgrade_smithing_template"
+            ],
+            [
+              "minecraft:netherite_chestplate"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ]
+          ],
+          "result": "endrealms:chorusite_chestplate"
+        }
+      ],
+      "path_x": 18.0,
+      "path_y": 0.5,
+      "tier": 4
+    },
+    {
+      "id": "chorusite_block",
+      "chapter": "chorusite",
+      "icon": "endrealms:chorusite_block",
+      "x": 4.0,
+      "y": 1.0,
+      "requires": [
+        "armor"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:chorusite_block"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond_block",
+          "count": 16
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 4
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 5000,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ],
+            [
+              "endrealms:chorusite_ingot"
+            ]
+          ],
+          "result": "endrealms:chorusite_block"
+        }
+      ],
+      "path_x": 21.0,
+      "path_y": -1.0,
+      "tier": 5
+    },
+    {
+      "id": "end_table",
+      "chapter": "jewels",
+      "icon": "endrealms:end_crafting_table",
+      "x": 0.0,
+      "y": 0.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:end_crafting_table",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:polished_voidstone",
+          "count": 32
+        },
+        {
+          "item": "endrealms:prism_shard",
+          "count": 16
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 8
+        }
+      ],
+      "xp": 150,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "minecraft:ender_pearl"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "minecraft:crafting_table"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ]
+          ],
+          "result": "endrealms:end_crafting_table"
+        }
+      ],
+      "path_x": 3.0,
+      "path_y": 3.0,
+      "tier": 1,
+      "after": "gateway"
+    },
+    {
+      "id": "phasite",
+      "chapter": "jewels",
+      "icon": "endrealms:phasite_ore",
+      "x": 0.0,
+      "y": 2.25,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:phasite"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 2
+        },
+        {
+          "item": "minecraft:lapis_lazuli",
+          "count": 32
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        }
+      ],
+      "xp": 600,
+      "recipes": [],
+      "path_x": 11.0,
+      "path_y": 2.0,
+      "tier": 3,
+      "after": "observatory"
+    },
+    {
+      "id": "pearl",
+      "chapter": "jewels",
+      "icon": "endrealms:phase_pearl",
+      "x": 1.0,
+      "y": 1.5,
+      "requires": [
+        "phasite",
+        "end_table"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:phase_pearl"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 4
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        }
+      ],
+      "xp": 600,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:ender_pearl"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:ender_pearl"
+            ],
+            [
+              "minecraft:ender_eye"
+            ],
+            [
+              "minecraft:ender_pearl"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:ender_pearl"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:popped_chorus_fruit"
+            ],
+            []
+          ],
+          "result": "endrealms:phase_pearl"
+        }
+      ],
+      "path_x": 12.0,
+      "path_y": 1.5,
+      "tier": 3
+    },
+    {
+      "id": "anchor",
+      "chapter": "jewels",
+      "icon": "endrealms:phase_anchor",
+      "x": 2.0,
+      "y": 1.5,
+      "requires": [
+        "pearl"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:phase_anchor"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phase_anchor",
+          "count": 2
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        }
+      ],
+      "xp": 400,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ]
+          ],
+          "result": "endrealms:phase_anchor"
+        }
+      ],
+      "path_x": 13.0,
+      "path_y": 1.5,
+      "tier": 3
+    },
+    {
+      "id": "table",
+      "chapter": "jewels",
+      "icon": "endrealms:gem_table",
+      "x": 1.0,
+      "y": 3.0,
+      "requires": [
+        "phasite",
+        "end_table"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:gem_table",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        },
+        {
+          "item": "minecraft:quartz",
+          "count": 32
+        },
+        {
+          "item": "minecraft:redstone",
+          "count": 32
+        },
+        {
+          "item": "minecraft:lapis_lazuli",
+          "count": 32
+        }
+      ],
+      "xp": 300,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "minecraft:smithing_table"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:polished_voidstone"
+            ]
+          ],
+          "result": "endrealms:gem_table"
+        }
+      ],
+      "path_x": 12.0,
+      "path_y": 2.5,
+      "tier": 3
+    },
+    {
+      "id": "gem",
+      "chapter": "jewels",
+      "icon": "endrealms:ember_garnet",
+      "x": 2.0,
+      "y": 3.0,
+      "requires": [
+        "table"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:gem"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:chorusite_shard",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        },
+        {
+          "item": "minecraft:redstone",
+          "count": 32
+        },
+        {
+          "item": "minecraft:quartz",
+          "count": 32
+        }
+      ],
+      "xp": 400,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "minecraft:raw_gold"
+            ],
+            [
+              "minecraft:raw_gold"
+            ],
+            [
+              "endrealms:ember_rock"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:ember_garnet"
+        },
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:lapis_lazuli"
+            ],
+            [
+              "minecraft:lapis_lazuli"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:star_sapphire"
+        },
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:raw_iron"
+            ],
+            [
+              "minecraft:raw_iron"
+            ],
+            [
+              "minecraft:obsidian"
+            ],
+            [
+              "endrealms:voidstone"
+            ],
+            [
+              "endrealms:voidstone"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:void_onyx"
+        }
+      ],
+      "path_x": 13.0,
+      "path_y": 2.5,
+      "tier": 3
+    },
+    {
+      "id": "socket",
+      "chapter": "jewels",
+      "icon": "endrealms:gem_table",
+      "x": 3.0,
+      "y": 3.0,
+      "requires": [
+        "gem"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:gem_socket"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 32
+        },
+        {
+          "item": "endrealms:void_onyx",
+          "count": 1
+        }
+      ],
+      "xp": 500,
+      "recipes": [],
+      "path_x": 14.0,
+      "path_y": 2.5,
+      "tier": 3
+    },
+    {
+      "id": "all_gems",
+      "chapter": "jewels",
+      "icon": "endrealms:bloodstone",
+      "x": 4.0,
+      "y": 3.0,
+      "requires": [
+        "socket"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:all_gems"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 4
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 4
+        },
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 4
+        }
+      ],
+      "xp": 3000,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:phasite_ore",
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [
+              "minecraft:amethyst_shard"
+            ],
+            [
+              "endrealms:moonbell"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:moon_opal"
+        },
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:quartz"
+            ],
+            [
+              "minecraft:coal"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [
+              "endrealms:ash_dust"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:ash_quartz"
+        },
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:chorusite_shard"
+            ],
+            [
+              "minecraft:raw_copper"
+            ],
+            [
+              "minecraft:raw_copper"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "minecraft:redstone"
+            ],
+            [
+              "minecraft:nether_wart"
+            ],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:bloodstone"
+        }
+      ],
+      "path_x": 16.0,
+      "path_y": 1.5,
+      "tier": 4
+    },
+    {
+      "id": "canvas",
+      "chapter": "misc",
+      "icon": "endrealms:canvas",
+      "x": 0.0,
+      "y": 0.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:canvas",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:red_dye",
+          "count": 4
+        },
+        {
+          "item": "minecraft:yellow_dye",
+          "count": 4
+        },
+        {
+          "item": "minecraft:blue_dye",
+          "count": 4
+        },
+        {
+          "item": "minecraft:green_dye",
+          "count": 4
+        }
+      ],
+      "xp": 20,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ],
+            [
+              "minecraft:white_wool"
+            ]
+          ],
+          "result": "endrealms:canvas"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "large_canvas",
+      "chapter": "misc",
+      "icon": "endrealms:large_canvas",
+      "x": 1.0,
+      "y": 0.0,
+      "requires": [
+        "canvas"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:large_canvas",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:white_wool",
+          "count": 9
+        },
+        {
+          "item": "minecraft:black_dye",
+          "count": 4
+        },
+        {
+          "item": "minecraft:white_dye",
+          "count": 4
+        }
+      ],
+      "xp": 20,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "endrealms:canvas"
+            ],
+            [
+              "endrealms:canvas"
+            ],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:large_canvas"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "backpack",
+      "chapter": "misc",
+      "icon": "endrealms:backpack",
+      "x": 0.0,
+      "y": 1.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:backpack",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:leather",
+          "count": 4
+        },
+        {
+          "item": "minecraft:string",
+          "count": 4
+        }
+      ],
+      "xp": 25,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [],
+            [
+              "minecraft:string"
+            ],
+            [],
+            [
+              "minecraft:leather"
+            ],
+            [],
+            [
+              "minecraft:leather"
+            ],
+            [
+              "minecraft:leather"
+            ],
+            [
+              "minecraft:leather"
+            ],
+            [
+              "minecraft:leather"
+            ]
+          ],
+          "result": "endrealms:backpack"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "fermentation_station",
+      "chapter": "brew",
+      "icon": "endrealms:fermentation_station",
+      "x": 0.0,
+      "y": 6.0,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:fermentation_station",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:apple",
+          "count": 16
+        },
+        {
+          "item": "minecraft:glass_bottle",
+          "count": 4
+        },
+        {
+          "item": "minecraft:water_bucket",
+          "count": 1
+        }
+      ],
+      "xp": 25,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:copper_ingot"
+            ],
+            [
+              "minecraft:iron_ingot"
+            ],
+            [
+              "minecraft:copper_ingot"
+            ],
+            [
+              "minecraft:glass"
+            ],
+            [
+              "minecraft:barrel"
+            ],
+            [
+              "minecraft:glass"
+            ],
+            [
+              "minecraft:copper_ingot"
+            ],
+            [
+              "minecraft:copper_ingot"
+            ],
+            [
+              "minecraft:copper_ingot"
+            ]
+          ],
+          "result": "endrealms:fermentation_station"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "apple_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:apple_brandy",
+      "x": 1.0,
+      "y": 6.0,
+      "requires": [
+        "fermentation_station"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:apple_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:apple",
+          "count": 32
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 2
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "brandy_master",
+      "chapter": "brew",
+      "icon": "endrealms:starberry_brandy",
+      "x": 2.0,
+      "y": 2.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:apple_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:glow_berry_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:sweet_berry_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:moonbell_nectar_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:starberry_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:emerald",
+          "count": 16
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "aging_barrel",
+      "chapter": "brew",
+      "icon": "endrealms:aging_barrel",
+      "x": 2.0,
+      "y": 5.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:aging_barrel",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:dark_oak_log",
+          "count": 16
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 4
+        }
+      ],
+      "xp": 40,
+      "recipes": [
+        {
+          "kind": "crafting",
+          "slots": [
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ],
+            [
+              "minecraft:iron_ingot"
+            ],
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ],
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ],
+            [
+              "minecraft:barrel"
+            ],
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ],
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ],
+            [
+              "minecraft:iron_ingot"
+            ],
+            [
+              "minecraft:dark_oak_log",
+              "minecraft:dark_oak_wood",
+              "minecraft:stripped_dark_oak_log",
+              "minecraft:stripped_dark_oak_wood"
+            ]
+          ],
+          "result": "endrealms:aging_barrel"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "fine_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:apple_brandy",
+      "x": 3.0,
+      "y": 5.0,
+      "requires": [
+        "aging_barrel"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:fine_brandy"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 6
+        },
+        {
+          "item": "minecraft:emerald",
+          "count": 24
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "fruit_medley_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:fruit_medley_brandy",
+      "x": 2.0,
+      "y": 6.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:fruit_medley_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:sweet_berries",
+          "count": 12
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "honeyed_apple_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:honeyed_apple_brandy",
+      "x": 2.0,
+      "y": 7.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:honeyed_apple_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:honey_bottle",
+          "count": 4
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "glowing_nectar_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:glowing_nectar_brandy",
+      "x": 2.0,
+      "y": 8.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:glowing_nectar_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:glow_berries",
+          "count": 16
+        },
+        {
+          "item": "endrealms:moonbell_nectar",
+          "count": 4
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "chorus_berry_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:chorus_berry_brandy",
+      "x": 2.0,
+      "y": 9.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:chorus_berry_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:chorus_fruit",
+          "count": 8
+        },
+        {
+          "item": "endrealms:starberry",
+          "count": 8
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "melon_refresher",
+      "chapter": "brew",
+      "icon": "endrealms:melon_refresher",
+      "x": 2.0,
+      "y": 10.0,
+      "requires": [
+        "apple_brandy"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:melon_refresher",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:melon_slice",
+          "count": 16
+        },
+        {
+          "item": "minecraft:sweet_berries",
+          "count": 12
+        }
+      ],
+      "xp": 40,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "endless_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:endless_brandy",
+      "x": 3.0,
+      "y": 0.0,
+      "requires": [
+        "brandy_master"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:endless_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:moonbell_nectar",
+          "count": 6
+        },
+        {
+          "item": "endrealms:starberry",
+          "count": 8
+        }
+      ],
+      "xp": 80,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "miners_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:miners_brandy",
+      "x": 3.0,
+      "y": 1.0,
+      "requires": [
+        "brandy_master"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:miners_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:apple",
+          "count": 8
+        },
+        {
+          "item": "minecraft:glow_berries",
+          "count": 16
+        }
+      ],
+      "xp": 80,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "dragon_blood_brandy",
+      "chapter": "brew",
+      "icon": "endrealms:dragon_blood_brandy",
+      "x": 3.0,
+      "y": 2.0,
+      "requires": [
+        "brandy_master"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:dragon_blood_brandy",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:dragon_bone",
+          "count": 2
+        },
+        {
+          "item": "minecraft:apple",
+          "count": 8
+        }
+      ],
+      "xp": 80,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "forest_elixir",
+      "chapter": "brew",
+      "icon": "endrealms:forest_elixir",
+      "x": 3.0,
+      "y": 3.0,
+      "requires": [
+        "brandy_master"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:forest_elixir",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:sweet_berries",
+          "count": 12
+        },
+        {
+          "item": "minecraft:honey_bottle",
+          "count": 4
+        }
+      ],
+      "xp": 80,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "void_essence",
+      "chapter": "brew",
+      "icon": "endrealms:void_essence",
+      "x": 3.0,
+      "y": 4.0,
+      "requires": [
+        "brandy_master"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:void_essence",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:chorus_fruit",
+          "count": 8
+        },
+        {
+          "item": "minecraft:ender_eye",
+          "count": 2
+        }
+      ],
+      "xp": 80,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "mix_master",
+      "chapter": "brew",
+      "icon": "endrealms:endless_brandy",
+      "x": 4.0,
+      "y": 0.0,
+      "requires": [
+        "endless_brandy",
+        "miners_brandy",
+        "dragon_blood_brandy",
+        "forest_elixir",
+        "void_essence"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:fruit_medley_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:honeyed_apple_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:glowing_nectar_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:chorus_berry_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:melon_refresher",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:endless_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:miners_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:dragon_blood_brandy",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:forest_elixir",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "id": "endrealms:void_essence",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 1
+        },
+        {
+          "item": "minecraft:emerald",
+          "count": 32
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 0
+    },
+    {
+      "id": "mailbox",
+      "chapter": "jewels",
+      "icon": "endrealms:phase_mailbox",
+      "x": 3.0,
+      "y": 1.0,
+      "requires": [
+        "anchor"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:phase_mailbox",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 8
+        },
+        {
+          "item": "minecraft:ender_eye",
+          "count": 16
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 4
+        }
+      ],
+      "xp": 3000,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "minecraft:diamond"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [
+              "minecraft:ender_eye"
+            ],
+            [
+              "endrealms:phase_anchor"
+            ],
+            [
+              "minecraft:ender_eye"
+            ],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "minecraft:chest"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [
+              "endrealms:polished_voidstone"
+            ],
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:phase_mailbox"
+        }
+      ],
+      "path_x": 21.0,
+      "path_y": 2.0,
+      "tier": 5
+    },
+    {
+      "id": "gravity_stone",
+      "chapter": "jewels",
+      "icon": "endrealms:gravity_stone",
+      "x": 3.0,
+      "y": 2.0,
+      "requires": [
+        "deepglow",
+        "anchor"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:gravity_stone",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 6
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 2
+        },
+        {
+          "item": "minecraft:redstone_block",
+          "count": 8
+        }
+      ],
+      "xp": 2500,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [
+              "minecraft:feather"
+            ],
+            [],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [],
+            [
+              "minecraft:feather"
+            ],
+            [],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [
+              "endrealms:crystalline_voidstone"
+            ],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [
+              "endrealms:crystalline_voidstone"
+            ],
+            [
+              "minecraft:slime_block"
+            ],
+            [
+              "endrealms:crystalline_voidstone"
+            ],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [
+              "endrealms:crystalline_voidstone"
+            ],
+            [
+              "endrealms:phasite_shard"
+            ],
+            [],
+            [
+              "minecraft:feather"
+            ],
+            [],
+            [
+              "endrealms:deepglow_shard"
+            ],
+            [],
+            [
+              "minecraft:feather"
+            ]
+          ],
+          "result": "endrealms:gravity_stone"
+        }
+      ],
+      "path_x": 21.0,
+      "path_y": -2.0,
+      "tier": 5
+    },
+    {
+      "id": "sanctum",
+      "chapter": "rift",
+      "icon": "endrealms:rift_heart",
+      "x": 0.0,
+      "y": 0.5,
+      "requires": [
+        "armor"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:rift_sanctum"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 32
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 16
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 16
+        }
+      ],
+      "xp": 800,
+      "recipes": [],
+      "path_x": 21.0,
+      "path_y": 0.5,
+      "tier": 5
+    },
+    {
+      "id": "rift_lord",
+      "chapter": "rift",
+      "icon": "endrealms:rift_lord_spawn_egg",
+      "x": 1.0,
+      "y": 0.5,
+      "requires": [
+        "sanctum"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:rift_lord"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 8
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 8
+        },
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 8
+        }
+      ],
+      "xp": 5000,
+      "recipes": [],
+      "path_x": 22.0,
+      "path_y": 0.5,
+      "tier": 5
+    },
+    {
+      "id": "riftblade",
+      "chapter": "rift",
+      "icon": "endrealms:riftblade",
+      "x": 2.0,
+      "y": 0.0,
+      "requires": [
+        "rift_lord"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:riftblade"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 8
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 64
+        }
+      ],
+      "xp": 2000,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [],
+            [],
+            [
+              "endrealms:phasite_gem"
+            ],
+            [],
+            [],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [
+              "endrealms:rift_heart"
+            ],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:phasite_gem"
+            ],
+            [],
+            [
+              "endrealms:chorusite_sword"
+            ],
+            [],
+            [
+              "endrealms:phasite_gem"
+            ],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [
+              "endrealms:prism_shard"
+            ],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "result": "endrealms:riftblade"
+        }
+      ],
+      "path_x": 23.0,
+      "path_y": 0.0,
+      "tier": 5
+    },
+    {
+      "id": "citadel",
+      "chapter": "rift",
+      "icon": "endrealms:voidstone_bricks",
+      "x": 2.0,
+      "y": 1.0,
+      "requires": [
+        "rift_lord"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:void_citadel"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 32
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 32
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 32
+        },
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 4
+        }
+      ],
+      "xp": 1500,
+      "recipes": [],
+      "path_x": 23.0,
+      "path_y": 1.0,
+      "tier": 5
+    },
+    {
+      "id": "citadel_guards",
+      "chapter": "rift",
+      "icon": "endrealms:void_sentinel_spawn_egg",
+      "x": 3.0,
+      "y": 1.0,
+      "requires": [
+        "citadel"
+      ],
+      "objectives": [
+        {
+          "type": "kill",
+          "id": "endrealms:void_sentinel",
+          "count": 25
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 2
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 32
+        }
+      ],
+      "xp": 2000,
+      "recipes": [],
+      "path_x": 24.0,
+      "path_y": 1.0,
+      "tier": 5
+    },
+    {
+      "id": "void_king",
+      "chapter": "rift",
+      "icon": "endrealms:void_king_spawn_egg",
+      "x": 4.0,
+      "y": 1.0,
+      "requires": [
+        "citadel_guards"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:void_king"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:netherite_ingot",
+          "count": 12
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 12
+        },
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 16
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 16
+        }
+      ],
+      "xp": 8000,
+      "recipes": [],
+      "path_x": 25.0,
+      "path_y": 1.0,
+      "tier": 5
+    },
+    {
+      "id": "crownstone",
+      "chapter": "rift",
+      "icon": "endrealms:crownstone",
+      "x": 5.0,
+      "y": 1.0,
+      "requires": [
+        "void_king"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:crownstone"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 64
+        },
+        {
+          "item": "endrealms:phasite_shard",
+          "count": 8
+        },
+        {
+          "item": "minecraft:diamond_block",
+          "count": 8
+        }
+      ],
+      "xp": 3000,
+      "recipes": [],
+      "path_x": 26.0,
+      "path_y": 1.0,
+      "tier": 5
+    }
+  ]
+}

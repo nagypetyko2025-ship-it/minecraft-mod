@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust",
+    "endrealms:ash_dust"
+  ],
+  "result": {
+    "id": "endrealms:ash_meal"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:crumbling_planks"
+    },
+    "title": {
+      "translate": "advancements.endrealms.sky_wreck.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.sky_wreck.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "endrealms:sky_wreck"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

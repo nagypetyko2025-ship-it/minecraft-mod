@@ -1,0 +1,6 @@
+{
+  "type": "endrealms:observatory",
+  "biomes": "#endrealms:has_structure/observatory",
+  "step": "surface_structures",
+  "spawn_overrides": {}
+}

@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "age=0,part=0": {
+      "model": "endrealms:block/moonbell_sprout_0"
+    },
+    "age=0,part=1": {
+      "model": "endrealms:block/moonbell_middle"
+    },
+    "age=0,part=2": {
+      "model": "endrealms:block/moonbell_top"
+    },
+    "age=1,part=0": {
+      "model": "endrealms:block/moonbell_sprout_1"
+    },
+    "age=1,part=1": {
+      "model": "endrealms:block/moonbell_middle"
+    },
+    "age=1,part=2": {
+      "model": "endrealms:block/moonbell_top"
+    },
+    "age=2,part=0": {
+      "model": "endrealms:block/moonbell_bottom"
+    },
+    "age=2,part=1": {
+      "model": "endrealms:block/moonbell_middle"
+    },
+    "age=2,part=2": {
+      "model": "endrealms:block/moonbell_top"
+    }
+  }
+}

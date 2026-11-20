@@ -1,0 +1,25 @@
+{
+  "parent": "endrealms:gem",
+  "display": {
+    "icon": {
+      "id": "endrealms:gem_table"
+    },
+    "title": {
+      "translate": "advancements.endrealms.gem_socket.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.gem_socket.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

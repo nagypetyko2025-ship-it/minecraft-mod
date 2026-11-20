@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/cube_column_uv_locked_x", "textures": { "end": "endrealms:block/astral_log_top", "side": "endrealms:block/astral_log" } }

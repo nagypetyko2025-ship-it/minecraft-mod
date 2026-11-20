@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:shardcrab",
+  "display": {
+    "icon": {
+      "id": "endrealms:ash_dust"
+    },
+    "title": {
+      "translate": "advancements.endrealms.ash_wraith.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.ash_wraith.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:ash_wraith"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

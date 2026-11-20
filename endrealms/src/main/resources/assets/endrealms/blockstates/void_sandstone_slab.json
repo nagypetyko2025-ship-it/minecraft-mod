@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "endrealms:block/void_sandstone_slab"
+    },
+    "type=double": {
+      "model": "endrealms:block/void_sandstone"
+    },
+    "type=top": {
+      "model": "endrealms:block/void_sandstone_slab_top"
+    }
+  }
+}

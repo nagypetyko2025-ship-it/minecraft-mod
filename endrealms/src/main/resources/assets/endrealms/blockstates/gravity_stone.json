@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "endrealms:block/gravity_stone"
+    },
+    "powered=true": {
+      "model": "endrealms:block/gravity_stone_on"
+    }
+  }
+}

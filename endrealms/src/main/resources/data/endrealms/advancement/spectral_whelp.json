@@ -1,0 +1,34 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:spectral_whelp_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.endrealms.spectral_whelp.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.spectral_whelp.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:spectral_whelp"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ]
+  ]
+}

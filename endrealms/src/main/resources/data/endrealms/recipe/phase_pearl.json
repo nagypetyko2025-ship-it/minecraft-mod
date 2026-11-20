@@ -1,0 +1,23 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    " CRC ",
+    "CPEPC",
+    "RE*ER",
+    "CPEPC",
+    " CRC "
+  ],
+  "key": {
+    "C": "minecraft:popped_chorus_fruit",
+    "R": "endrealms:prism_shard",
+    "P": [
+      "endrealms:phasite_ore",
+      "endrealms:phasite_shard"
+    ],
+    "E": "minecraft:ender_pearl",
+    "*": "minecraft:ender_eye"
+  },
+  "result": {
+    "id": "endrealms:phase_pearl"
+  }
+}

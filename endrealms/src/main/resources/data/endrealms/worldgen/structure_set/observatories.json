@@ -1,0 +1,20 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 19283746,
+    "separation": 10,
+    "spacing": 24,
+    "spread_type": "triangular",
+    "locate_offset": [
+      8,
+      0,
+      8
+    ]
+  },
+  "structures": [
+    {
+      "structure": "endrealms:observatory",
+      "weight": 1
+    }
+  ]
+}

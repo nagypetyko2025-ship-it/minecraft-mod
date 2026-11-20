@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:root",
+  "display": {
+    "icon": {
+      "id": "endrealms:end_villager_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.endrealms.end_village.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.end_village.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "endrealms:end_village"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "done"
+    ]
+  ]
+}

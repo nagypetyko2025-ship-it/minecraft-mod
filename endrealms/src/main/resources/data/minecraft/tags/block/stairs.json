@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "endrealms:voidstone_brick_stairs",
+    "endrealms:voidstone_stairs",
+    "endrealms:polished_voidstone_stairs",
+    "endrealms:void_sandstone_stairs",
+    "endrealms:smooth_void_sandstone_stairs"
+  ]
+}
