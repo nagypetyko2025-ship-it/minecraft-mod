@@ -2945,49 +2945,91 @@
           "kind": "crafting",
           "slots": [
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ],
             [
               "minecraft:iron_ingot"
             ],
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ],
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ],
             [
               "minecraft:barrel"
             ],
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ],
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ],
             [
               "minecraft:iron_ingot"
             ],
             [
+              "minecraft:oak_log",
+              "minecraft:spruce_log",
+              "minecraft:birch_log",
+              "minecraft:jungle_log",
+              "minecraft:acacia_log",
               "minecraft:dark_oak_log",
-              "minecraft:dark_oak_wood",
-              "minecraft:stripped_dark_oak_log",
-              "minecraft:stripped_dark_oak_wood"
+              "minecraft:mangrove_log",
+              "minecraft:cherry_log",
+              "minecraft:pale_oak_log",
+              "minecraft:crimson_stem",
+              "minecraft:warped_stem"
             ]
           ],
           "result": "endrealms:aging_barrel"

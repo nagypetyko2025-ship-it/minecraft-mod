@@ -370,6 +370,10 @@
   "item.endrealms.void_essence.quality_2": "Aged Void Essence",
   "item.endrealms.void_essence.quality_3": "Fine Old Void Essence",
   "brandy.endrealms.reveal": "Reveals nearby monsters (%s s)",
+  "update.endrealms.ready": "End Realms %s downloaded",
+  "update.endrealms.restart": "Close and restart the game to use it",
+  "update.endrealms.failed": "Could not download the End Realms update",
+  "update.endrealms.manual": "Install the newest player pack instead",
   "quest.endrealms.title": "Endwalker's Guide",
   "quest.endrealms.progress": "%s / %s quests",
   "quest.endrealms.claim": "Claim reward",
@@ -594,9 +598,5 @@
   "quest.endrealms.void_king.goal": "Defeat the Void King",
   "quest.endrealms.crownstone.title": "Heavy Is the Crown",
   "quest.endrealms.crownstone.desc": "Only the Void King carries Crownstones. Set in the Gem Table, one does the work of two ordinary gems.",
-  "quest.endrealms.crownstone.goal": "Obtain a Crownstone",
-  "update.endrealms.ready": "End Realms %s downloaded",
-  "update.endrealms.restart": "Close and restart the game to use it",
-  "update.endrealms.failed": "Could not download the End Realms update",
-  "update.endrealms.manual": "Install the newest player pack instead"
+  "quest.endrealms.crownstone.goal": "Obtain a Crownstone"
 }

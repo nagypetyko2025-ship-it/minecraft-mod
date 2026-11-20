@@ -23,7 +23,8 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.40.0)
+## Tartalom (0.40.1)
+- Az érlelő hordó bármilyen fa rönkjéből elkészíthető (End-fákból is), nem csak sötéttölgyből
 - **Automatikus frissítés**: ha a szerveren újabb End Realms fut, a játék belépéskor magától letölti GitHubról; értesítés jön, hogy kész, utána csak újra kell indítani a játékot (a 0.40.0-t még egyszer kézzel kell feltenni)
 - Javítva: a fermentáló állomásból az utolsó hozzávalót kivéve összeomlott a játék
 - **10 kevert pálinka** 2–3 alapanyagból (Gyümölcsös házi, Mézes alma, Fénylő nektár, Kórusbogyó, Dinnyés frissítő, Végtelen pálinka, Bányászpálinka, Sárkányvér, Erdei elixír, Üresség-esszencia), mind érlelhető; a receptpanel görgethető

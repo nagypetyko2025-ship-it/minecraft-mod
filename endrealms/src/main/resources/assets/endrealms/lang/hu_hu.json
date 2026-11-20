@@ -370,6 +370,10 @@
   "item.endrealms.void_essence.quality_2": "Érlelt üresség-esszencia",
   "item.endrealms.void_essence.quality_3": "Nemes üresség-esszencia",
   "brandy.endrealms.reveal": "Felfedi a közeli szörnyeket (%s mp)",
+  "update.endrealms.ready": "End Realms %s letöltve",
+  "update.endrealms.restart": "Zárd be és indítsd újra a játékot",
+  "update.endrealms.failed": "Nem sikerült letölteni az End Realms frissítést",
+  "update.endrealms.manual": "Telepítsd kézzel a játékos-csomagot",
   "quest.endrealms.title": "Endjáró kalauz",
   "quest.endrealms.progress": "%s / %s küldetés",
   "quest.endrealms.claim": "Jutalom átvétele",
@@ -594,9 +598,5 @@
   "quest.endrealms.void_king.goal": "Győzd le az Űrkirályt",
   "quest.endrealms.crownstone.title": "A korona súlya",
   "quest.endrealms.crownstone.desc": "Koronakő csak az Űrkirálynál van. Az Ékkőasztalon befoglalva két közönséges ékkő munkáját végzi el.",
-  "quest.endrealms.crownstone.goal": "Szerezz Koronakövet",
-  "update.endrealms.ready": "End Realms %s letöltve",
-  "update.endrealms.restart": "Zárd be és indítsd újra a játékot",
-  "update.endrealms.failed": "Nem sikerült letölteni az End Realms frissítést",
-  "update.endrealms.manual": "Telepítsd kézzel a játékos-csomagot"
+  "quest.endrealms.crownstone.goal": "Szerezz Koronakövet"
 }

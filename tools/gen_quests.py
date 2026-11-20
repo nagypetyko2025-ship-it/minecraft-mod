@@ -23,7 +23,8 @@ def w(p, o):
 
 
 TAGS = {"#endrealms:chorusite_tool_materials": [E + "chorusite_ingot"],
-        "#minecraft:dark_oak_logs": [M + "dark_oak_log", M + "dark_oak_wood", M + "stripped_dark_oak_log", M + "stripped_dark_oak_wood"]}
+        "#minecraft:logs": [M + w + "_log" for w in ("oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "pale_oak")]
+        + [M + "crimson_stem", M + "warped_stem"]}
 
 
 def options(ingredient):
