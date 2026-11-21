@@ -66,6 +66,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 		ServerLifecycleEvents.SERVER_STARTED.register(this::start);
 		ServerLifecycleEvents.SERVER_STOPPING.register(s -> stop());
 		history.register();
+		AutoRestart.register();
 		if (Worlds.available()) {
 			MultiWorlds.register();
 		}
@@ -383,7 +384,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 				}
 				run("say " + text);
 			}
-			case "restart" -> run("stop");
+			case "restart" -> server.execute(() -> AutoRestart.restart(server, "asked for in the control panel"));
 			case "shutdown" -> {
 				Files.writeString(serverFile("stop.flag"), "panel");
 				run("stop");

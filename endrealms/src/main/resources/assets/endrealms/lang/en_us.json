@@ -373,7 +373,7 @@
   "update.endrealms.ready": "End Realms %s downloaded",
   "update.endrealms.restart": "Close and restart the game to use it",
   "update.endrealms.failed": "Could not download the End Realms update",
-  "update.endrealms.manual": "Install the newest player pack instead",
+  "update.endrealms.manual": "Run the End Realms updater on your desktop",
   "effect.endrealms.blackout": "Blackout",
   "drunk.endrealms.woke": "Where am I...? And what happened to my bag?",
   "quest.endrealms.title": "Endwalker's Guide",

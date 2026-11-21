@@ -1,8 +1,8 @@
 """Publishes the built End Realms jar to GitHub, where the game's auto-updater fetches it from.
 
 Usage: python tools/publish_update.py
-Copies endrealms/build/libs/endrealms-<version>.jar (the version in gradle.properties) to updates/, removes the older
-jars there, and commits and pushes it together with the source. Run it before the server restarts onto the new version:
+Copies endrealms/build/libs/endrealms-<version>.jar (the version in gradle.properties) and server/jatekos-csomag.zip
+(which the players' desktop updater installs) to updates/, removes the older jars there, and commits and pushes it together with the source. Run it before the server restarts onto the new version:
 a joining player's game downloads https://raw.githubusercontent.com/nagypetyko2025-ship-it/minecraft-mod/main/updates/endrealms-<version>.jar
 """
 import glob
@@ -25,6 +25,10 @@ for old in glob.glob(os.path.join(updates, "endrealms-*.jar")):
     if os.path.basename(old) != os.path.basename(jar):
         os.remove(old)
 shutil.copy2(jar, updates)
+pack = os.path.join(ROOT, "server", "jatekos-csomag.zip")      # the players' desktop updater installs this whole pack
+if not os.path.isfile(pack):
+    sys.exit("missing server/jatekos-csomag.zip: run tools/make_player_pack.py first")
+shutil.copy2(pack, updates)
 
 
 def git(*args):

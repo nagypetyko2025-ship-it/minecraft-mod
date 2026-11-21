@@ -373,7 +373,7 @@
   "update.endrealms.ready": "End Realms %s letöltve",
   "update.endrealms.restart": "Zárd be és indítsd újra a játékot",
   "update.endrealms.failed": "Nem sikerült letölteni az End Realms frissítést",
-  "update.endrealms.manual": "Telepítsd kézzel a játékos-csomagot",
+  "update.endrealms.manual": "Futtasd az asztali End Realms frissítőt",
   "effect.endrealms.blackout": "Ájulás",
   "drunk.endrealms.woke": "Hol vagyok...? És mi történt a táskámmal?",
   "quest.endrealms.title": "Endjáró kalauz",

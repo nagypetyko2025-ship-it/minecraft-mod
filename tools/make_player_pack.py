@@ -13,6 +13,7 @@ HOST = "impairment-wimp.tun.ply.gg:20574"
 SERVER_NAME = "End Realms szerver"
 VERSION = "End Realms 26.3"
 SOURCE = os.path.join(os.environ["APPDATA"], ".minecraft", "versions", VERSION)
+PACK_URL = "https://raw.githubusercontent.com/nagypetyko2025-ship-it/minecraft-mod/main/updates/jatekos-csomag.zip"
 
 
 def nbt_string(value):
@@ -49,7 +50,7 @@ version = swap(version)
 assert replaced == 1, f"expected one fabric.addMods argument, found {replaced}"
 client = version["downloads"]["client"]
 
-INSTALL = r'''param([string]$MinecraftDir = (Join-Path $env:APPDATA '.minecraft'))
+INSTALL = r'''param([string]$MinecraftDir = (Join-Path $env:APPDATA '.minecraft'), [string]$Desktop = [Environment]::GetFolderPath('Desktop'))
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $PSScriptRoot
 $versionName = '__VERSION__'
@@ -71,6 +72,11 @@ if (-not (Test-Path $MinecraftDir)) {
 $target = Join-Path (Join-Path $MinecraftDir 'versions') $versionName
 $mods = Join-Path $target 'mods'
 New-Item -ItemType Directory -Force $mods | Out-Null
+
+foreach ($jar in Get-ChildItem $mods -Filter '*.jar' -ErrorAction SilentlyContinue) {
+    try { $stream = [IO.File]::Open($jar.FullName, 'Open', 'ReadWrite', 'None'); $stream.Close() }
+    catch { throw 'A Minecraft most fut, es fogja a modokat. Zard be a jatekot (es a TLaunchert), aztan probald ujra.' }
+}
 
 Write-Host 'Modok masolasa...'
 Get-ChildItem $mods -Filter '*.jar' -ErrorAction SilentlyContinue | Remove-Item -Force
@@ -121,14 +127,38 @@ if (-not (Test-Path $servers)) {
     }
 }
 
+Write-Host 'Frissito elhelyezese az asztalon...'
+Copy-Item (Join-Path $here 'files\frissites.ps1') (Join-Path $target 'frissites.ps1') -Force
+if ($Desktop -and (Test-Path $Desktop)) {
+    $bat = "@echo off`r`ntitle End Realms frissito`r`npowershell -NoProfile -ExecutionPolicy Bypass -File `"$target\frissites.ps1`"`r`nif errorlevel 1 echo. & echo HIBA: a frissites nem sikerult, olvasd el a fenti uzenetet.`r`necho.`r`npause`r`n"
+    [IO.File]::WriteAllText((Join-Path $Desktop 'End Realms frissites.bat'), $bat, [Text.Encoding]::ASCII)
+}
+
 Done 'Kesz! A telepites sikerult.'
 Write-Host ''
 Write-Host "1. A TLauncherben valaszd ki ezt a verziot: $versionName"
 Write-Host '   (Ha nem latod, kapcsold be a modositott verziok mutatasat a beallitasokban, vagy inditsd ujra a TLaunchert.)'
 Write-Host '2. Inditsd el a jatekot. Az elso inditasnal a TLauncher letolti a hianyzo fajlokat, ez par percig tarthat.'
+Write-Host '   Kesobb, ha a szerver uj modokat kap: inditsd el az asztalon az "End Realms frissites" fajlt, az mindent letolt.'
 if ($added) { Write-Host "3. Tobbjatekos menu: ott talalod a szervert ($serverName)." } else { Write-Host "3. Tobbjatekos menu: add hozza kezzel ezt a cimet: $hostAddress" }
 Write-Host '4. Elso belepeskor irj jelszot:  /register jelszo jelszo     kesobb:  /login jelszo'
 '''.replace("__VERSION__", VERSION).replace("__HOST__", HOST).replace("__SERVER__", SERVER_NAME).replace("__URL__", client["url"]).replace("__SHA1__", client["sha1"])
+
+UPDATE = r'''# End Realms frissito: letolti a legujabb jatekos-csomagot a GitHubrol, es lefuttatja a telepitojet.
+$ErrorActionPreference = 'Stop'
+$url = '__PACK_URL__'
+Write-Host '=== End Realms frissito ===' -ForegroundColor Cyan
+$tmp = Join-Path $env:TEMP 'endrealms-frissites'
+if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
+New-Item -ItemType Directory -Force $tmp | Out-Null
+Write-Host 'A legujabb csomag letoltese...'
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest -Uri $url -OutFile (Join-Path $tmp 'csomag.zip') -UseBasicParsing
+Expand-Archive -LiteralPath (Join-Path $tmp 'csomag.zip') -DestinationPath (Join-Path $tmp 'csomag') -Force
+& (Join-Path $tmp 'csomag\files\install.ps1')
+Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
+'''.replace("__PACK_URL__", PACK_URL)
 
 BAT = '\r\n'.join(['@echo off', 'title End Realms telepito', 'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0files\\install.ps1"',
                    'if errorlevel 1 echo. & echo HIBA: a telepites nem sikerult, olvasd el a fenti uzenetet.', 'echo.', 'pause', ''])
@@ -142,7 +172,8 @@ Telepites:
 
 Szerver cime, ha kezzel kellene megadni: {HOST}
 
-Uj modverzio eseten toltsd le az uj csomagot, es inditsd el ujra a telepitot.
+Uj modverzio eseten: az End Realms mod magatol frissul a jatekban. Ha a szerver mas modokat is kap,
+inditsd el az asztalon az "End Realms frissites" fajlt (a telepito tette oda), az mindent letolt.
 A szerver csak akkor elerheto, ha a gazda gepe be van kapcsolva es a szerver fut.
 """
 
@@ -151,6 +182,7 @@ with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     z.writestr("TELEPITES.bat", BAT.encode("ascii"))
     z.writestr("OLVASS_EL.txt", README.encode("utf-8"))
     z.writestr("files/install.ps1", b"\xef\xbb\xbf" + INSTALL.encode("utf-8"))
+    z.writestr("files/frissites.ps1", b"\xef\xbb\xbf" + UPDATE.encode("utf-8"))
     z.writestr("files/version.json", json.dumps(version, ensure_ascii=False).encode("utf-8"))
     z.write(os.path.join(SOURCE, "TLauncherAdditional.json"), "files/TLauncherAdditional.json")
     z.writestr("files/servers.dat", servers_dat())

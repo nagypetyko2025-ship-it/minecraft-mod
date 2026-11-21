@@ -60,7 +60,7 @@ public final class VersionCheck {
 		} else if (clientNewer) {
 			text.append(Component.literal("Neked már újabb verziód van, mint a szervernek.\nVárj, amíg a szervert frissítik, aztán lépj be újra.").withStyle(ChatFormatting.WHITE));
 		} else {
-			text.append(Component.literal("Telepítsd a legújabb játékos-csomagot (jatekos-csomag.zip),\nindítsd újra a játékot, és lépj be újra.").withStyle(ChatFormatting.WHITE));
+			text.append(Component.literal("Zárd be a Minecraftot, futtasd az asztalon az „End Realms frissites” fájlt\n(vagy telepítsd a legújabb jatekos-csomag.zip-et), és lépj be újra.").withStyle(ChatFormatting.WHITE));
 		}
 		return text;
 	}

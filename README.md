@@ -23,7 +23,10 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.41.1)
+## Tartalom (0.42.0)
+- **Önálló szerverfrissítés**: ha új verzió vár a mods-update mappában, és 2 perce senki sincs fent, a szerver magától újraindul és telepíti
+- **Gyors újraindítás**: a panel Újraindítás gombja után a szerver kérdés nélkül azonnal újraindul; világmentés csak akkor készül, ha az utolsó 6 óránál régebbi; a panel közben „Újraindul…”-t mutat
+- **Asztali frissítő**: a telepítő az asztalra tesz egy „End Realms frissites” fájlt, ami GitHubról letölti és telepíti a teljes csomagot (minden modot)
 - Javítva: az érlelő hordóban a kész üvegek „Legjobb” feliratai egymásba lógtak (a helyek most távolabb vannak)
 - **Ékkövek 5×5-ben**: a 7 barkácsolható ékkő (Koronakő kivételével) mostantól az End-barkácsasztalon, 5×5-ös gyémánt mintában készül, kb. kétszeres alapanyagból
 - **Ájulás**: Részegség IV elérésekor 4 másodpercre teljesen elsötétül a kép, és nem tudsz mozogni; utána 100 blokkon belül máshol térsz magadhoz, összekevert táskával, és minden hatás eltűnik rólad
