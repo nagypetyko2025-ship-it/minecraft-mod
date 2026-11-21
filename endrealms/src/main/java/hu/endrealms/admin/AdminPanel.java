@@ -159,6 +159,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 			Object answer = switch (path) {
 				case "/api/status" -> onServer(this::status);
 				case "/api/players" -> onServer(this::players);
+				case "/api/whitelist" -> onServer(this::whitelist);
 				case "/api/worlds" -> {
 					worlds.measure(onServer(() -> worlds.folders(server)));
 					yield onServer(() -> worlds.list(server));
@@ -276,6 +277,59 @@ public class AdminPanel implements DedicatedServerModInitializer {
 		return set;
 	}
 
+	/** Turned away by the whitelist: "Disconnecting Name (/1.2.3.4:5678): You are not white-listed on this server!" */
+	private static final Pattern REFUSED = Pattern.compile("Disconnecting ([A-Za-z0-9_]{1,16}) \\(.*not white-listed");
+
+	/**
+	 * The whitelist tab: who is on it (and whether they are online or when they last played), who tried to join today and
+	 * was turned away, and who has played before but is not on the list, so either can be added with one click.
+	 */
+	private Map<String, Object> whitelist() {
+		Map<String, Map<String, Object>> known = new LinkedHashMap<>();
+		for (Map<String, Object> p : players()) {
+			known.put(((String) p.get("name")).toLowerCase(Locale.ROOT), p);
+		}
+		List<Map<String, Object>> listed = new ArrayList<>();
+		Set<String> onList = new HashSet<>();
+		for (String name : server.getPlayerList().getWhiteListNames()) {
+			onList.add(name.toLowerCase(Locale.ROOT));
+			Map<String, Object> p = known.get(name.toLowerCase(Locale.ROOT));
+			Map<String, Object> entry = new LinkedHashMap<>();
+			entry.put("name", name);
+			entry.put("online", p != null && (Boolean) p.get("online"));
+			entry.put("lastPlayed", p == null ? 0L : p.get("lastPlayed"));
+			listed.add(entry);
+		}
+		listed.sort((a, b) -> ((String) a.get("name")).compareToIgnoreCase((String) b.get("name")));
+		List<String> refused = new ArrayList<>();
+		Path log = serverFile("logs").resolve("latest.log");
+		try {
+			for (String line : Files.exists(log) ? Files.readAllLines(log, StandardCharsets.UTF_8) : List.<String>of()) {
+				java.util.regex.Matcher m = REFUSED.matcher(line);
+				if (m.find()) {
+					String name = m.group(1);
+					refused.remove(name);
+					refused.add(0, name);       // newest first
+				}
+			}
+		} catch (IOException ignored) {
+		}
+		refused.removeIf(name -> onList.contains(name.toLowerCase(Locale.ROOT)));
+		List<String> others = new ArrayList<>();
+		for (Map<String, Object> p : known.values()) {
+			String name = (String) p.get("name");
+			if (!onList.contains(name.toLowerCase(Locale.ROOT)) && !refused.contains(name)) {
+				others.add(name);
+			}
+		}
+		Map<String, Object> answer = new LinkedHashMap<>();
+		answer.put("enabled", server.getPlayerList().isUsingWhitelist());
+		answer.put("listed", listed);
+		answer.put("refused", refused);
+		answer.put("others", others);
+		return answer;
+	}
+
 	private List<Map<String, Object>> players() {
 		Set<String> online = new HashSet<>();
 		server.getPlayerList().getPlayers().forEach(p -> online.add(p.getGameProfile().name().toLowerCase(Locale.ROOT)));
@@ -313,6 +367,64 @@ public class AdminPanel implements DedicatedServerModInitializer {
 	}
 
 	/** Everyone who ever joined: UUID -> name, from the game's name cache, the server history and whoever is online now. */
+	/**
+	 * Puts a player on the whitelist. This server runs in offline mode, where a player's id comes from their name, but the
+	 * whitelist command looks names up at Mojang and would store the id of a paid account with that name, which never
+	 * matches. So in offline mode the entry is made here, with the offline id of the name exactly as the player uses it
+	 * (as the server last saw it, or as typed).
+	 */
+	private void whitelistAdd(String name) {
+		if (server.usesAuthentication()) {
+			run("whitelist add " + name);
+			return;
+		}
+		String exact = name;
+		for (Map<String, Object> played : players()) {         // only players who really played: the name cache also
+			String known = (String) played.get("name");          // keeps names the whitelist command looked up at Mojang
+			if (known.equalsIgnoreCase(name)) {
+				exact = known;
+			}
+		}
+		whitelistRemove(exact, false);          // drop a stale entry for the same name first
+		server.getPlayerList().getWhiteList().add(new net.minecraft.server.players.UserWhiteListEntry(net.minecraft.server.players.NameAndId.createOffline(exact)));
+		saveWhitelist();
+		EndRealms.LOGGER.info("Control panel: added {} to the whitelist", exact);
+	}
+
+	private void whitelistRemove(String name) {
+		whitelistRemove(name, true);
+		ServerPlayer online = server.getPlayerList().getPlayerByName(name);
+		if (online != null && server.getPlayerList().isUsingWhitelist() && !server.getPlayerList().isWhiteListed(new net.minecraft.server.players.NameAndId(online.getGameProfile()))) {
+			online.connection.disconnect(net.minecraft.network.chat.Component.translatable("multiplayer.disconnect.not_whitelisted"));
+		}
+	}
+
+	/** Removes every entry with this name, whatever its id, so entries the command made with a wrong id go too. */
+	private void whitelistRemove(String name, boolean log) {
+		var list = server.getPlayerList().getWhiteList();
+		List<net.minecraft.server.players.NameAndId> gone = new ArrayList<>();
+		for (var entry : list.getEntries()) {
+			if (entry.getUser() != null && entry.getUser().name().equalsIgnoreCase(name)) {
+				gone.add(entry.getUser());
+			}
+		}
+		gone.forEach(list::remove);
+		if (!gone.isEmpty()) {
+			saveWhitelist();
+			if (log) {
+				EndRealms.LOGGER.info("Control panel: removed {} from the whitelist", name);
+			}
+		}
+	}
+
+	private void saveWhitelist() {
+		try {
+			server.getPlayerList().getWhiteList().save();
+		} catch (IOException e) {
+			EndRealms.LOGGER.error("Could not save the whitelist", e);
+		}
+	}
+
 	private Map<String, String> knownNames() {
 		Map<String, String> names = new LinkedHashMap<>(history.names());
 		for (JsonElement element : readArray("usercache.json")) {
@@ -369,8 +481,16 @@ public class AdminPanel implements DedicatedServerModInitializer {
 			case "pardon" -> run("pardon " + player(body));
 			case "op" -> run("op " + player(body));
 			case "deop" -> run("deop " + player(body));
-			case "whitelist-add" -> run("whitelist add " + player(body));
-			case "whitelist-remove" -> run("whitelist remove " + player(body));
+			case "whitelist-add" -> {
+				String name = player(body);
+				server.execute(() -> whitelistAdd(name));
+			}
+			case "whitelist-remove" -> {
+				String name = player(body);
+				server.execute(() -> whitelistRemove(name));      // also sends them off if they are online
+			}
+			case "whitelist-on" -> run("whitelist on");
+			case "whitelist-off" -> run("whitelist off");
 			case "survival", "creative", "adventure", "spectator" -> run("gamemode " + action + " " + player(body));
 			case "day" -> run("time set day");
 			case "night" -> run("time set night");

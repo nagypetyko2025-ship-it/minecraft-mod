@@ -72,6 +72,13 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#7fe0e8}
   <div class="box pad row"><button class="b" id="restart">Újraindítás</button><button class="b danger" id="shutdown">Leállítás</button></div>
 </section>
 <section id="players"><div id="pdetail" style="display:none"></div><div class="box" id="allplayers"></div></section>
+<section id="whitelist">
+  <div class="box pad row" id="wlstate" style="justify-content:space-between"></div>
+  <div class="row" style="margin:12px 0"><input type="text" id="wladd" placeholder="Játékosnév pontosan, kis- és nagybetűvel, például: Tomi" maxlength="16" style="flex:1"><button class="b" id="wladdbtn">Hozzáadás</button></div>
+  <h2>A fehérlistán</h2><div class="box" id="wllist"></div>
+  <div id="wlrefused"></div>
+  <div id="wlothers"></div>
+</section>
 <section id="worlds"><div id="wdetail" style="display:none"></div><div id="wlist"></div></section>
 <section id="rules">
   <div class="row" style="margin-bottom:10px"><input type="text" id="rulesearch" placeholder="Keresés a szabályok között" style="flex:1"></div>
@@ -97,7 +104,7 @@ async function api(p,b){const r=await fetch('/api/'+p,{method:b?'POST':'GET',hea
   const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j}
 function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._);t._=setTimeout(()=>t.style.display='none',2600)}
 const act=(a,e={})=>api('action',{action:a,...e}).then(()=>{toast('Kész');setTimeout(load,500)}).catch(x=>toast('Hiba: '+x.message));
-const TABS=[['home','Áttekintés'],['players','Játékosok'],['worlds','Világok'],['rules','Világszabályok'],['settings','Beállítások'],['console','Konzol']];
+const TABS=[['home','Áttekintés'],['players','Játékosok'],['whitelist','Fehérlista'],['worlds','Világok'],['rules','Világszabályok'],['settings','Beállítások'],['console','Konzol']];
 let tab='home';
 $('tabs').innerHTML=TABS.map(([i,n])=>`<button data-t="${i}">${n}</button>`).join('');
 function show(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));load()}
@@ -198,12 +205,27 @@ const OPT={difficulty:['peaceful','easy','normal','hard'],gamemode:['survival','
 async function settings(){const s=await api('settings');
   $('setlist').innerHTML=Object.keys(s).sort().map(k=>{const v=s[k];let c;if(v==='true'||v==='false')c=`<input type="checkbox" data-set="${k}" ${v==='true'?'checked':''}>`;else if(OPT[k])c=`<select data-set="${k}">${OPT[k].map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`;else c=`<input type="text" data-set="${k}" value="${esc(v)}">`;return `<div class="field"><span>${LABELS[k]||esc(k)}</span>${c}</div>`}).join('')}
 async function log(){const l=await api('log');const e=$('log');const b=e.scrollTop+e.clientHeight>=e.scrollHeight-30;e.textContent=l.lines.join('\n');if(b)e.scrollTop=e.scrollHeight}
-const LOAD={home,players,worlds,rules,settings,console:log};
+async function whitelist(){const w=await api('whitelist');
+  $('wlstate').innerHTML=w.enabled
+    ?'<span><b style="color:var(--good)">● Bekapcsolva</b> – csak a listán szereplők léphetnek be.</span><button class="b danger" data-wl="whitelist-off">Kikapcsolás</button>'
+    :'<span><b style="color:var(--bad)">● Kikapcsolva</b> – bárki beléphet, aki ismeri a szerver címét.</span><button class="b" data-wl="whitelist-on">Bekapcsolás</button>';
+  $('wllist').innerHTML=w.listed.length?'<table><tr><th>Név</th><th>Utoljára</th><th></th></tr>'+w.listed.map(p=>`<tr><td>${esc(p.name)}${p.online?'<span class="tag on">online</span>':''}</td><td>${p.online?'most':p.lastPlayed?new Date(p.lastPlayed).toLocaleString('hu-HU'):'még nem játszott'}</td><td class="row"><button class="b danger" data-wlrm="${esc(p.name)}">Törlés</button></td></tr>`).join('')+'</table>':'<div class="empty">A lista üres.</div>';
+  const chips=(title,hint,l)=>l.length?`<h2>${title}</h2><div class="box pad"><p style="color:var(--muted);margin:0 0 8px">${hint}</p><div class="row" style="flex-wrap:wrap">${l.map(n=>`<button class="b" data-wladd="${esc(n)}">+ ${esc(n)}</button>`).join('')}</div></div>`:'';
+  $('wlrefused').innerHTML=chips('Nemrég kizárva','Ők próbáltak belépni, de nincsenek a listán. Kattints egy névre a felvételhez.',w.refused);
+  $('wlothers').innerHTML=chips('Korábban játszottak, de nincsenek a listán','Kattints egy névre a felvételhez.',w.others)}
+function wlAdd(){const n=$('wladd').value.trim();if(!/^[A-Za-z0-9_]{1,16}$/.test(n)){toast('Érvénytelen név: 1–16 betű, szám vagy _');return}
+  act('whitelist-add',{player:n}).then(()=>$('wladd').value='')}
+$('wladdbtn').onclick=wlAdd;
+$('wladd').onkeydown=e=>{if(e.key==='Enter')wlAdd()};
+const LOAD={home,players,whitelist,worlds,rules,settings,console:log};
 let on=true;
 async function load(){try{await LOAD[tab]();$('conn').textContent='● fut';$('conn').style.color='var(--good)';on=true}catch(e){$('conn').textContent='● nem elérhető';$('conn').style.color='var(--bad)';on=false}}
 setInterval(()=>{if(tab==='home'||tab==='console'||!on)load()},2500);
 document.body.addEventListener('click',e=>{const d=e.target.dataset;if(!d)return;
   if(d.a)act(d.a);
+  if(d.wl&&(d.wl==='whitelist-on'||confirm('Kikapcsolod a fehérlistát? Utána bárki beléphet, aki ismeri a szerver címét.')))act(d.wl);
+  if(d.wladd)act('whitelist-add',{player:d.wladd});
+  if(d.wlrm&&confirm('Törlöd a fehérlistáról: '+d.wlrm+'? Ha most fent van, kidobja a szerver.'))act('whitelist-remove',{player:d.wlrm});
   if(d.kick&&confirm('Kirúgod: '+d.kick+'?'))act('kick',{player:d.kick});
   if(d.do&&(d.do!=='ban'||confirm('Kitiltod: '+d.p+'?')))act(d.do,{player:d.p}).then(players)});
 document.body.addEventListener('change',e=>{const d=e.target.dataset;
