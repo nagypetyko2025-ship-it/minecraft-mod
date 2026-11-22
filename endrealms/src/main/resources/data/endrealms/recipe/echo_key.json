@@ -1,0 +1,19 @@
+{
+  "type": "endrealms:end_crafting",
+  "pattern": [
+    " E E ",
+    "ESKSE",
+    " KRK ",
+    "ESKSE",
+    " E E "
+  ],
+  "key": {
+    "E": "minecraft:echo_shard",
+    "S": "minecraft:sculk",
+    "K": "minecraft:sculk_catalyst",
+    "R": "minecraft:recovery_compass"
+  },
+  "result": {
+    "id": "endrealms:echo_key"
+  }
+}

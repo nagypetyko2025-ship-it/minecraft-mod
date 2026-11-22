@@ -32,15 +32,17 @@ public final class QuestBook {
 			float pathX, float pathY, int tier, String suggestedAfter) {
 	}
 
-	public record Chapter(String id, String icon) {
+	/** realm: "end" or "sculk", the guide's two big tabs; path: the realm's Whole Path tab, all its quests in one tree. */
+	public record Chapter(String id, String icon, String realm, boolean path) {
 	}
 
-	/** One stage of the Whole Path tab, starting at column x. */
-	public record Tier(int id, float x) {
+	/** One stage of a realm's Whole Path tab, starting at column x. */
+	public record Tier(int id, float x, String realm) {
 	}
 
-	/** The tab that shows every quest in one tree instead of one chapter. */
+	/** The End's Whole Path tab. */
 	public static final String WHOLE_PATH = "path";
+	public static final List<String> REALMS = List.of("end", "sculk");
 
 	private static final List<Chapter> CHAPTERS = new ArrayList<>();
 	private static final List<Tier> TIERS = new ArrayList<>();
@@ -54,11 +56,12 @@ public final class QuestBook {
 			JsonObject root = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
 			for (JsonElement e : root.getAsJsonArray("chapters")) {
 				JsonObject o = e.getAsJsonObject();
-				CHAPTERS.add(new Chapter(o.get("id").getAsString(), o.get("icon").getAsString()));
+				CHAPTERS.add(new Chapter(o.get("id").getAsString(), o.get("icon").getAsString(),
+						o.has("realm") ? o.get("realm").getAsString() : "end", o.has("path") && o.get("path").getAsBoolean()));
 			}
 			for (JsonElement e : root.getAsJsonArray("tiers")) {
 				JsonObject o = e.getAsJsonObject();
-				TIERS.add(new Tier(o.get("id").getAsInt(), o.get("x").getAsFloat()));
+				TIERS.add(new Tier(o.get("id").getAsInt(), o.get("x").getAsFloat(), o.has("realm") ? o.get("realm").getAsString() : "end"));
 			}
 			for (JsonElement e : root.getAsJsonArray("quests")) {
 				Quest quest = parse(e.getAsJsonObject());
@@ -114,8 +117,35 @@ public final class QuestBook {
 		return TIERS;
 	}
 
-	public static List<Quest> inChapter(String chapter) {
-		return WHOLE_PATH.equals(chapter) ? QUESTS.values().stream().filter(q -> q.tier() > 0).toList() : QUESTS.values().stream().filter(q -> q.chapter().equals(chapter)).toList();
+	public static Chapter chapter(String id) {
+		return CHAPTERS.stream().filter(c -> c.id().equals(id)).findFirst().orElse(null);
+	}
+
+	/** The realm a quest belongs to: that of its chapter. */
+	public static String realm(Quest quest) {
+		Chapter chapter = chapter(quest.chapter());
+		return chapter == null ? "end" : chapter.realm();
+	}
+
+	public static List<Chapter> chapters(String realm) {
+		return CHAPTERS.stream().filter(c -> c.realm().equals(realm)).toList();
+	}
+
+	public static List<Tier> tiers(String realm) {
+		return TIERS.stream().filter(t -> t.realm().equals(realm)).toList();
+	}
+
+	/** A chapter's quests; a Whole Path tab shows every quest of its realm that has a tier. */
+	public static List<Quest> inChapter(String chapterId) {
+		Chapter chapter = chapter(chapterId);
+		if (chapter != null && chapter.path()) {
+			return QUESTS.values().stream().filter(q -> q.tier() > 0 && realm(q).equals(chapter.realm())).toList();
+		}
+		return QUESTS.values().stream().filter(q -> q.chapter().equals(chapterId)).toList();
+	}
+
+	public static List<Quest> inRealm(String realm) {
+		return QUESTS.values().stream().filter(q -> realm(q).equals(realm)).toList();
 	}
 
 	public static int size() {

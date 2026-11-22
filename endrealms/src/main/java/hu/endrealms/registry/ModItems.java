@@ -171,6 +171,9 @@ public final class ModItems {
 	public static final Item DRAGON_BONE = register("dragon_bone", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 	/** From the Echo Flower. */
 	public static final Item ECHO_DUST = register("echo_dust", Item::new, new Item.Properties());
+	/** Lights the portal frame in the heart of an Ancient City: the way into the Sculk dimension. */
+	public static final Item ECHO_KEY = register("echo_key", hu.endrealms.sculk.EchoKeyItem::new,
+			new Item.Properties().durability(8).rarity(Rarity.RARE));
 	/** From the Bone Stag. */
 	public static final Item SCULK_ANTLER = register("sculk_antler", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 	public static final Item BONE_STAG_SPAWN_EGG = register("bone_stag_spawn_egg", SpawnEggItem::new,

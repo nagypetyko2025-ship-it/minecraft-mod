@@ -25,15 +25,24 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class SculkPortalBlock extends Block implements Portal {
 	/** Most of a block, so it sits a little below the ground around it. */
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 12, 16);
+	/** A pool sunk into the ground (true), or a whole block filling an upright frame like the Ancient City's (false). */
+	public static final net.minecraft.world.level.block.state.properties.BooleanProperty POOL =
+			net.minecraft.world.level.block.state.properties.BooleanProperty.create("pool");
 	private static final int WAIT_TICKS = 40;
 
 	public SculkPortalBlock(Properties properties) {
 		super(properties);
+		registerDefaultState(stateDefinition.any().setValue(POOL, true));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(net.minecraft.world.level.block.state.StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(POOL);
 	}
 
 	@Override
 	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return state.getValue(POOL) ? SHAPE : Shapes.block();
 	}
 
 	@Override

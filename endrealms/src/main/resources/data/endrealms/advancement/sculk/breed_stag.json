@@ -1,0 +1,36 @@
+{
+  "parent": "endrealms:sculk/root",
+  "display": {
+    "icon": {
+      "id": "endrealms:soul_mushroom"
+    },
+    "title": {
+      "translate": "advancements.endrealms.sculk.breed_stag.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.sculk.breed_stag.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "bred": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "child": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "endrealms:bone_stag"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bred"
+    ]
+  ]
+}

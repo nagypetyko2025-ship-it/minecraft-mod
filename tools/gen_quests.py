@@ -85,7 +85,13 @@ def give(i, n=1):
 
 CHAPTERS = [("path", E + "end_guide", "Whole Path", "Teljes út"), ("start", M + "ender_eye", "Start", "Kezdet"), ("isles", E + "astral_sapling", "Islands", "Szigetek"),
             ("ruins", E + "voidstone_bricks", "Ruins", "Romok"), ("chorusite", E + "chorusite_ingot", "Chorusite", "Chorusit"),
-            ("jewels", E + "ember_garnet", "Gems", "Ékkövek"), ("rift", E + "rift_heart", "Rift", "Hasadék"), ("brew", E + "fermentation_station", "Brewing", "Pálinkafőzés"), ("misc", E + "backpack", "Other", "Egyéb")]
+            ("jewels", E + "ember_garnet", "Gems", "Ékkövek"), ("rift", E + "rift_heart", "Rift", "Hasadék"), ("brew", E + "fermentation_station", "Brewing", "Pálinkafőzés"), ("misc", E + "backpack", "Other", "Egyéb"),
+            # the Sculk dimension: the guide's second realm
+            ("sculk_path", M + "sculk_catalyst", "Whole Path", "Teljes út"), ("sculk_arrival", E + "echo_key", "Arrival", "Érkezés"),
+            ("sculk_lands", E + "sculk_stone", "Lands", "Tájak"), ("sculk_wilds", E + "soul_mushroom", "Wildlife", "Élővilág")]
+REALM = {c[0]: ("sculk" if c[0].startswith("sculk_") else "end") for c in CHAPTERS}
+PATHS = {"path", "sculk_path"}          # each realm's Whole Path tab
+REALM_NAMES = {"end": ("The End", "End"), "sculk": ("Sculk", "Sculk")}
 QUESTS = []
 
 
@@ -331,6 +337,59 @@ Q("crownstone", "rift", "crownstone", ["void_king"], [adv("crownstone")], [give(
   ("Heavy Is the Crown", "Only the Void King carries Crownstones. Set in the Gem Table, one does the work of two ordinary gems.", "Obtain a Crownstone"),
   ("A korona súlya", "Koronakő csak az Űrkirálynál van. Az Ékkőasztalon befoglalva két közönséges ékkő munkáját végzi el.", "Szerezz Koronakövet"))
 
+# ======================================================================== the Sculk dimension
+# ---- Arrival
+Q("sculk_key", "sculk_arrival", "echo_key", [], [item("echo_key")], [give(M + "echo_shard", 4), give(M + "golden_apple", 4)], 300, ["echo_key"],
+  ("The Key to the Silence", "Echo shards, sculk catalysts and a recovery compass on the End Crafting Table make an Echo Key. Use it on the great frame of reinforced deepslate in the heart of an Ancient City, and the frame fills with living dark.", ""),
+  ("A csend kulcsa", "Visszhangszilánkból, sculk-katalizátorból és visszatérő iránytűből az End-barkácsasztalon Visszhangkulcs készül. Használd az Ókori város közepén álló megerősített mélypala keretén, és a keret megtelik élő sötétséggel.", ""))
+Q("sculk_enter", "sculk_arrival", M + "sculk_catalyst", ["sculk_key"], [adv("sculk/root")], [give(M + "lantern", 8), give(M + "cooked_beef", 16), give(M + "golden_apple", 4)], 300, [],
+  ("Something Is Wrong", "A land like the Overworld, but dead and dark, where the sculk has taken everything. It is quiet. Too quiet.", "Cross into the Sculk dimension"),
+  ("Valami nincs rendben", "Olyan, mint a felszíni világ, csak halott és sötét, és mindent benőtt a sculk. Csend van. Túl nagy csend.", "Lépj át a Sculk-dimenzióba"))
+Q("sculk_escape", "sculk_arrival", E + "sculk_portal", ["sculk_enter"], [adv("sculk/escape")], [give(M + "golden_apple", 4), give(M + "experience_bottle", 16)], 200, [],
+  ("Escape", "Every portal you come out of gets a twin on the other side. Step back in to leave.", "Return to the Overworld"),
+  ("Menekülés", "Minden portál mellé, amin kijössz, a túloldalon is kerül egy. Lépj vissza bele, ha menni akarsz.", "Térj vissza a felszíni világba"))
+Q("sculk_soil", "sculk_arrival", E + "sculk_soil", ["sculk_enter"], [item("sculk_soil", 32)], [give(M + "iron_shovel", 1), give(M + "bread", 16)], 100, [],
+  ("Ground That Isn't", "Under the sculk lies Sculk Soil: it looks like sculk, but it is crumbly earth.", ""),
+  ("Föld, ami nem az", "A sculk alatt Sculk-talaj van: olyan, mint a sculk, de omlós föld.", ""))
+Q("sculk_stone", "sculk_arrival", E + "sculk_stone", ["sculk_soil"], [item("sculk_stone", 64)], [give(M + "iron_pickaxe", 1), give(M + "torch", 32)], 150, [],
+  ("Veined Rock", "Deeper down the rock is Sculk Stone, dark as deepslate and veined with sculk.", ""),
+  ("Erezett kő", "Lejjebb a kőzet Sculk-kő, sötét, mint a mélypala, és sculk-erek futnak át rajta.", ""))
+
+# ---- Lands
+Q("sculk_barrens", "sculk_lands", M + "dead_bush", ["sculk_enter"], [adv("sculk/sculk_barrens")], [give(M + "cooked_beef", 16), give(M + "torch", 32)], 150, [],
+  ("Silent Barrens", "Open, dead country: sculk, bare soil, a few crooked trees. Even the wind whispers.", "Walk the Silent Barrens"),
+  ("Néma puszta", "Nyílt, halott vidék: sculk, csupasz talaj, néhány görbe fa. Még a szél is suttog.", "Járj a Néma pusztán"))
+Q("sculk_woods", "sculk_lands", M + "stripped_dark_oak_log", ["sculk_barrens"], [adv("sculk/withered_woods")], [give(M + "lantern", 4), give(M + "golden_carrot", 16)], 200, [],
+  ("Among Dead Trees", "Bare trees close together, grass taller than you, and eyes in the grass.", "Enter the Withered Woods"),
+  ("Halott fák között", "Sűrű, csupasz fák, nálad magasabb fű, és szemek a fűben.", "Lépj be az Elhalt erdőbe"))
+Q("sculk_canyons", "sculk_lands", M + "sculk_vein", ["sculk_barrens"], [adv("sculk/sculk_canyons")], [give(M + "ladder", 32), give(M + "water_bucket", 1)], 250, [],
+  ("Staring Into the Deep", "Where the Overworld would have badlands and deserts, the land is torn by deep, wide chasms.", "Stand above the chasms of the Riven Lands"),
+  ("Mélybe néző", "Ahol a felszíni világban badlands és sivatag lenne, ott mély, széles szakadékok tépik szét a földet.", "Állj meg a Hasadékföld szakadékai fölött"))
+Q("sculk_peaks", "sculk_lands", E + "sculk_stone", ["sculk_barrens"], [adv("sculk/sculk_peaks")], [give(M + "golden_apple", 4), give(M + "diamond", 4)], 300, [],
+  ("Broken Peaks", "Bare dark rock where the mountains rise. They are far apart, and far away.", "Climb among the Broken Peaks"),
+  ("Csonka ormok", "Csupasz sötét kő ott, ahol a hegyek emelkednek. Messze vannak egymástól, és messze tőled.", "Mássz fel a Csonka ormok közé"))
+Q("sculk_all_biomes", "sculk_lands", M + "sculk_shrieker", ["sculk_woods", "sculk_canyons", "sculk_peaks"], [adv("sculk/all_biomes")],
+  [give(M + "diamond", 8), give(M + "enchanted_golden_apple", 1), give(M + "experience_bottle", 32)], 600, [],
+  ("Seen Too Much", "Walk every land of the Sculk dimension.", "Visit every biome of the Sculk dimension"),
+  ("Aki túl sokat látott", "Járd be a Sculk-dimenzió minden táját.", "Járd be a Sculk-dimenzió minden biomját"))
+
+# ---- Wildlife
+Q("sculk_watcher_grass", "sculk_wilds", E + "watcher_grass", ["sculk_enter"], [item("watcher_grass", 8)], [give(M + "shears", 1), give(M + "bone_meal", 16)], 100, [],
+  ("It Is Looking", "The common grass of this land grows taller than you, and its eyes follow you. Sneak and they shut. Shears cut it.", ""),
+  ("Figyel", "Ennek a földnek a füve nálad is magasabb, és a szemei követnek. Ha lopakodsz, lecsukódnak. Ollóval vágható.", ""))
+Q("sculk_echo", "sculk_wilds", E + "echo_dust", ["sculk_enter"], [item("echo_dust", 4)], [give(M + "amethyst_shard", 16), give(M + "glow_berries", 16)], 150, [],
+  ("Someone Behind You", "Walk past an Echo Flower and, a moment later, you hear your own steps again, from where you just walked. Picked, it gives Echo Dust.", ""),
+  ("Valaki mögötted", "Ha elmész egy Visszhangvirág mellett, kicsivel később újra hallod a saját lépteidet onnan, ahol az előbb jártál. Leszedve Visszhangport ad.", ""))
+Q("sculk_mushroom", "sculk_wilds", E + "soul_mushroom", ["sculk_enter"], [item("soul_mushroom", 8)], [give(M + "lantern", 8), give(M + "bone_meal", 16)], 100, [],
+  ("A Little Light", "Soul Mushrooms are among the few lights of this land. Pale moths circle every light here.", ""),
+  ("Egy kis fény", "A Lélekgombák ennek a földnek a kevés fénye közé tartoznak. Minden fény körül halvány molyok keringenek.", ""))
+Q("sculk_stag", "sculk_wilds", E + "sculk_antler", ["sculk_mushroom"], [item("sculk_antler")], [give(M + "bone", 16), give(M + "golden_carrot", 16)], 200, [],
+  ("The Watcher in the Trees", "Bone Stags stand far off and stare, and slip away when you come close. You can see through their ribs. They drop a Sculk Antler.", ""),
+  ("A fák közti figyelő", "A Csontagancsos szarvasok messziről bámulnak, és ha közel mész, elmenekülnek. A bordáikon át lehet látni. Sculk-agancsot hagynak hátra.", ""))
+Q("sculk_breed", "sculk_wilds", E + "bone_stag_spawn_egg", ["sculk_stag"], [adv("sculk/breed_stag")], [give(M + "diamond", 4), give(M + "experience_bottle", 16)], 300, [],
+  ("Tamed by Light", "Hold a Soul Mushroom and they come to you. Feed two and a fawn is born.", "Breed two Bone Stags"),
+  ("Fénnyel szelídítve", "Tarts a kezedben Lélekgombát, és odajönnek. Etess meg kettőt, és borjú születik.", "Szaporíts két Csontagancsos szarvast"))
+
 # ---------------------------------------------------------------- automatic layout: depth to the right, children stacked
 by_id = {q["id"]: q for q in QUESTS}
 for q in QUESTS:
@@ -367,12 +426,18 @@ TIERS = [(("First Steps", "Első lépések"), "enter_end dragon gateway end_city
          (("Exploration", "Felfedezés"), "basin fishing shardcrab scorched wraith ash_meal vent graveyard whelp dragon_bones drake bastion sentinel observatory wreck"),
          (("Treasure Hunt", "Kincsek nyomában"), "shards phasite pearl anchor table gem socket crypt crypt_guards lurker template"),
          (("Mastery", "Mesterfok"), "deepglow pure ingot pickaxe armor all_gems"),
-         (("Endgame", "Végjáték"), "chorusite_block mailbox gravity_stone sanctum rift_lord riftblade citadel citadel_guards void_king crownstone")]
+         (("Endgame", "Végjáték"), "chorusite_block mailbox gravity_stone sanctum rift_lord riftblade citadel citadel_guards void_king crownstone"),
+         # the Sculk dimension's Whole Path
+         (("Into the Silence", "A csendbe"), "sculk_key sculk_enter sculk_escape sculk_soil sculk_stone"),
+         (("The Dead Lands", "A halott tájak"), "sculk_barrens sculk_woods sculk_canyons sculk_peaks sculk_all_biomes"),
+         (("What Lives There", "Ami ott él"), "sculk_watcher_grass sculk_echo sculk_mushroom sculk_stag sculk_breed")]
+TIER_REALM = {t: ("sculk" if ids.split()[0].startswith("sculk_") else "end") for t, (_, ids) in enumerate(TIERS, 1)}
 tier_of = {i: t for t, (_, ids) in enumerate(TIERS, 1) for i in ids.split()}
 assert set(tier_of) == {i for i, q in by_id.items() if q["chapter"] not in OFF_PATH}, sorted(set(tier_of) ^ {i for i, q in by_id.items() if q["chapter"] not in OFF_PATH})
 # only drawn on the Whole Path tab, so every quest joins the tree; these lock nothing
 AFTER = {"forest": "gateway", "prism": "gateway", "graveyard": "gateway", "village": "gateway", "basin": "gateway", "scorched": "gateway", "bastion": "gateway", "observatory": "gateway", "wreck": "gateway",
-         "shards": "bastion", "phasite": "observatory", "end_table": "gateway"}
+         "shards": "bastion", "phasite": "observatory", "end_table": "gateway",
+         "sculk_barrens": "sculk_escape", "sculk_watcher_grass": "sculk_escape"}
 for q in QUESTS:
     if q["chapter"] in OFF_PATH:
         q.update(tier=0, parents=[], path_x=0.0, path_y=0.0)
@@ -381,7 +446,7 @@ for q in QUESTS:
     parents = q["requires"] + ([AFTER[q["id"]]] if q["id"] in AFTER else [])
     assert all(tier_of[p] <= q["tier"] for p in parents), q["id"]
     q["parents"] = parents
-assert [q["id"] for q in QUESTS if not q["parents"] and q["tier"]] == ["enter_end"]
+assert [q["id"] for q in QUESTS if not q["parents"] and q["tier"]] == ["enter_end", "sculk_key"]
 
 
 def tier_depth(q):
@@ -389,10 +454,11 @@ def tier_depth(q):
     return 1 + max(map(tier_depth, inside)) if inside else 0
 
 
-columns, start = [], 0
-for t in range(1, len(TIERS) + 1):
-    columns.append(start)
-    start += max(max(tier_depth(q) for q in QUESTS if q["tier"] == t) + 1, 5)   # wide enough for the tier's name
+columns, start = [], {}
+for t in range(1, len(TIERS) + 1):              # each realm's tiers start again from column 0
+    realm = TIER_REALM[t]
+    columns.append(start.get(realm, 0))
+    start[realm] = columns[-1] + max(max(tier_depth(q) for q in QUESTS if q["tier"] == t) + 1, 5)   # wide enough for the tier's name
 
 
 # every tier is its own compact block centred on row 0, so the whole path stays low enough to read while scrolling sideways
@@ -434,7 +500,8 @@ def exported(q):
     return o
 
 
-w(f"{D}/quests.json", {"chapters": [{"id": c[0], "icon": c[1]} for c in CHAPTERS], "tiers": [{"id": t + 1, "x": columns[t]} for t in range(len(TIERS))], "quests": [exported(q) for q in QUESTS]})
+w(f"{D}/quests.json", {"chapters": [{"id": c[0], "icon": c[1], "realm": REALM[c[0]], "path": c[0] in PATHS} for c in CHAPTERS],
+                       "tiers": [{"id": t + 1, "x": columns[t], "realm": TIER_REALM[t + 1]} for t in range(len(TIERS))], "quests": [exported(q) for q in QUESTS]})
 
 KEY = "quest.endrealms."
 COMMON = {"en_us": {"title": "Endwalker's Guide", "progress": "%s / %s quests", "claim": "Claim reward", "claimed": "Claimed", "goals": "Goals", "rewards": "Rewards", "requires": "Finish first:", "xp": "+%s XP",
@@ -447,8 +514,11 @@ for lang, slot, chapter_slot in (("en_us", "en", 2), ("hu_hu", "hu", 3)):
     d.update({KEY + k: v for k, v in COMMON[lang].items()})
     for c in CHAPTERS:
         d[f"{KEY}chapter.{c[0]}"] = c[chapter_slot]
+    for realm, names in REALM_NAMES.items():
+        d[f"{KEY}realm.{realm}"] = names[0 if lang == "en_us" else 1]
     for t, (names, _) in enumerate(TIERS, 1):
-        d[f"{KEY}tier.{t}"] = f"Tier {t}: {names[0]}" if lang == "en_us" else f"{t}. szint: {names[1]}"
+        n = t - min(u for u in TIER_REALM if TIER_REALM[u] == TIER_REALM[t]) + 1      # numbered within its realm
+        d[f"{KEY}tier.{t}"] = f"Tier {n}: {names[0]}" if lang == "en_us" else f"{n}. szint: {names[1]}"
     for q in QUESTS:
         title, desc, goal = q[slot]
         d[f"{KEY}{q['id']}.title"] = title

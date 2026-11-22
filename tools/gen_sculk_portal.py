@@ -63,7 +63,11 @@ def write(path, obj):
         json.dump(obj, f, indent=2)
 
 
-write("blockstates/sculk_portal.json", {"variants": {"": {"model": "endrealms:block/sculk_portal"}}})
+# a pool sunk in the ground, or a whole block filling an upright frame (the Ancient City's, lit with an Echo Key)
+write("blockstates/sculk_portal.json", {"variants": {"pool=true": {"model": "endrealms:block/sculk_portal"},
+                                                     "pool=false": {"model": "endrealms:block/sculk_portal_full"}}})
+write("models/block/sculk_portal_full.json", {"parent": "minecraft:block/cube_column",
+                                              "textures": {"end": "endrealms:block/sculk_portal_top", "side": "endrealms:block/sculk_portal_side"}})
 write("models/block/sculk_portal.json", {
     "parent": "minecraft:block/block",
     "textures": {"particle": "endrealms:block/sculk_portal_top", "top": "endrealms:block/sculk_portal_top", "side": "endrealms:block/sculk_portal_side"},
@@ -80,4 +84,31 @@ write("models/block/sculk_portal.json", {
     }],
 })
 write("items/sculk_portal.json", {"model": {"type": "minecraft:model", "model": "endrealms:block/sculk_portal"}})
+
+
+
+def echo_key():
+    """A key of dark sculk-wrapped bone: a ring bow with a glowing echo shard set in it, and a toothed bit."""
+    img = Image.new("RGBA", (16, 16))
+    bone, dark, glow = (214, 208, 190), (16, 46, 52), (110, 236, 232)
+    ring = [(3, 2), (4, 2), (5, 2), (2, 3), (6, 3), (2, 4), (6, 4), (2, 5), (6, 5), (3, 6), (4, 6), (5, 6)]
+    for x, y in ring:
+        img.putpixel((x, y), dark + (255,))
+    for x, y in [(4, 3), (3, 4), (5, 4), (4, 5)]:
+        img.putpixel((x, y), (40, 120, 126, 255))
+    img.putpixel((4, 4), glow + (255,))
+    for i in range(7):                                           # the shaft, diagonal
+        img.putpixel((6 + i, 6 + i), bone + (255,))
+        img.putpixel((6 + i, 7 + i), (170, 162, 144, 255))
+    for x, y in [(10, 12), (11, 13), (12, 11), (13, 12), (9, 11)]:  # the bit's teeth
+        img.putpixel((x, y), bone + (255,))
+    for x, y in [(7, 8), (9, 10)]:                               # sculk wound round the shaft
+        img.putpixel((x, y), dark + (255,))
+        img.putpixel((x + 1, y), (60, 190, 196, 255))
+    return img
+
+
+echo_key().save(os.path.join(ASSETS, "textures", "item", "echo_key.png"))
+write("models/item/echo_key.json", {"parent": "minecraft:item/handheld", "textures": {"layer0": "endrealms:item/echo_key"}})
+write("items/echo_key.json", {"model": {"type": "minecraft:model", "model": "endrealms:item/echo_key"}})
 print("sculk portal assets written")

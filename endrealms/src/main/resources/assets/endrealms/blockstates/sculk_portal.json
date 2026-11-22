@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "pool=true": {
       "model": "endrealms:block/sculk_portal"
+    },
+    "pool=false": {
+      "model": "endrealms:block/sculk_portal_full"
     }
   }
 }

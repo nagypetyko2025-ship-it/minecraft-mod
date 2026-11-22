@@ -19,8 +19,10 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Endwalker's Guide: quests in chapters, each chapter a tree you can drag around. A quest opens once the quests before
- * it are claimed; its details slide over the right side of the tree. The tree itself comes from QuestBook.
+ * Endwalker's Guide: two realms on tabs along the top, the End and the Sculk dimension; the chosen realm's chapters
+ * listed down the left side, its Whole Path (every quest in one tree) first; each chapter a tree you can drag around.
+ * A quest opens once the quests before it are claimed; its details slide over the right side of the tree. The tree
+ * itself comes from QuestBook.
  */
 public class QuestScreen extends Screen {
 	private static final int CELL_X = 42;
@@ -36,10 +38,13 @@ public class QuestScreen extends Screen {
 	private static final int MUTED = 0xFF9A90B8;
 	private static final int GOLD = 0xFFF2D27A;
 	private static final int LOCKED = 0xFF3A3050;
+	private static final int SIDEBAR = 100;
+	private static final int ROW = 22;
 
 	private static Set<String> claimed = new HashSet<>();
 	private static Map<String, Integer> progress = Map.of();
 	private static String lastChapter;
+	private static String lastRealm = "end";
 
 	private enum Status { LOCKED, OPEN, READY, CLAIMED }
 
@@ -48,6 +53,7 @@ public class QuestScreen extends Screen {
 	private int panelW;
 	private int panelH;
 	private int chapter;
+	private String realm = "end";
 	private double panX;
 	private double panY;
 	private boolean centred;
@@ -93,13 +99,30 @@ public class QuestScreen extends Screen {
 		return finished(quest) ? Status.READY : Status.OPEN;
 	}
 
+	private List<QuestBook.Chapter> realmChapters() {
+		return QuestBook.chapters(realm);
+	}
+
+	private QuestBook.Chapter current() {
+		List<QuestBook.Chapter> chapters = realmChapters();
+		return chapters.get(Math.min(chapter, chapters.size() - 1));
+	}
+
 	private List<QuestBook.Quest> shown() {
-		return QuestBook.inChapter(QuestBook.chapters().get(chapter).id());
+		return QuestBook.inChapter(current().id());
+	}
+
+	private int canvasLeft() {
+		return left + 4 + SIDEBAR + 4;
+	}
+
+	private int canvasRight() {
+		return left + panelW - 4;
 	}
 
 	@Override
 	protected void init() {
-		panelW = Math.min(width - 12, 460);
+		panelW = Math.min(width - 12, 540);
 		panelH = Math.min(height - 12, 270);
 		left = (width - panelW) / 2;
 		top = (height - panelH) / 2;
@@ -109,9 +132,11 @@ public class QuestScreen extends Screen {
 			}
 		}).bounds(left + panelW - DETAIL_W + 8, top + panelH - 26, DETAIL_W - 52, 20).build());
 		closeButton = addRenderableWidget(Button.builder(Component.literal("✕"), b -> select(null)).bounds(left + panelW - 28, top + panelH - 26, 22, 20).build());
+		realm = lastRealm;
+		chapter = 0;
 		if (lastChapter != null) {
-			for (int i = 0; i < QuestBook.chapters().size(); i++) {
-				if (QuestBook.chapters().get(i).id().equals(lastChapter)) {
+			for (int i = 0; i < realmChapters().size(); i++) {
+				if (realmChapters().get(i).id().equals(lastChapter)) {
 					chapter = i;
 				}
 			}
@@ -137,7 +162,7 @@ public class QuestScreen extends Screen {
 	}
 
 	private boolean wholePath() {
-		return QuestBook.WHOLE_PATH.equals(QuestBook.chapters().get(chapter).id());
+		return current().path();
 	}
 
 	private void centre() {
@@ -156,13 +181,13 @@ public class QuestScreen extends Screen {
 			minY = Math.min(minY, quest.y());
 			maxY = Math.max(maxY, quest.y());
 		}
-		panX = Math.max(14.0, (panelW - 8 - (maxX * CELL_X + NODE)) / 2.0);
+		panX = Math.max(14.0, (canvasRight() - canvasLeft() - (maxX * CELL_X + NODE)) / 2.0);
 		panY = (canvasBottom() - canvasTop() - NODE) / 2.0 - (minY + maxY) / 2.0 * CELL_Y;
 		centred = true;
 	}
 
 	private int nodeX(QuestBook.Quest quest) {
-		return left + 4 + (int) panX + Math.round((wholePath() ? quest.pathX() : quest.x()) * CELL_X);
+		return canvasLeft() + (int) panX + Math.round((wholePath() ? quest.pathX() : quest.x()) * CELL_X);
 	}
 
 	private int nodeY(QuestBook.Quest quest) {
@@ -174,7 +199,7 @@ public class QuestScreen extends Screen {
 	}
 
 	private QuestBook.Quest nodeAt(double x, double y) {
-		if (overDetail(x) || y < canvasTop() || y >= canvasBottom()) {
+		if (overDetail(x) || x < canvasLeft() || y < canvasTop() || y >= canvasBottom()) {
 			return null;
 		}
 		for (QuestBook.Quest quest : shown()) {
@@ -187,8 +212,8 @@ public class QuestScreen extends Screen {
 		return null;
 	}
 
-	private int tabWidth() {
-		return Math.max(24, (panelW - 8) / Math.max(1, QuestBook.chapters().size()));
+	private int realmTabWidth() {
+		return 120;
 	}
 
 	@Override
@@ -196,11 +221,23 @@ public class QuestScreen extends Screen {
 		if (super.mouseClicked(event, doubled)) {
 			return true;
 		}
-		if (event.y() >= top + 22 && event.y() < top + 46) {
-			int tab = (int) (event.x() - left - 4) / tabWidth();
-			if (tab >= 0 && tab < QuestBook.chapters().size()) {
-				chapter = tab;
-				lastChapter = QuestBook.chapters().get(tab).id();
+		if (event.y() >= top + 20 && event.y() < top + 20 + ROW && event.x() >= left + 4) {     // the realm tabs
+			int tab = (int) (event.x() - left - 4) / realmTabWidth();
+			if (tab >= 0 && tab < QuestBook.REALMS.size() && !QuestBook.chapters(QuestBook.REALMS.get(tab)).isEmpty()) {
+				realm = QuestBook.REALMS.get(tab);
+				lastRealm = realm;
+				chapter = 0;
+				lastChapter = current().id();
+				centred = false;
+				select(null);
+				return true;
+			}
+		}
+		if (event.x() >= left + 4 && event.x() < left + 4 + SIDEBAR && event.y() >= canvasTop()) {   // the chapter list
+			int row = (int) (event.y() - canvasTop()) / ROW;
+			if (row >= 0 && row < realmChapters().size()) {
+				chapter = row;
+				lastChapter = current().id();
 				centred = false;
 				select(null);
 				return true;
@@ -216,7 +253,7 @@ public class QuestScreen extends Screen {
 
 	@Override
 	public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
-		if (!overDetail(event.x()) && event.y() >= canvasTop()) {
+		if (!overDetail(event.x()) && event.x() >= canvasLeft() && event.y() >= canvasTop()) {
 			panX += dx;
 			panY += dy;
 			return true;
@@ -255,7 +292,7 @@ public class QuestScreen extends Screen {
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float partial) {
-		if (QuestBook.chapters().isEmpty()) {
+		if (realmChapters().isEmpty()) {
 			return;
 		}
 		if (!centred) {
@@ -264,7 +301,8 @@ public class QuestScreen extends Screen {
 		g.fill(left, top, left + panelW, top + panelH, BG);
 		g.outline(left, top, panelW, panelH, BORDER);
 		g.text(font, title, left + 8, top + 7, ACCENT);
-		Component count = Component.translatable("quest.endrealms.progress", claimed.size(), QuestBook.size());
+		List<QuestBook.Quest> inRealm = QuestBook.inRealm(realm);
+		Component count = Component.translatable("quest.endrealms.progress", inRealm.stream().filter(q -> claimed.contains(q.id())).count(), inRealm.size());
 		g.text(font, count, left + panelW - font.width(count) - 8, top + 7, MUTED);
 		extractTabs(g, mouseX, mouseY);
 		extractTree(g, mouseX, mouseY);
@@ -277,35 +315,57 @@ public class QuestScreen extends Screen {
 	}
 
 	private void extractTabs(GuiGraphicsExtractor g, int mouseX, int mouseY) {
-		List<QuestBook.Chapter> chapters = QuestBook.chapters();
-		int w = tabWidth();
+		// the two realms along the top
+		for (int i = 0; i < QuestBook.REALMS.size(); i++) {
+			String id = QuestBook.REALMS.get(i);
+			List<QuestBook.Chapter> chapters = QuestBook.chapters(id);
+			if (chapters.isEmpty()) {
+				continue;
+			}
+			int x = left + 4 + i * realmTabWidth();
+			int y = top + 20;
+			boolean active = id.equals(realm);
+			g.fill(x, y, x + realmTabWidth() - 3, y + ROW, active ? 0xFF33275C : 0xFF1A1433);
+			g.outline(x, y, realmTabWidth() - 3, ROW, active ? ACCENT : BORDER);
+			g.item(stack(chapters.get(0).icon()), x + 3, y + 3);
+			g.text(font, Component.translatable("quest.endrealms.realm." + id), x + 22, y + 7, active ? TEXT : MUTED);
+			if (QuestBook.inRealm(id).stream().anyMatch(q -> status(q) == Status.READY)) {
+				g.fill(x + realmTabWidth() - 10, y + 2, x + realmTabWidth() - 6, y + 6, GOLD);
+			}
+		}
+		// the chosen realm's chapters down the left
+		List<QuestBook.Chapter> chapters = realmChapters();
+		int x = left + 4;
+		g.fill(x, canvasTop(), x + SIDEBAR, canvasBottom(), 0xFF140F28);
 		for (int i = 0; i < chapters.size(); i++) {
-			int x = left + 4 + i * w;
-			int y = top + 22;
+			int y = canvasTop() + i * ROW;
+			if (y + ROW > canvasBottom()) {
+				break;
+			}
 			boolean active = i == chapter;
-			g.fill(x, y, x + w - 2, y + 24, active ? 0xFF33275C : 0xFF1A1433);
-			g.outline(x, y, w - 2, 24, active ? ACCENT : BORDER);
-			g.item(stack(chapters.get(i).icon()), x + 3, y + 4);
+			if (active) {
+				g.fill(x, y, x + SIDEBAR, y + ROW - 1, 0xFF33275C);
+				g.fill(x, y, x + 2, y + ROW - 1, ACCENT);
+			}
+			g.item(stack(chapters.get(i).icon()), x + 4, y + 3);
 			Component name = Component.translatable("quest.endrealms.chapter." + chapters.get(i).id());
 			String label = name.getString();
-			int room = w - 26;
-			if (room > 12) {
-				String shown = font.width(label) > room ? font.plainSubstrByWidth(label, room - 5) + "…" : label;
-				g.text(font, shown, x + 21, y + 8, active ? TEXT : MUTED);
-			}
+			int room = SIDEBAR - 30;
+			String shownLabel = font.width(label) > room ? font.plainSubstrByWidth(label, room - 5) + "…" : label;
+			g.text(font, shownLabel, x + 23, y + 7, active ? TEXT : MUTED);
 			boolean ready = QuestBook.inChapter(chapters.get(i).id()).stream().anyMatch(q -> status(q) == Status.READY);
 			if (ready) {
-				g.fill(x + w - 8, y + 2, x + w - 4, y + 6, GOLD);
+				g.fill(x + SIDEBAR - 6, y + 3, x + SIDEBAR - 2, y + 7, GOLD);
 			}
-			if (mouseX >= x && mouseX < x + w - 2 && mouseY >= y && mouseY < y + 24) {
+			if (mouseX >= x && mouseX < x + SIDEBAR && mouseY >= y && mouseY < y + ROW && font.width(label) > room) {
 				g.setTooltipForNextFrame(font, name, mouseX, mouseY);
 			}
 		}
 	}
 
 	private void extractTree(GuiGraphicsExtractor g, int mouseX, int mouseY) {
-		int x0 = left + 4;
-		int x1 = left + panelW - 4;
+		int x0 = canvasLeft();
+		int x1 = canvasRight();
 		g.fill(x0, canvasTop(), x1, canvasBottom(), CANVAS);
 		g.enableScissor(x0, canvasTop(), x1, canvasBottom());
 		List<QuestBook.Quest> quests = shown();
@@ -361,13 +421,14 @@ public class QuestScreen extends Screen {
 	}
 
 	private int tierX(QuestBook.Tier tier) {
-		return left + 4 + (int) panX + Math.round(tier.x() * CELL_X);
+		return canvasLeft() + (int) panX + Math.round(tier.x() * CELL_X);
 	}
 
 	/** Only a line separates the tiers: the quests stay joined across it. */
 	private void extractTierLines(GuiGraphicsExtractor g) {
-		for (QuestBook.Tier tier : QuestBook.tiers()) {
-			if (tier.id() > 1) {
+		List<QuestBook.Tier> tiers = QuestBook.tiers(realm);
+		for (QuestBook.Tier tier : tiers) {
+			if (tier != tiers.get(0)) {
 				int x = tierX(tier) - (CELL_X - NODE) / 2;
 				g.fill(x, canvasTop(), x + 1, canvasBottom(), BORDER);
 			}
@@ -375,9 +436,10 @@ public class QuestScreen extends Screen {
 	}
 
 	private void extractTierNames(GuiGraphicsExtractor g) {
-		for (QuestBook.Tier tier : QuestBook.tiers()) {
-			long total = QuestBook.inChapter(QuestBook.WHOLE_PATH).stream().filter(q -> q.tier() == tier.id()).count();
-			long done = QuestBook.inChapter(QuestBook.WHOLE_PATH).stream().filter(q -> q.tier() == tier.id() && claimed.contains(q.id())).count();
+		List<QuestBook.Quest> path = QuestBook.inChapter(current().id());
+		for (QuestBook.Tier tier : QuestBook.tiers(realm)) {
+			long total = path.stream().filter(q -> q.tier() == tier.id()).count();
+			long done = path.stream().filter(q -> q.tier() == tier.id() && claimed.contains(q.id())).count();
 			String label = Component.translatable("quest.endrealms.tier." + tier.id()).getString() + " (" + done + "/" + total + ")";
 			int x = tierX(tier);
 			g.fill(x - 2, canvasTop() + 1, x + font.width(label) + 2, canvasTop() + 12, 0xCC0F0A1E);

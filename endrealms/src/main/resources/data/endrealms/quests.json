@@ -2,61 +2,123 @@
   "chapters": [
     {
       "id": "path",
-      "icon": "endrealms:end_guide"
+      "icon": "endrealms:end_guide",
+      "realm": "end",
+      "path": true
     },
     {
       "id": "start",
-      "icon": "minecraft:ender_eye"
+      "icon": "minecraft:ender_eye",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "isles",
-      "icon": "endrealms:astral_sapling"
+      "icon": "endrealms:astral_sapling",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "ruins",
-      "icon": "endrealms:voidstone_bricks"
+      "icon": "endrealms:voidstone_bricks",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "chorusite",
-      "icon": "endrealms:chorusite_ingot"
+      "icon": "endrealms:chorusite_ingot",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "jewels",
-      "icon": "endrealms:ember_garnet"
+      "icon": "endrealms:ember_garnet",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "rift",
-      "icon": "endrealms:rift_heart"
+      "icon": "endrealms:rift_heart",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "brew",
-      "icon": "endrealms:fermentation_station"
+      "icon": "endrealms:fermentation_station",
+      "realm": "end",
+      "path": false
     },
     {
       "id": "misc",
-      "icon": "endrealms:backpack"
+      "icon": "endrealms:backpack",
+      "realm": "end",
+      "path": false
+    },
+    {
+      "id": "sculk_path",
+      "icon": "minecraft:sculk_catalyst",
+      "realm": "sculk",
+      "path": true
+    },
+    {
+      "id": "sculk_arrival",
+      "icon": "endrealms:echo_key",
+      "realm": "sculk",
+      "path": false
+    },
+    {
+      "id": "sculk_lands",
+      "icon": "endrealms:sculk_stone",
+      "realm": "sculk",
+      "path": false
+    },
+    {
+      "id": "sculk_wilds",
+      "icon": "endrealms:soul_mushroom",
+      "realm": "sculk",
+      "path": false
     }
   ],
   "tiers": [
     {
       "id": 1,
-      "x": 0
+      "x": 0,
+      "realm": "end"
     },
     {
       "id": 2,
-      "x": 6
+      "x": 6,
+      "realm": "end"
     },
     {
       "id": 3,
-      "x": 11
+      "x": 11,
+      "realm": "end"
     },
     {
       "id": 4,
-      "x": 16
+      "x": 16,
+      "realm": "end"
     },
     {
       "id": 5,
-      "x": 21
+      "x": 21,
+      "realm": "end"
+    },
+    {
+      "id": 6,
+      "x": 0,
+      "realm": "sculk"
+    },
+    {
+      "id": 7,
+      "x": 5,
+      "realm": "sculk"
+    },
+    {
+      "id": 8,
+      "x": 10,
+      "realm": "sculk"
     }
   ],
   "quests": [
@@ -4200,6 +4262,554 @@
       "path_x": 26.0,
       "path_y": 1.0,
       "tier": 5
+    },
+    {
+      "id": "sculk_key",
+      "chapter": "sculk_arrival",
+      "icon": "endrealms:echo_key",
+      "x": 0.0,
+      "y": 0.5,
+      "requires": [],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:echo_key",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:echo_shard",
+          "count": 4
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 300,
+      "recipes": [
+        {
+          "kind": "end_crafting",
+          "slots": [
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            [
+              "minecraft:sculk"
+            ],
+            [
+              "minecraft:sculk_catalyst"
+            ],
+            [
+              "minecraft:sculk"
+            ],
+            [
+              "minecraft:echo_shard"
+            ],
+            [],
+            [
+              "minecraft:sculk_catalyst"
+            ],
+            [
+              "minecraft:recovery_compass"
+            ],
+            [
+              "minecraft:sculk_catalyst"
+            ],
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            [
+              "minecraft:sculk"
+            ],
+            [
+              "minecraft:sculk_catalyst"
+            ],
+            [
+              "minecraft:sculk"
+            ],
+            [
+              "minecraft:echo_shard"
+            ],
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            [],
+            [
+              "minecraft:echo_shard"
+            ],
+            []
+          ],
+          "result": "endrealms:echo_key"
+        }
+      ],
+      "path_x": 0.0,
+      "path_y": 0.0,
+      "tier": 6
+    },
+    {
+      "id": "sculk_enter",
+      "chapter": "sculk_arrival",
+      "icon": "minecraft:sculk_catalyst",
+      "x": 1.0,
+      "y": 0.5,
+      "requires": [
+        "sculk_key"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/root"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:lantern",
+          "count": 8
+        },
+        {
+          "item": "minecraft:cooked_beef",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 1.0,
+      "path_y": 0.0,
+      "tier": 6
+    },
+    {
+      "id": "sculk_escape",
+      "chapter": "sculk_arrival",
+      "icon": "endrealms:sculk_portal",
+      "x": 2.0,
+      "y": 0.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/escape"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 16
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 2.0,
+      "path_y": -0.5,
+      "tier": 6
+    },
+    {
+      "id": "sculk_soil",
+      "chapter": "sculk_arrival",
+      "icon": "endrealms:sculk_soil",
+      "x": 2.0,
+      "y": 1.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:sculk_soil",
+          "count": 32
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:iron_shovel",
+          "count": 1
+        },
+        {
+          "item": "minecraft:bread",
+          "count": 16
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 2.0,
+      "path_y": 0.5,
+      "tier": 6
+    },
+    {
+      "id": "sculk_stone",
+      "chapter": "sculk_arrival",
+      "icon": "endrealms:sculk_stone",
+      "x": 3.0,
+      "y": 1.0,
+      "requires": [
+        "sculk_soil"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:sculk_stone",
+          "count": 64
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:iron_pickaxe",
+          "count": 1
+        },
+        {
+          "item": "minecraft:torch",
+          "count": 32
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 3.0,
+      "path_y": 0.5,
+      "tier": 6
+    },
+    {
+      "id": "sculk_barrens",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:dead_bush",
+      "x": 0.0,
+      "y": 1.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/sculk_barrens"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:cooked_beef",
+          "count": 16
+        },
+        {
+          "item": "minecraft:torch",
+          "count": 32
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 5.0,
+      "path_y": 0.0,
+      "tier": 7,
+      "after": "sculk_escape"
+    },
+    {
+      "id": "sculk_woods",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:stripped_dark_oak_log",
+      "x": 1.0,
+      "y": 0.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/withered_woods"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:lantern",
+          "count": 4
+        },
+        {
+          "item": "minecraft:golden_carrot",
+          "count": 16
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": -1.0,
+      "tier": 7
+    },
+    {
+      "id": "sculk_canyons",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:sculk_vein",
+      "x": 1.0,
+      "y": 1.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/sculk_canyons"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:ladder",
+          "count": 32
+        },
+        {
+          "item": "minecraft:water_bucket",
+          "count": 1
+        }
+      ],
+      "xp": 250,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 0.0,
+      "tier": 7
+    },
+    {
+      "id": "sculk_peaks",
+      "chapter": "sculk_lands",
+      "icon": "endrealms:sculk_stone",
+      "x": 1.0,
+      "y": 2.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/sculk_peaks"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 1.0,
+      "tier": 7
+    },
+    {
+      "id": "sculk_all_biomes",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:sculk_shrieker",
+      "x": 2.0,
+      "y": 0.0,
+      "requires": [
+        "sculk_woods",
+        "sculk_canyons",
+        "sculk_peaks"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/all_biomes"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 8
+        },
+        {
+          "item": "minecraft:enchanted_golden_apple",
+          "count": 1
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 32
+        }
+      ],
+      "xp": 600,
+      "recipes": [],
+      "path_x": 7.0,
+      "path_y": -1.0,
+      "tier": 7
+    },
+    {
+      "id": "sculk_watcher_grass",
+      "chapter": "sculk_wilds",
+      "icon": "endrealms:watcher_grass",
+      "x": 0.0,
+      "y": 0.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:watcher_grass",
+          "count": 8
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:shears",
+          "count": 1
+        },
+        {
+          "item": "minecraft:bone_meal",
+          "count": 16
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 10.0,
+      "path_y": -1.0,
+      "tier": 8,
+      "after": "sculk_escape"
+    },
+    {
+      "id": "sculk_echo",
+      "chapter": "sculk_wilds",
+      "icon": "endrealms:echo_dust",
+      "x": 0.0,
+      "y": 1.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:echo_dust",
+          "count": 4
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:amethyst_shard",
+          "count": 16
+        },
+        {
+          "item": "minecraft:glow_berries",
+          "count": 16
+        }
+      ],
+      "xp": 150,
+      "recipes": [],
+      "path_x": 10.0,
+      "path_y": 0.0,
+      "tier": 8
+    },
+    {
+      "id": "sculk_mushroom",
+      "chapter": "sculk_wilds",
+      "icon": "endrealms:soul_mushroom",
+      "x": 0.0,
+      "y": 2.0,
+      "requires": [
+        "sculk_enter"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:soul_mushroom",
+          "count": 8
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:lantern",
+          "count": 8
+        },
+        {
+          "item": "minecraft:bone_meal",
+          "count": 16
+        }
+      ],
+      "xp": 100,
+      "recipes": [],
+      "path_x": 10.0,
+      "path_y": 1.0,
+      "tier": 8
+    },
+    {
+      "id": "sculk_stag",
+      "chapter": "sculk_wilds",
+      "icon": "endrealms:sculk_antler",
+      "x": 1.0,
+      "y": 2.0,
+      "requires": [
+        "sculk_mushroom"
+      ],
+      "objectives": [
+        {
+          "type": "item",
+          "id": "endrealms:sculk_antler",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:bone",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_carrot",
+          "count": 16
+        }
+      ],
+      "xp": 200,
+      "recipes": [],
+      "path_x": 11.0,
+      "path_y": 1.0,
+      "tier": 8
+    },
+    {
+      "id": "sculk_breed",
+      "chapter": "sculk_wilds",
+      "icon": "endrealms:bone_stag_spawn_egg",
+      "x": 2.0,
+      "y": 2.0,
+      "requires": [
+        "sculk_stag"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/breed_stag"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:diamond",
+          "count": 4
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 16
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 12.0,
+      "path_y": 1.0,
+      "tier": 8
     }
   ]
 }

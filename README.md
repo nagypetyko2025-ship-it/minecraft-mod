@@ -23,7 +23,11 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.47.0)
+## Tartalom (0.48.0)
+- **Visszhangkulcs**: az End-barkácsasztalon készül (visszhangszilánk, sculk, sculk-katalizátor, visszatérő iránytű); az Ókori város közepén álló megerősített mélypala kereten használva a keret megtelik Sculk-portállal (8 használat)
+- **Endjáró kalauz új elrendezés**: felül két fő fül (End és Sculk), a fejezetek bal oldalt listában, mindkettőnek saját „Teljes út” fája
+- **Sculk-küldetések**: 15 küldetés három fejezetben (Érkezés, Tájak, Élővilág) és három szintben a Teljes úton; új előrelépés: Csontagancsos szarvas szaporítása
+- **Kreatív menü: külön „End Realms: Sculk” fül** minden sculk-dimenziós dologgal
 - **Sculk-élővilág**: Figyelőfű (3 blokk magas, sűrű, ez a dimenzió általános füve; a tetején világító szemek a legközelebbi játékos felé fordulnak, lopakodásra lecsukódnak), Visszhangvirág (ha elmész mellette, kicsit később visszajátssza a lépteid hangját; Visszhangport ad, ollóval önmagát), Lélekgomba (világít)
 - **Csontagancsos szarvas**: félig csontváz szarvas átlátszó bordakosárral, róla lelógó sculkkal, világító szemmel és ágas agancsal; messziről mozdulatlanul bámul, közelről elmenekül; Lélekgombával odacsalható és szaporítható; Sculk-agancsot és csontot ad
 - **Lidércmolyok**: halványan világító molyok keringenek a fények körül (díszek, nem foghatók be, nem oltják ki a fényt)
