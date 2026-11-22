@@ -31,9 +31,7 @@
     "minecraft:visual/fog_color": "#15191a",
     "minecraft:visual/sky_color": "#060708",
     "minecraft:visual/sky_light_color": "#3c5a63",
-    "minecraft:visual/sky_light_factor": 0.22,
-    "minecraft:visual/fog_start_distance": 24.0,
-    "minecraft:visual/fog_end_distance": 160.0
+    "minecraft:visual/sky_light_factor": 0.22
   },
   "coordinate_scale": 1.0,
   "has_ceiling": false,
