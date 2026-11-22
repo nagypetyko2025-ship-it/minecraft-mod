@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_shear",
+              "name": "endrealms:echo_flower"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "endrealms:echo_dust",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:blocks/echo_flower"
+}

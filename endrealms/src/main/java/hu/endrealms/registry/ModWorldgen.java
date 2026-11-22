@@ -81,6 +81,9 @@ public final class ModWorldgen {
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("drake_nest"), GraveyardFeatures.DrakeNest.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("dead_tree"), hu.endrealms.worldgen.SculkFeatures.DeadTree.CODEC);
 		Registry.register(BuiltInRegistries.BIOME_SOURCE, EndRealms.id("sculk"), hu.endrealms.sculk.SculkBiomeSource.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("watcher_grass_patch"), hu.endrealms.worldgen.SculkFeatures.PlantPatch.WATCHER_GRASS_CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("echo_flower_patch"), hu.endrealms.worldgen.SculkFeatures.PlantPatch.ECHO_FLOWER_CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("soul_mushroom_patch"), hu.endrealms.worldgen.SculkFeatures.PlantPatch.SOUL_MUSHROOM_CODEC);
 
 		BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
 				GenerationStep.Decoration.UNDERGROUND_ORES, ORE_CHORUSITE);

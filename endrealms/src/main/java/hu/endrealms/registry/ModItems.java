@@ -169,6 +169,12 @@ public final class ModItems {
 	public static final Item BACKPACK = register("backpack", Item::new, new Item.Properties().stacksTo(1));
 
 	public static final Item DRAGON_BONE = register("dragon_bone", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+	/** From the Echo Flower. */
+	public static final Item ECHO_DUST = register("echo_dust", Item::new, new Item.Properties());
+	/** From the Bone Stag. */
+	public static final Item SCULK_ANTLER = register("sculk_antler", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+	public static final Item BONE_STAG_SPAWN_EGG = register("bone_stag_spawn_egg", SpawnEggItem::new,
+			new Item.Properties().spawnEgg(ModEntities.BONE_STAG));
 
 	public static final Item SPECTRAL_WHELP_SPAWN_EGG = register("spectral_whelp_spawn_egg", SpawnEggItem::new,
 			new Item.Properties().spawnEgg(ModEntities.SPECTRAL_WHELP));

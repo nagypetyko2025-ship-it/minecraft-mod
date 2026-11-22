@@ -57,7 +57,7 @@
   ],
   "default_block": "endrealms:sculk_stone",
   "default_fluid": "minecraft:air",
-  "disable_mob_generation": true,
+  "disable_mob_generation": false,
   "legacy_random_source": false,
   "material_rule": "endrealms:sculk",
   "noise": {

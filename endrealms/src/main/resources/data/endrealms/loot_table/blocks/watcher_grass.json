@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "endrealms:watcher_grass",
+        "state": {
+          "part": "bottom"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": "minecraft:tool/can_shear",
+          "name": "endrealms:watcher_grass"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:blocks/watcher_grass"
+}

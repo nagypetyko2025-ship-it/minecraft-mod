@@ -622,5 +622,12 @@
   "advancements.endrealms.sculk.escape.title": "Escape",
   "advancements.endrealms.sculk.escape.description": "Return from the Sculk dimension to the Overworld",
   "advancements.endrealms.sculk.all_biomes.title": "Seen Too Much",
-  "advancements.endrealms.sculk.all_biomes.description": "Visit every biome of the Sculk dimension"
+  "advancements.endrealms.sculk.all_biomes.description": "Visit every biome of the Sculk dimension",
+  "block.endrealms.echo_flower": "Echo Flower",
+  "block.endrealms.watcher_grass": "Watcher Grass",
+  "block.endrealms.soul_mushroom": "Soul Mushroom",
+  "item.endrealms.echo_dust": "Echo Dust",
+  "item.endrealms.sculk_antler": "Sculk Antler",
+  "item.endrealms.bone_stag_spawn_egg": "Bone Stag Spawn Egg",
+  "entity.endrealms.bone_stag": "Bone Stag"
 }

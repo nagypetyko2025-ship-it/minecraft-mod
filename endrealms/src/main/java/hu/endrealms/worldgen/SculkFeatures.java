@@ -87,4 +87,50 @@ public final class SculkFeatures {
 			}
 		}
 	}
+
+	/**
+	 * A patch of plants around the origin: a number of tries scattered within a radius, each standing on the ground
+	 * of the dimension. Watcher Grass grows thick, three blocks tall; the others are single blocks.
+	 */
+	public static final class PlantPatch implements Feature {
+		public static final PlantPatch WATCHER_GRASS = new PlantPatch(56, 6, null);
+		public static final PlantPatch ECHO_FLOWER = new PlantPatch(10, 4, () -> hu.endrealms.registry.ModBlocks.ECHO_FLOWER.defaultBlockState());
+		public static final PlantPatch SOUL_MUSHROOM = new PlantPatch(8, 3, () -> hu.endrealms.registry.ModBlocks.SOUL_MUSHROOM.defaultBlockState());
+		public static final MapCodec<PlantPatch> WATCHER_GRASS_CODEC = MapCodec.unit(WATCHER_GRASS);
+		public static final MapCodec<PlantPatch> ECHO_FLOWER_CODEC = MapCodec.unit(ECHO_FLOWER);
+		public static final MapCodec<PlantPatch> SOUL_MUSHROOM_CODEC = MapCodec.unit(SOUL_MUSHROOM);
+
+		private final int tries;
+		private final int radius;
+		private final java.util.function.Supplier<BlockState> plant;
+
+		private PlantPatch(int tries, int radius, java.util.function.Supplier<BlockState> plant) {
+			this.tries = tries;
+			this.radius = radius;
+			this.plant = plant;
+		}
+
+		@Override
+		public MapCodec<? extends Feature> codec() {
+			return this == WATCHER_GRASS ? WATCHER_GRASS_CODEC : this == ECHO_FLOWER ? ECHO_FLOWER_CODEC : SOUL_MUSHROOM_CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
+			int placed = 0;
+			BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+			for (int i = 0; i < tries; i++) {
+				pos.setWithOffset(origin, random.nextInt(radius * 2 + 1) - radius, random.nextInt(7) - 3, random.nextInt(radius * 2 + 1) - radius);
+				if (plant == null) {
+					if (hu.endrealms.sculk.SculkPlants.WatcherGrass.place(level, pos, random, FLAGS)) {
+						placed++;
+					}
+				} else if (level.isEmptyBlock(pos) && hu.endrealms.sculk.SculkPlants.ground(level.getBlockState(pos.below()))) {
+					level.setBlock(pos, plant.get(), FLAGS);
+					placed++;
+				}
+			}
+			return placed > 0;
+		}
+	}
 }

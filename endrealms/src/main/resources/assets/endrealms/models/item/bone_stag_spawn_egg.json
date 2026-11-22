@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "endrealms:item/bone_stag_spawn_egg"
+  }
+}

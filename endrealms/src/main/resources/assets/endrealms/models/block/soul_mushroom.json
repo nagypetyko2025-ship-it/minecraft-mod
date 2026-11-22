@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "endrealms:block/soul_mushroom"
+  }
+}

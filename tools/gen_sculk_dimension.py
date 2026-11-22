@@ -87,7 +87,7 @@ noise["material_rule"] = E + "sculk"
 noise["default_block"] = E + "sculk_stone"
 noise["default_fluid"] = "minecraft:air"         # no water anywhere: the seas are dry, deep basins
 noise.pop("aquifers", None)                       # nor underground lakes of water or lava
-noise["disable_mob_generation"] = True
+noise["disable_mob_generation"] = False      # Bone Stags are about when the land is made
 w("worldgen/noise_settings/sculk.json", noise)
 
 
@@ -137,6 +137,27 @@ w("worldgen/placed_feature/dead_tree_dense.json", {"feature": E + "dead_tree", "
 w("worldgen/placed_feature/sculk_patch_surface.json", {"feature": E + "sculk_patch_surface", "placement": [{"type": "minecraft:rarity_filter", "chance": 2}] + SURFACE})
 w("worldgen/placed_feature/sculk_patch_surface_dense.json", {"feature": E + "sculk_patch_surface", "placement": [{"type": "minecraft:count", "count": 3}] + SURFACE})
 
+# plants: Watcher Grass everywhere (the common grass), Echo Flowers scattered, Soul Mushrooms in clumps
+for name in ("watcher_grass_patch", "echo_flower_patch", "soul_mushroom_patch"):
+    w(f"worldgen/feature/{name}.json", {"type": E + name})
+
+
+def placed(name, feature, count=None, rarity=None):
+    head = [{"type": "minecraft:count", "count": count}] if count else [{"type": "minecraft:rarity_filter", "chance": rarity}]
+    w(f"worldgen/placed_feature/{name}.json", {"feature": E + feature, "placement": head + SURFACE})
+
+
+placed("watcher_grass_dense", "watcher_grass_patch", count=7)
+placed("watcher_grass", "watcher_grass_patch", count=4)
+placed("watcher_grass_sparse", "watcher_grass_patch", count=2)
+placed("echo_flowers", "echo_flower_patch", rarity=2)
+placed("soul_mushrooms", "soul_mushroom_patch", count=2)
+placed("soul_mushrooms_rare", "soul_mushroom_patch", rarity=3)
+
+STAGS = {"argument": {"spawn_costs": {}, "spawns_by_category": {"creature": [
+    {"type": E + "bone_stag", "count": {"type": "minecraft:uniform", "min_inclusive": 1, "max_inclusive": 3}, "weight": 10}]}},
+    "modifier": "overlay"}
+
 CARVERS = ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]
 
 # deep canyons: the vanilla canyon, but far more often, starting near the surface and cut much deeper and wider
@@ -157,13 +178,14 @@ w("worldgen/carver/deep_canyon.json", {
 })
 
 
-def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS):
+def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS, stags=True):
     w(f"worldgen/biome/{name}.json", {
         "attributes": {
             "minecraft:visual/fog_color": fog,
             "minecraft:visual/sky_color": "#060708",
             "minecraft:visual/water_fog_color": "#0a1214",
             "minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": particle}, "probability": chance}], "modifier": "append"},
+            **({"minecraft:gameplay/natural_mob_spawns": STAGS} if stags else {}),
         },
         "carvers": carvers,
         "downfall": 0.0,
@@ -175,11 +197,12 @@ def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS):
 
 
 biome("sculk_barrens", "#1b1f20", 176.0, "minecraft:white_ash", 0.006,
-      [E + "dead_tree_sparse", E + "sculk_patch_surface", "minecraft:patch_dead_bush"])
+      [E + "dead_tree_sparse", E + "sculk_patch_surface", E + "watcher_grass", E + "echo_flowers", E + "soul_mushrooms_rare", "minecraft:patch_dead_bush"])
 biome("withered_woods", "#101415", 112.0, "minecraft:ash", 0.012,
-      [E + "dead_tree_dense", E + "sculk_patch_surface_dense", "minecraft:pale_moss_patch"])
+      [E + "dead_tree_dense", E + "sculk_patch_surface_dense", E + "watcher_grass_dense", E + "echo_flowers", E + "soul_mushrooms", "minecraft:pale_moss_patch"])
 biome("sculk_peaks", "#181c1e", 192.0, "minecraft:white_ash", 0.004,
-      [E + "dead_tree_sparse", E + "sculk_patch_surface"])
+      [E + "dead_tree_sparse", E + "sculk_patch_surface", E + "watcher_grass_sparse", E + "soul_mushrooms_rare"], stags=False)
 biome("sculk_canyons", "#16191a", 160.0, "minecraft:ash", 0.006,
-      [E + "dead_tree_sparse", E + "sculk_patch_surface_dense", "minecraft:patch_dead_bush"], CARVERS + [E + "deep_canyon"])
+      [E + "dead_tree_sparse", E + "sculk_patch_surface_dense", E + "watcher_grass_sparse", E + "echo_flowers", E + "soul_mushrooms_rare", "minecraft:patch_dead_bush"],
+      CARVERS + [E + "deep_canyon"])
 print("sculk dimension data written")

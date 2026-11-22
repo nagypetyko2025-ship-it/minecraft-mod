@@ -35,6 +35,8 @@ public class EndRealms implements ModInitializer {
 		hu.endrealms.net.VersionCheck.init();
 		hu.endrealms.brew.Brewing.init();
 		hu.endrealms.brew.Blackout.init();
+		hu.endrealms.sculk.SculkLife.init();
+		hu.endrealms.sculk.SculkParticles.init();
 		ModItems.init();
 		ModBlocks.init();
 		ModFluids.init();

@@ -39,7 +39,9 @@
     [],
     [
       "endrealms:dead_tree_sparse",
-      "endrealms:sculk_patch_surface"
+      "endrealms:sculk_patch_surface",
+      "endrealms:watcher_grass_sparse",
+      "endrealms:soul_mushrooms_rare"
     ],
     []
   ],

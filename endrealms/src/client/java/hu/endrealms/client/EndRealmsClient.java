@@ -41,6 +41,8 @@ public class EndRealmsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// Answers the server's version question while logging in, and fetches a newer End Realms (see VersionCheck, AutoUpdate).
 		hu.endrealms.client.update.ClientUpdate.init();
+		hu.endrealms.client.sculk.SculkSky.init();
+		hu.endrealms.client.sculk.WillMoths.init();
 		// Passing out at Drunkenness IV: the whole screen goes black, fading in over half a second (see Blackout).
 		net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry.addLast(hu.endrealms.EndRealms.id("blackout"), (g, delta) -> {
 			net.minecraft.client.player.LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
@@ -60,6 +62,9 @@ public class EndRealmsClient implements ClientModInitializer {
 		ModelLayerRegistry.registerModelLayer(GlimmerhoofRenderer.LAYER, GlimmerhoofModel::createBodyLayer);
 		ModelLayerRegistry.registerModelLayer(GlimmerhoofRenderer.BABY_LAYER, GlimmerhoofRenderer::createBabyLayer);
 		EntityRendererRegistry.register(ModEntities.GLIMMERHOOF, GlimmerhoofRenderer::new);
+		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.BoneStagRenderer.LAYER, hu.endrealms.client.entity.BoneStagModel::createBodyLayer);
+		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.BoneStagRenderer.BABY_LAYER, hu.endrealms.client.entity.BoneStagRenderer::createBabyLayer);
+		EntityRendererRegistry.register(ModEntities.BONE_STAG, hu.endrealms.client.entity.BoneStagRenderer::new);
 
 		ModelLayerRegistry.registerModelLayer(VoidSentinelRenderer.LAYER, VoidSentinelRenderer::createLayer);
 		EntityRendererRegistry.register(ModEntities.VOID_SENTINEL, VoidSentinelRenderer::new);

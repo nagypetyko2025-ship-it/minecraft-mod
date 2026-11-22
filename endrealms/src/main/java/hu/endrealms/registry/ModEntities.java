@@ -35,6 +35,16 @@ public final class ModEntities {
 					.clientTrackingRange(10)
 					.build(GLIMMERHOOF_KEY));
 
+	private static final ResourceKey<EntityType<?>> BONE_STAG_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("bone_stag"));
+	public static final EntityType<hu.endrealms.entity.BoneStag> BONE_STAG = Registry.register(BuiltInRegistries.ENTITY_TYPE, BONE_STAG_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.BoneStag::new, MobCategory.CREATURE, mob -> mob
+							.spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, hu.endrealms.entity.BoneStag::checkSpawnRules)
+							.defaultAttributes(hu.endrealms.entity.BoneStag::createAttributes))
+					.sized(0.9F, 1.8F)
+					.eyeHeight(1.6F)
+					.clientTrackingRange(10)
+					.build(BONE_STAG_KEY));
+
 	private static final ResourceKey<EntityType<?>> VOID_SENTINEL_KEY =
 			ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("void_sentinel"));
 	public static final EntityType<VoidSentinel> VOID_SENTINEL = Registry.register(BuiltInRegistries.ENTITY_TYPE,

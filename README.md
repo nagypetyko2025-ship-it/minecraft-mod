@@ -23,7 +23,11 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.46.1)
+## Tartalom (0.47.0)
+- **Sculk-élővilág**: Figyelőfű (3 blokk magas, sűrű, ez a dimenzió általános füve; a tetején világító szemek a legközelebbi játékos felé fordulnak, lopakodásra lecsukódnak), Visszhangvirág (ha elmész mellette, kicsit később visszajátssza a lépteid hangját; Visszhangport ad, ollóval önmagát), Lélekgomba (világít)
+- **Csontagancsos szarvas**: félig csontváz szarvas átlátszó bordakosárral, róla lelógó sculkkal, világító szemmel és ágas agancsal; messziről mozdulatlanul bámul, közelről elmenekül; Lélekgombával odacsalható és szaporítható; Sculk-agancsot és csontot ad
+- **Lidércmolyok**: halványan világító molyok keringenek a fények körül (díszek, nem foghatók be, nem oltják ki a fényt)
+- **Éjszaka a Sculk-dimenzióban**: éjjel egy hatalmas sculk-fej jelenik meg az északi égen világító szemekkel, mintha figyelne; nappal üres az ég
 - A Sculk-dimenzióból kikerült a köd: a látótávolságig ellátni, csak az ég és a horizont maradt sötét
 - **Sculk-dimenzió átalakítva**: nincs benne víz (a tengerek helyén kiszáradt, mély medencék), sokkal több sculk, új blokkok: Sculk-talaj (sculk-szerű, de földes) és alatta Sculk-kő mélypala-sávokkal; ritkább köd
 - **Két új biom**: Csonka ormok (a hegyvidékeken, csupasz sötét kő) és Hasadékföld (sok mély, széles kanyon); a négy biom a felszíni világ biomtérképét követi, így a hegyes biom tényleg a hegyekre esik

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "eyes=north,part=bottom": {
+      "model": "endrealms:block/watcher_grass_bottom"
+    },
+    "eyes=east,part=bottom": {
+      "model": "endrealms:block/watcher_grass_bottom"
+    },
+    "eyes=south,part=bottom": {
+      "model": "endrealms:block/watcher_grass_bottom"
+    },
+    "eyes=west,part=bottom": {
+      "model": "endrealms:block/watcher_grass_bottom"
+    },
+    "eyes=closed,part=bottom": {
+      "model": "endrealms:block/watcher_grass_bottom"
+    },
+    "eyes=north,part=middle": {
+      "model": "endrealms:block/watcher_grass_middle"
+    },
+    "eyes=east,part=middle": {
+      "model": "endrealms:block/watcher_grass_middle"
+    },
+    "eyes=south,part=middle": {
+      "model": "endrealms:block/watcher_grass_middle"
+    },
+    "eyes=west,part=middle": {
+      "model": "endrealms:block/watcher_grass_middle"
+    },
+    "eyes=closed,part=middle": {
+      "model": "endrealms:block/watcher_grass_middle"
+    },
+    "eyes=north,part=top": {
+      "model": "endrealms:block/watcher_grass_top"
+    },
+    "eyes=east,part=top": {
+      "model": "endrealms:block/watcher_grass_top",
+      "y": 90
+    },
+    "eyes=south,part=top": {
+      "model": "endrealms:block/watcher_grass_top",
+      "y": 180
+    },
+    "eyes=west,part=top": {
+      "model": "endrealms:block/watcher_grass_top",
+      "y": 270
+    },
+    "eyes=closed,part=top": {
+      "model": "endrealms:block/watcher_grass_top_closed"
+    }
+  }
+}

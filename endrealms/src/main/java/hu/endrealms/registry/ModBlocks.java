@@ -277,6 +277,27 @@ public final class ModBlocks {
 	public static final Block SCULK_STONE = register("sculk_stone", Block::new,
 			BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).mapColor(MapColor.COLOR_BLACK));
 
+	/** Pale bell of the Sculk dimension: walk past and it plays your footsteps back to you (SculkLife). */
+	public static final Block ECHO_FLOWER = register("echo_flower",
+			props -> new hu.endrealms.sculk.SculkPlants.Plant(props, Block.box(4, 0, 4, 12, 11, 12)),
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollision().instabreak().sound(SoundType.SCULK_SENSOR)
+					.offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(net.minecraft.world.level.material.PushReaction.POPPED)
+					.lightLevel(state -> 2));
+
+	/** The common grass of the Sculk dimension: three blocks tall, with eyes on top that follow you. */
+	public static final Block WATCHER_GRASS = register("watcher_grass", hu.endrealms.sculk.SculkPlants.WatcherGrass::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollision().instabreak().sound(SoundType.SCULK_VEIN)
+					.offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(net.minecraft.world.level.material.PushReaction.POPPED)
+					.lightLevel(state -> state.getValue(hu.endrealms.sculk.SculkPlants.WatcherGrass.PART) == hu.endrealms.sculk.SculkPlants.Part.TOP
+							&& state.getValue(hu.endrealms.sculk.SculkPlants.WatcherGrass.EYES) != hu.endrealms.sculk.SculkPlants.Eyes.CLOSED ? 3 : 0));
+
+	/** Glowing mushroom of the Sculk dimension, one of its few lights; the Bone Stag's food. */
+	public static final Block SOUL_MUSHROOM = register("soul_mushroom",
+			props -> new hu.endrealms.sculk.SculkPlants.Plant(props, Block.box(4, 0, 4, 12, 10, 12)),
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noCollision().instabreak().sound(SoundType.FUNGUS)
+					.offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(net.minecraft.world.level.material.PushReaction.POPPED)
+					.lightLevel(state -> 10));
+
 	private ModBlocks() {
 	}
 

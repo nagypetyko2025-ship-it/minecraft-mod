@@ -13,6 +13,25 @@
         }
       ],
       "modifier": "append"
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "creature": [
+            {
+              "type": "endrealms:bone_stag",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 10
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
     }
   },
   "carvers": [
@@ -40,6 +59,9 @@
     [
       "endrealms:dead_tree_sparse",
       "endrealms:sculk_patch_surface",
+      "endrealms:watcher_grass",
+      "endrealms:echo_flowers",
+      "endrealms:soul_mushrooms_rare",
       "minecraft:patch_dead_bush"
     ],
     []

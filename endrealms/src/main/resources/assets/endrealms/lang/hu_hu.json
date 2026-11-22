@@ -622,5 +622,12 @@
   "advancements.endrealms.sculk.escape.title": "Menekülés",
   "advancements.endrealms.sculk.escape.description": "Térj vissza a Sculk-dimenzióból a felszíni világba",
   "advancements.endrealms.sculk.all_biomes.title": "Aki túl sokat látott",
-  "advancements.endrealms.sculk.all_biomes.description": "Járd be a Sculk-dimenzió minden biomját"
+  "advancements.endrealms.sculk.all_biomes.description": "Járd be a Sculk-dimenzió minden biomját",
+  "block.endrealms.echo_flower": "Visszhangvirág",
+  "block.endrealms.watcher_grass": "Figyelőfű",
+  "block.endrealms.soul_mushroom": "Lélekgomba",
+  "item.endrealms.echo_dust": "Visszhangpor",
+  "item.endrealms.sculk_antler": "Sculk-agancs",
+  "item.endrealms.bone_stag_spawn_egg": "Csontagancsos szarvas idéző tojás",
+  "entity.endrealms.bone_stag": "Csontagancsos szarvas"
 }
