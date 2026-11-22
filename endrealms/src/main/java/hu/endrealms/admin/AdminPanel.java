@@ -58,6 +58,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 	private long startedAt;
 	private JsonObject ruleNames = new JsonObject();
 	private final ServerHistory history = new ServerHistory();
+	private final PlayTimeline timeline = new PlayTimeline();
 	private final PlayerDetails details = new PlayerDetails();
 	private final Worlds worlds = new Worlds();
 
@@ -66,6 +67,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 		ServerLifecycleEvents.SERVER_STARTED.register(this::start);
 		ServerLifecycleEvents.SERVER_STOPPING.register(s -> stop());
 		history.register();
+		timeline.register();
 		AutoRestart.register();
 		if (Worlds.available()) {
 			MultiWorlds.register();
@@ -160,6 +162,14 @@ public class AdminPanel implements DedicatedServerModInitializer {
 				case "/api/status" -> onServer(this::status);
 				case "/api/players" -> onServer(this::players);
 				case "/api/whitelist" -> onServer(this::whitelist);
+				case "/api/timeline" -> {
+					String query = exchange.getRequestURI().getQuery();
+					int days = 7;
+					if (query != null && query.matches("days=\\d{1,2}")) {
+						days = Math.max(1, Math.min(31, Integer.parseInt(query.substring(5))));
+					}
+					yield timeline.recent(days);
+				}
 				case "/api/worlds" -> {
 					worlds.measure(onServer(() -> worlds.folders(server)));
 					yield onServer(() -> worlds.list(server));

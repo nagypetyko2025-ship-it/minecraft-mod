@@ -51,6 +51,24 @@ a.pl{color:var(--accent);text-decoration:none;cursor:pointer}a.pl:hover{text-dec
 .kv{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;padding:13px}.kv span:nth-child(odd){color:var(--muted)}.kv code{font:13px Consolas,monospace;word-break:break-all}
 .adv{display:flex;flex-wrap:wrap;gap:5px}.adv span{font-size:12.5px;padding:2px 8px;border-radius:99px;background:var(--panel2);border:1px solid var(--line)}
 input[type=checkbox]{width:18px;height:18px;accent-color:#7fe0e8}
+/* the play timeline on the Players tab */
+button.b.on{border-color:var(--accent);color:var(--accent)}
+#timeline .hint{color:var(--muted);margin:0 0 10px;font-size:13px}
+.tlgrid{position:relative}
+.tlaxis{position:relative;height:18px;margin-left:150px;border-bottom:1px solid var(--line)}
+.tlaxis span{position:absolute;transform:translateX(-50%);font-size:11.5px;color:var(--muted)}
+.tlaxis span:first-child{transform:none}
+.tlrow{display:flex;align-items:center;height:30px;border-bottom:1px solid var(--panel2)}
+.tlname{width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px}
+.tlname small{color:var(--muted);margin-left:6px;font-size:11.5px}
+.tlbar{position:relative;flex:1;height:16px;background:repeating-linear-gradient(90deg,var(--panel2) 0 1px,transparent 1px calc(100%/8))}
+.tlbar i{position:absolute;top:0;bottom:0;border-radius:4px;min-width:3px;opacity:.9}
+.tlbar i.live{box-shadow:0 0 0 2px var(--good)}
+.tlbar b.tlnow{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--warn)}
+.tlheat{display:grid;grid-template-columns:repeat(24,1fr);gap:3px}
+.tlheat div{height:46px;border:1px solid var(--line);border-radius:5px;display:flex;align-items:flex-end;justify-content:center}
+.tlheat span{font-size:11px;color:var(--muted);padding-bottom:2px}
+@media (max-width:640px){.tlname,.tlaxis{width:90px}.tlaxis{margin-left:90px}}
 </style>
 </head>
 <body>
@@ -71,7 +89,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#7fe0e8}
   <h2>Szerver</h2>
   <div class="box pad row"><button class="b" id="restart">Újraindítás</button><button class="b danger" id="shutdown">Leállítás</button></div>
 </section>
-<section id="players"><div id="pdetail" style="display:none"></div><div class="box" id="allplayers"></div></section>
+<section id="players"><div id="pdetail" style="display:none"></div><div id="timeline"></div><h2 id="allhead">Minden játékos</h2><div class="box" id="allplayers"></div></section>
 <section id="whitelist">
   <div class="box pad row" id="wlstate" style="justify-content:space-between"></div>
   <div class="row" style="margin:12px 0"><input type="text" id="wladd" placeholder="Játékosnév pontosan, kis- és nagybetűvel, például: Tomi" maxlength="16" style="flex:1"><button class="b" id="wladdbtn">Hozzáadás</button></div>
@@ -137,8 +155,8 @@ async function openPlayer(uuid){OPEN=uuid;let p;try{p=await api('player?uuid='+e
     +`<div class="tops">${top('Legtöbbet megölt lények',p.topKilled,'Még senkit nem ölt meg.')}${top('Ami a legtöbbször megölte',p.topKilledBy,'Még nem halt meg.')}${top('Legtöbbet kitermelt blokkok',p.topMined,'Még nem bányászott.')}</div>`
     +`<h2>Megszerzett előrelépések (${a.done})</h2><div class="box pad">${a.earned.length?'<div class="adv">'+a.earned.map(t=>`<span>${esc(t)}</span>`).join('')+'</div>':'<span style="color:var(--muted)">Még egy sincs.</span>'}</div>`
     +`<p style="color:var(--muted);font-size:12.5px">A kint lévő játékosok adatai a legutóbbi mentés szerintiek (kilépéskor és 5 percenként).</p>`;
-  $('pdetail').style.display='block';$('allplayers').style.display='none';$('pback').onclick=closePlayer;scrollTo(0,0)}
-function closePlayer(){OPEN=null;$('pdetail').style.display='none';$('allplayers').style.display=''}
+  $('pdetail').style.display='block';['allplayers','timeline','allhead'].forEach(i=>$(i).style.display='none');$('pback').onclick=closePlayer;scrollTo(0,0)}
+function closePlayer(){OPEN=null;$('pdetail').style.display='none';['allplayers','timeline','allhead'].forEach(i=>$(i).style.display='')}
 document.body.addEventListener('click',e=>{const u=e.target.dataset&&e.target.dataset.pl;if(u){e.preventDefault();openPlayer(u)}});
 $('tabs').addEventListener('click',e=>{if(e.target.dataset.t==='players')closePlayer()});
 const DIMNAME={'minecraft:overworld':'Felszín','minecraft:the_nether':'Nether','minecraft:the_end':'End'};
@@ -217,12 +235,39 @@ function wlAdd(){const n=$('wladd').value.trim();if(!/^[A-Za-z0-9_]{1,16}$/.test
   act('whitelist-add',{player:n}).then(()=>$('wladd').value='')}
 $('wladdbtn').onclick=wlAdd;
 $('wladd').onkeydown=e=>{if(e.key==='Enter')wlAdd()};
-const LOAD={home,players,whitelist,worlds,rules,settings,console:log};
+let TL=null,TLDAY=0;
+const color=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return `hsl(${h} 65% 58%)`};
+async function timeline(){TL=await api('timeline?days=7');drawTimeline()}
+function drawTimeline(){const t=TL;if(!t)return;
+  const days=[];for(let i=0;i<7;i++){const d=new Date(t.now);d.setHours(0,0,0,0);d.setDate(d.getDate()-i);days.push(d)}
+  const wd=['vasárnap','hétfő','kedd','szerda','csütörtök','péntek','szombat'];
+  const label=(d,i)=>i===0?'Ma':i===1?'Tegnap':`${wd[d.getDay()]}, ${d.getMonth()+1}. ${d.getDate()}.`;
+  const btns=days.map((d,i)=>`<button class="b${TLDAY===i?' on':''}" data-tl="${i}">${label(d,i)}</button>`).join('')+`<button class="b${TLDAY==='sum'?' on':''}" data-tl="sum">Összesítés (7 nap)</button>`;
+  let body;
+  if(TLDAY==='sum'){
+    const h=new Array(24).fill(0);
+    for(const s of t.sessions)for(let m=Math.max(s.from,t.since);m<s.to;m+=60000)h[new Date(m).getHours()]++;
+    const max=Math.max(1,...h);
+    body=`<p class="hint">Az elmúlt 7 napban melyik órában mennyit játszottak összesen (játékosóra). Ahol halvány, ott jó újraindítani vagy frissíteni.</p><div class="tlheat">${h.map((v,i)=>`<div title="${i}:00–${i+1}:00 · ${(v/60).toLocaleString('hu-HU',{maximumFractionDigits:1})} játékosóra" style="background:color-mix(in srgb,var(--good) ${Math.round(v/max*85)}%,transparent)"><span>${i}</span></div>`).join('')}</div>`;
+  }else{
+    const d0=days[TLDAY].getTime(),d1=d0+86400000,rows={};
+    for(const s of t.sessions){const a=Math.max(s.from,d0),b=Math.min(s.to,d1);if(b>a)(rows[s.name]=rows[s.name]||[]).push([a,b,s.online])}
+    const names=Object.keys(rows).sort((x,y)=>x.localeCompare(y,'hu'));
+    const pct=v=>((v-d0)/864000).toFixed(3);
+    const hm=v=>new Date(v).toLocaleTimeString('hu-HU',{hour:'2-digit',minute:'2-digit'});
+    body=names.length?`<div class="tlgrid"><div class="tlaxis">${[0,3,6,9,12,15,18,21].map(x=>`<span style="left:${x/24*100}%">${x}:00</span>`).join('')}</div>`
+      +names.map(n=>{const total=rows[n].reduce((x,[a,b])=>x+b-a,0);
+        return `<div class="tlrow"><div class="tlname" title="${esc(n)}">${esc(n)}<small>${dur(Math.round(total/1000))}</small></div><div class="tlbar">${rows[n].map(([a,b,o])=>`<i class="${o?'live':''}" style="left:${pct(a)}%;width:${((b-a)/864000).toFixed(3)}%;background:${color(n)}" title="${esc(n)}: ${hm(a)} – ${o?'most is fent':hm(b)}"></i>`).join('')}${TLDAY===0?`<b class="tlnow" style="left:${pct(t.now)}%" title="most"></b>`:''}</div></div>`}).join('')+'</div>'
+      :'<div class="empty">Ezen a napon senki sem volt fent.</div>';
+  }
+  $('timeline').innerHTML=`<h2>Ki mikor volt fent</h2><div class="box pad"><div class="row" style="flex-wrap:wrap;margin-bottom:12px">${btns}</div>${body}</div>`}
+const LOAD={home,players:()=>Promise.all([players(),timeline()]),whitelist,worlds,rules,settings,console:log};
 let on=true;
 async function load(){try{await LOAD[tab]();$('conn').textContent='● fut';$('conn').style.color='var(--good)';on=true}catch(e){$('conn').textContent='● nem elérhető';$('conn').style.color='var(--bad)';on=false}}
 setInterval(()=>{if(tab==='home'||tab==='console'||!on)load()},2500);
 document.body.addEventListener('click',e=>{const d=e.target.dataset;if(!d)return;
   if(d.a)act(d.a);
+  if(d.tl!==undefined){TLDAY=d.tl==='sum'?'sum':+d.tl;drawTimeline()}
   if(d.wl&&(d.wl==='whitelist-on'||confirm('Kikapcsolod a fehérlistát? Utána bárki beléphet, aki ismeri a szerver címét.')))act(d.wl);
   if(d.wladd)act('whitelist-add',{player:d.wladd});
   if(d.wlrm&&confirm('Törlöd a fehérlistáról: '+d.wlrm+'? Ha most fent van, kidobja a szerver.'))act('whitelist-remove',{player:d.wlrm});
