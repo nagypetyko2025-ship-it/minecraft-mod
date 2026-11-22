@@ -82,6 +82,34 @@
           }
         }
       }
+    },
+    "sculk_barrens": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:sculk_barrens"
+            }
+          }
+        }
+      }
+    },
+    "withered_woods": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:withered_woods"
+            }
+          }
+        }
+      }
     }
   },
   "requirements": [
@@ -99,6 +127,12 @@
     ],
     [
       "dragon_graveyard"
+    ],
+    [
+      "sculk_barrens"
+    ],
+    [
+      "withered_woods"
     ]
   ]
 }

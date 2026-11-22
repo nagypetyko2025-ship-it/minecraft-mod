@@ -79,6 +79,7 @@ public final class ModWorldgen {
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("dragon_skull"), GraveyardFeatures.Skull.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("bone_tree"), GraveyardFeatures.BoneTree.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("drake_nest"), GraveyardFeatures.DrakeNest.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, EndRealms.id("dead_tree"), hu.endrealms.worldgen.SculkFeatures.DeadTree.CODEC);
 
 		BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
 				GenerationStep.Decoration.UNDERGROUND_ORES, ORE_CHORUSITE);

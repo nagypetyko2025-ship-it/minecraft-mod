@@ -263,6 +263,12 @@ public final class ModBlocks {
 			props -> new DropExperienceBlock(UniformInt.of(3, 7), props),
 			BlockBehaviour.Properties.ofFullCopy(CHORUSITE_ORE).mapColor(MapColor.COLOR_PURPLE).strength(5.5F, 9.0F));
 
+	/** The way into the Sculk dimension (and back): a pool of living dark in the ground. Unbreakable, drops nothing. */
+	public static final Block SCULK_PORTAL = register("sculk_portal", hu.endrealms.sculk.SculkPortalBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollision().strength(-1.0F, 3600000.0F).noLootTable()
+					.lightLevel(state -> 5).sound(net.minecraft.world.level.block.SoundType.SCULK)
+					.pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE));
+
 	private ModBlocks() {
 	}
 

@@ -23,7 +23,8 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.44.0)
+## Tartalom (0.45.0)
+- **Sculk-dimenzió (1. fázis)**: új, a felszíni világhoz hasonló, de halott, sötét és nyomasztó dimenzió (örök éjszaka, sűrű sötét köd, nincs zene, csak suttogó szél), két biommal: Néma puszta (sculk-foltok, durva föld, elszórt elhalt fák, száraz bokrok) és Elhalt erdő (sűrű csupasz fák, sculk, sápadt moha); belépés egyelőre a Sculk-portállal (/astra sculk portal:summon), a túloldalon visszavezető portál készül
 - **Ki mikor volt fent**: a panel Játékosok fülén napi idővonal (az elmúlt 7 napra) játékosonként, és egy összesítő hőtérkép arról, melyik órákban játszanak a legtöbben; a régebbi napokat a szerver naplóiból tölti vissza (sessions.json)
 - **Fehérlista fül a panelen**: listázza az engedélyezett játékosokat (online, utoljára mikor játszott), egy kattintással hozzáadás és törlés, be- és kikapcsolás; külön mutatja, kit zárt ki nemrég a szerver, és ki játszott már, de nincs a listán. Offline módban helyes azonosítóval veszi fel a neveket (a sima whitelist add parancs ilyenkor rossz azonosítót írna)
 - **Önálló szerverfrissítés**: ha új verzió vár a mods-update mappában, és 2 perce senki sincs fent, a szerver magától újraindul és telepíti

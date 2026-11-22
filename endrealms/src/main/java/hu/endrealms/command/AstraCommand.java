@@ -30,7 +30,8 @@ public final class AstraCommand {
 	/** Structure names offered by the command (ids in the endrealms namespace). */
 	private static final List<String> STRUCTURES = List.of("void_bastion", "end_village", "rift_sanctum", "sky_wreck", "observatory", "crypt", "void_citadel");
 	/** Biome names offered by the command (ids in the endrealms namespace). */
-	private static final List<String> BIOMES = List.of("astral_forest", "astral_basin", "prism_wastes", "scorched_barrens", "dragon_graveyard");
+	private static final List<String> BIOMES = List.of("astral_forest", "astral_basin", "prism_wastes", "scorched_barrens", "dragon_graveyard",
+			"sculk_barrens", "withered_woods");
 
 	private AstraCommand() {
 	}
@@ -42,7 +43,18 @@ public final class AstraCommand {
 						.then(Commands.argument("structure", StringArgumentType.word())
 								.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
 										java.util.stream.Stream.concat(STRUCTURES.stream(), BIOMES.stream()), builder))
-								.executes(AstraCommand::locate))));
+								.executes(AstraCommand::locate)))
+				// debug: a Sculk Portal right under your feet
+				.then(Commands.literal("sculk")
+						.then(Commands.literal("portal:summon")
+								.executes(AstraCommand::summonSculkPortal))));
+	}
+
+	private static int summonSculkPortal(CommandContext<CommandSourceStack> ctx) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+		net.minecraft.server.level.ServerPlayer player = ctx.getSource().getPlayerOrException();
+		hu.endrealms.sculk.SculkDimension.summonPortal(player.level(), player.blockPosition());
+		ctx.getSource().sendSuccess(() -> Component.translatable("commands.endrealms.astra.sculk_portal"), true);
+		return 1;
 	}
 
 	private static int locate(CommandContext<CommandSourceStack> ctx) {

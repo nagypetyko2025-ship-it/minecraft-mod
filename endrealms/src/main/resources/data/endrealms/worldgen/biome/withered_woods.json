@@ -1,0 +1,50 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#101415",
+    "minecraft:visual/sky_color": "#060708",
+    "minecraft:visual/water_fog_color": "#0a1214",
+    "minecraft:visual/fog_end_distance": 48.0,
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:ash"
+          },
+          "probability": 0.012
+        }
+      ],
+      "modifier": "append"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#1c2a2e",
+    "grass_color": "#4a4f45",
+    "foliage_color": "#3d4239",
+    "dry_foliage_color": "#4b4b44"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "endrealms:dead_tree_dense",
+      "endrealms:sculk_patch_surface_dense",
+      "minecraft:pale_moss_patch"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}

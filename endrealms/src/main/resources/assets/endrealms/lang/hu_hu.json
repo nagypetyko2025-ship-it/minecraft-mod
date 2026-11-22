@@ -600,5 +600,9 @@
   "quest.endrealms.void_king.goal": "Győzd le az Űrkirályt",
   "quest.endrealms.crownstone.title": "A korona súlya",
   "quest.endrealms.crownstone.desc": "Koronakő csak az Űrkirálynál van. Az Ékkőasztalon befoglalva két közönséges ékkő munkáját végzi el.",
-  "quest.endrealms.crownstone.goal": "Szerezz Koronakövet"
+  "quest.endrealms.crownstone.goal": "Szerezz Koronakövet",
+  "block.endrealms.sculk_portal": "Sculk-portál",
+  "biome.endrealms.sculk_barrens": "Néma puszta",
+  "biome.endrealms.withered_woods": "Elhalt erdő",
+  "commands.endrealms.astra.sculk_portal": "Sculk-portál lerakva alád. Állj benne két másodpercig."
 }

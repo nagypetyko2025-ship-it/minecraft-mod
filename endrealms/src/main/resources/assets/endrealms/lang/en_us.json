@@ -600,5 +600,9 @@
   "quest.endrealms.void_king.goal": "Defeat the Void King",
   "quest.endrealms.crownstone.title": "Heavy Is the Crown",
   "quest.endrealms.crownstone.desc": "Only the Void King carries Crownstones. Set in the Gem Table, one does the work of two ordinary gems.",
-  "quest.endrealms.crownstone.goal": "Obtain a Crownstone"
+  "quest.endrealms.crownstone.goal": "Obtain a Crownstone",
+  "block.endrealms.sculk_portal": "Sculk Portal",
+  "biome.endrealms.sculk_barrens": "Silent Barrens",
+  "biome.endrealms.withered_woods": "Withered Woods",
+  "commands.endrealms.astra.sculk_portal": "Sculk Portal placed under you. Stand in it for two seconds."
 }
