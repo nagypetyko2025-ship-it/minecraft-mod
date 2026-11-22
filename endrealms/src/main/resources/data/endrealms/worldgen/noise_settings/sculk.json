@@ -1,48 +1,4 @@
 {
-  "aquifers": {
-    "barrier": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:aquifer_barrier",
-      "xz_scale": 1.0,
-      "y_scale": 0.5
-    },
-    "exclusion": {
-      "type": "minecraft:min",
-      "left": {
-        "type": "minecraft:sub",
-        "left": -0.225,
-        "right": "minecraft:overworld/erosion"
-      },
-      "right": {
-        "type": "minecraft:max",
-        "left": {
-          "type": "minecraft:sub",
-          "left": "minecraft:overworld/depth",
-          "right": 0.9
-        },
-        "right": 0.0
-      }
-    },
-    "fluid_level_floodedness": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:aquifer_fluid_level_floodedness",
-      "xz_scale": 1.0,
-      "y_scale": 0.67
-    },
-    "fluid_level_spread": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:aquifer_fluid_level_spread",
-      "xz_scale": 1.0,
-      "y_scale": 0.7142857142857143
-    },
-    "lava": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:aquifer_lava",
-      "xz_scale": 1.0,
-      "y_scale": 1.0
-    },
-    "surface_level": "minecraft:overworld/preliminary_surface_level"
-  },
   "debug_functions": [
     {
       "function": "minecraft:overworld/final_density",
@@ -99,8 +55,8 @@
       "label": "PS"
     }
   ],
-  "default_block": "minecraft:deepslate",
-  "default_fluid": "minecraft:water",
+  "default_block": "endrealms:sculk_stone",
+  "default_fluid": "minecraft:air",
   "disable_mob_generation": true,
   "legacy_random_source": false,
   "material_rule": "endrealms:sculk",

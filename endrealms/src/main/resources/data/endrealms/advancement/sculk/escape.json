@@ -1,0 +1,31 @@
+{
+  "parent": "endrealms:sculk/root",
+  "display": {
+    "icon": {
+      "id": "endrealms:sculk_portal"
+    },
+    "title": {
+      "translate": "advancements.endrealms.sculk.escape.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.sculk.escape.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "back": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "from": "endrealms:sculk",
+        "to": "minecraft:overworld"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "back"
+    ]
+  ]
+}

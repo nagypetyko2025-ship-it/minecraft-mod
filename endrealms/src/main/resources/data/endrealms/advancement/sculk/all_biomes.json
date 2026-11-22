@@ -1,0 +1,92 @@
+{
+  "parent": "endrealms:sculk/sculk_barrens",
+  "display": {
+    "icon": {
+      "id": "minecraft:sculk_shrieker"
+    },
+    "title": {
+      "translate": "advancements.endrealms.sculk.all_biomes.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.sculk.all_biomes.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "sculk_barrens": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:sculk_barrens"
+            }
+          }
+        }
+      }
+    },
+    "withered_woods": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:withered_woods"
+            }
+          }
+        }
+      }
+    },
+    "sculk_peaks": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:sculk_peaks"
+            }
+          }
+        }
+      }
+    },
+    "sculk_canyons": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:sculk_canyons"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sculk_barrens"
+    ],
+    [
+      "withered_woods"
+    ],
+    [
+      "sculk_peaks"
+    ],
+    [
+      "sculk_canyons"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  }
+}

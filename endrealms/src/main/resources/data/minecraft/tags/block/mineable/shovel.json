@@ -4,6 +4,7 @@
     "endrealms:end_soil",
     "endrealms:void_sand",
     "endrealms:ash_block",
-    "endrealms:ash_layer"
+    "endrealms:ash_layer",
+    "endrealms:sculk_soil"
   ]
 }

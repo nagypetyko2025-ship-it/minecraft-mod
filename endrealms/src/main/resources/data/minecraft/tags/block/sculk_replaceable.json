@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "endrealms:void_sandstone"
+    "endrealms:void_sandstone",
+    "endrealms:sculk_soil",
+    "endrealms:sculk_stone"
   ]
 }

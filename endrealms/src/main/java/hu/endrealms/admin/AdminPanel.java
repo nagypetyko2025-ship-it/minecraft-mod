@@ -165,8 +165,8 @@ public class AdminPanel implements DedicatedServerModInitializer {
 				case "/api/timeline" -> {
 					String query = exchange.getRequestURI().getQuery();
 					int days = 7;
-					if (query != null && query.matches("days=\\d{1,2}")) {
-						days = Math.max(1, Math.min(31, Integer.parseInt(query.substring(5))));
+					if (query != null && query.matches("days=\\d{1,3}")) {
+						days = Math.max(1, Math.min(366, Integer.parseInt(query.substring(5))));
 					}
 					yield timeline.recent(days);
 				}

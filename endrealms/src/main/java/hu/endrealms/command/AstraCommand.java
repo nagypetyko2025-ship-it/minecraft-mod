@@ -25,13 +25,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.Structure;
 
-/** /astra locate &lt;name&gt; - finds the nearest End Realms structure (void_bastion, end_village, rift_sanctum, sky_wreck, observatory, crypt, void_citadel) or biome (astral_forest, astral_basin, prism_wastes, scorched_barrens). */
+/**
+ * /astra locate end &lt;name&gt; - the nearest End Realms structure or End biome; /astra locate sculk &lt;name&gt; - the nearest
+ * biome of the Sculk dimension. Each searches its own dimension, wherever the command is run.
+ * /astra sculk portal:summon - debug: a Sculk Portal under your feet.
+ */
 public final class AstraCommand {
-	/** Structure names offered by the command (ids in the endrealms namespace). */
+	/** Structure names offered by the command (ids in the endrealms namespace), all in the End. */
 	private static final List<String> STRUCTURES = List.of("void_bastion", "end_village", "rift_sanctum", "sky_wreck", "observatory", "crypt", "void_citadel");
-	/** Biome names offered by the command (ids in the endrealms namespace). */
-	private static final List<String> BIOMES = List.of("astral_forest", "astral_basin", "prism_wastes", "scorched_barrens", "dragon_graveyard",
-			"sculk_barrens", "withered_woods");
+	/** End biome names offered by the command (ids in the endrealms namespace). */
+	private static final List<String> END_BIOMES = List.of("astral_forest", "astral_basin", "prism_wastes", "scorched_barrens", "dragon_graveyard");
+	/** Biomes of the Sculk dimension. */
+	private static final List<String> SCULK_BIOMES = List.of("sculk_barrens", "withered_woods", "sculk_peaks", "sculk_canyons");
 
 	private AstraCommand() {
 	}
@@ -40,10 +45,15 @@ public final class AstraCommand {
 		dispatcher.register(Commands.literal("astra")
 				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 				.then(Commands.literal("locate")
-						.then(Commands.argument("structure", StringArgumentType.word())
-								.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
-										java.util.stream.Stream.concat(STRUCTURES.stream(), BIOMES.stream()), builder))
-								.executes(AstraCommand::locate)))
+						.then(Commands.literal("end")
+								.then(Commands.argument("name", StringArgumentType.word())
+										.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+												java.util.stream.Stream.concat(STRUCTURES.stream(), END_BIOMES.stream()), builder))
+										.executes(ctx -> locateEnd(ctx.getSource(), StringArgumentType.getString(ctx, "name")))))
+						.then(Commands.literal("sculk")
+								.then(Commands.argument("name", StringArgumentType.word())
+										.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(SCULK_BIOMES, builder))
+										.executes(ctx -> locateSculk(ctx.getSource(), StringArgumentType.getString(ctx, "name"))))))
 				// debug: a Sculk Portal right under your feet
 				.then(Commands.literal("sculk")
 						.then(Commands.literal("portal:summon")
@@ -57,51 +67,62 @@ public final class AstraCommand {
 		return 1;
 	}
 
-	private static int locate(CommandContext<CommandSourceStack> ctx) {
-		CommandSourceStack source = ctx.getSource();
-		String name = StringArgumentType.getString(ctx, "structure");
-		if (BIOMES.contains(name)) {
-			return locateBiome(source, name);
+	private static int locateEnd(CommandSourceStack source, String name) {
+		ServerLevel end = source.getServer().getLevel(net.minecraft.world.level.Level.END);
+		if (END_BIOMES.contains(name)) {
+			return locateBiome(source, end, name);
 		}
 		Component display = Component.translatable("structure.endrealms." + name);
-		if (!STRUCTURES.contains(name)) {
+		if (!STRUCTURES.contains(name) || end == null) {
 			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.unknown", name));
 			return 0;
 		}
-		ServerLevel level = source.getLevel();
 		ResourceKey<Structure> key = ResourceKey.create(Registries.STRUCTURE, EndRealms.id(name));
-		Optional<Holder.Reference<Structure>> holder = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).get(key);
+		Optional<Holder.Reference<Structure>> holder = end.registryAccess().lookupOrThrow(Registries.STRUCTURE).get(key);
 		if (holder.isEmpty()) {
 			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.unknown", name));
 			return 0;
 		}
 		BlockPos from = BlockPos.containing(source.getPosition());
-		Pair<BlockPos, Holder<Structure>> found = level.getChunkSource().getGenerator()
-				.findNearestMapStructure(level, HolderSet.direct(holder.get()), from, 100, false);
+		Pair<BlockPos, Holder<Structure>> found = end.getChunkSource().getGenerator()
+				.findNearestMapStructure(end, HolderSet.direct(holder.get()), from, 100, false);
 		if (found == null) {
 			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.not_found", display));
 			return 0;
 		}
-		return report(source, display, from, found.getFirst());
+		return report(source, end, display, from, found.getFirst());
 	}
 
-	private static int locateBiome(CommandSourceStack source, String name) {
+	private static int locateSculk(CommandSourceStack source, String name) {
+		if (!SCULK_BIOMES.contains(name)) {
+			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.unknown", name));
+			return 0;
+		}
+		return locateBiome(source, source.getServer().getLevel(hu.endrealms.sculk.SculkDimension.LEVEL), name);
+	}
+
+	private static int locateBiome(CommandSourceStack source, ServerLevel level, String name) {
 		Component display = Component.translatable("biome.endrealms." + name);
+		if (level == null) {
+			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.unknown", name));
+			return 0;
+		}
 		ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, EndRealms.id(name));
 		BlockPos from = BlockPos.containing(source.getPosition());
-		Pair<BlockPos, Holder<Biome>> found = source.getLevel().findClosestBiome3d(biome -> biome.is(key), from, 6400, 32, 64);
+		Pair<BlockPos, Holder<Biome>> found = level.findClosestBiome3d(biome -> biome.is(key), from, 6400, 32, 64);
 		if (found == null) {
 			source.sendFailure(Component.translatable("commands.endrealms.astra.locate.not_found", display));
 			return 0;
 		}
-		return report(source, display, from, found.getFirst());
+		return report(source, level, display, from, found.getFirst());
 	}
 
-	private static int report(CommandSourceStack source, Component display, BlockPos from, BlockPos pos) {
+	/** The answer with clickable coordinates; the click suggests a teleport into that dimension. */
+	private static int report(CommandSourceStack source, ServerLevel level, Component display, BlockPos from, BlockPos pos) {
 		int distance = Mth.floor(Mth.sqrt((float) from.distSqr(new BlockPos(pos.getX(), from.getY(), pos.getZ()))));
 		Component coords = ComponentUtils.wrapInSquareBrackets(Component.translatable("chat.coordinates", pos.getX(), "~", pos.getZ()))
 				.withStyle(style -> style.withColor(ChatFormatting.GREEN)
-						.withClickEvent(new ClickEvent.SuggestCommand("/tp @s " + pos.getX() + " ~ " + pos.getZ()))
+						.withClickEvent(new ClickEvent.SuggestCommand("/execute in " + level.dimension().identifier() + " run tp @s " + pos.getX() + " ~ " + pos.getZ()))
 						.withHoverEvent(new HoverEvent.ShowText(Component.translatable("chat.coordinates.tooltip"))));
 		source.sendSuccess(() -> Component.translatable("commands.endrealms.astra.locate.success", display, coords, distance), false);
 		return distance;

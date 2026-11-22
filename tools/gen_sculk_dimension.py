@@ -45,8 +45,8 @@ w("dimension_type/sculk.json", {
         "minecraft:visual/sky_color": "#060708",
         "minecraft:visual/sky_light_color": "#3c5a63",
         "minecraft:visual/sky_light_factor": 0.22,
-        "minecraft:visual/fog_start_distance": 10.0,
-        "minecraft:visual/fog_end_distance": 80.0,
+        "minecraft:visual/fog_start_distance": 24.0,
+        "minecraft:visual/fog_end_distance": 160.0,
     },
     "coordinate_scale": 1.0,
     "has_ceiling": False,
@@ -68,9 +68,9 @@ w("tags/timeline/in_sculk.json", {"values": ["#minecraft:universal"]})
 FULL = [-1.0, 1.0]
 
 
-def point(biome, humidity):
-    return {"biome": E + biome, "parameters": {"temperature": FULL, "humidity": humidity, "continentalness": [-1.2, 1.0],
-                                              "erosion": FULL, "weirdness": FULL, "depth": 0.0, "offset": 0.0}}
+def point(biome, humidity=FULL, continentalness=(-1.2, 1.0), erosion=FULL, weirdness=FULL, offset=0.0):
+    return {"biome": E + biome, "parameters": {"temperature": FULL, "humidity": list(humidity), "continentalness": list(continentalness),
+                                              "erosion": list(erosion), "weirdness": list(weirdness), "depth": 0.0, "offset": offset}}
 
 
 w("dimension/sculk.json", {
@@ -78,12 +78,17 @@ w("dimension/sculk.json", {
     "generator": {
         "type": "minecraft:noise",
         "settings": E + "sculk",
-        "biome_source": {"type": "minecraft:multi_noise", "biomes": [point("sculk_barrens", [-1.0, 0.05]), point("withered_woods", [0.05, 1.0])]},
+        # the Overworld's own biome map, each vanilla biome standing in for one of ours (SculkBiomeSource): the peaks land
+        # on the real mountains, the woods where forests grow, the canyons on badlands and deserts, the barrens elsewhere
+        "biome_source": {"type": E + "sculk", "barrens": E + "sculk_barrens", "woods": E + "withered_woods",
+                         "peaks": E + "sculk_peaks", "canyons": E + "sculk_canyons"},
     },
 })
 
 noise["material_rule"] = E + "sculk"
-noise["default_block"] = M + "deepslate"
+noise["default_block"] = E + "sculk_stone"
+noise["default_fluid"] = "minecraft:air"         # no water anywhere: the seas are dry, deep basins
+noise.pop("aquifers", None)                       # nor underground lakes of water or lava
 noise["disable_mob_generation"] = True
 w("worldgen/noise_settings/sculk.json", noise)
 
@@ -106,23 +111,21 @@ def depth(add_surface_depth, then):
                                                        "secondary_depth_range": 0, "surface_type": "floor"}, "then_run": then}
 
 
-DRY = {"type": "minecraft:water", "offset": -1, "surface_depth_multiplier": 0, "add_stone_depth": False}
+# sculk over nearly everything, the bare Sculk Soil showing through in patches (more of it on the barrens)
 top = {"type": "minecraft:sequence", "sequence": [
-    {"type": "minecraft:condition", "if_true": {"type": "minecraft:not", "invert": DRY}, "then_run": block(M + "mud")},   # under water
-    in_biome("withered_woods", {"type": "minecraft:sequence", "sequence": [noisy(-0.15, 10.0, block(M + "sculk")), block(M + "mud")]}),
-    {"type": "minecraft:sequence", "sequence": [noisy(0.45, 10.0, block(M + "sculk")), noisy(-10.0, -0.35, block(M + "soul_soil")), block(M + "coarse_dirt")]},
+    # bare dark rock on the heights, sculk clinging in the hollows
+    in_biome("sculk_peaks", {"type": "minecraft:sequence", "sequence": [noisy(0.0, 10.0, block(M + "sculk")), block(E + "sculk_stone")]}),
+    in_biome("withered_woods", {"type": "minecraft:sequence", "sequence": [noisy(-0.55, 10.0, block(M + "sculk")), block(E + "sculk_soil")]}),
+    {"type": "minecraft:sequence", "sequence": [noisy(-0.2, 10.0, block(M + "sculk")), noisy(-10.0, -0.65, block(M + "soul_soil")), block(E + "sculk_soil")]},
 ]}
-under = {"type": "minecraft:sequence", "sequence": [
-    in_biome("withered_woods", block(M + "mud")),
-    block(M + "coarse_dirt"),
-]}
+under = {"type": "minecraft:sequence", "sequence": [in_biome("sculk_peaks", block(E + "sculk_stone")), block(E + "sculk_soil")]}
 w("worldgen/material_rule/sculk.json", {"type": "minecraft:sequence", "sequence": [
     "minecraft:bedrock_floor",
     {"type": "minecraft:condition", "if_true": {"type": "minecraft:above_preliminary_surface"},
      "then_run": {"type": "minecraft:sequence", "sequence": [depth(False, top), depth(True, under)]}},
-    # bands of tuff through the dark rock, like calcite in stony peaks
+    # bands of deepslate through the Sculk Stone, like calcite in stony peaks
     {"type": "minecraft:condition", "if_true": {"type": "minecraft:noise_threshold", "noise": "minecraft:calcite",
-                                                "min_threshold": -0.02, "max_threshold": 0.02}, "then_run": block(M + "tuff")},
+                                                "min_threshold": -0.03, "max_threshold": 0.03}, "then_run": block(M + "deepslate")},
 ]})
 
 # --- features ----------------------------------------------------------------------------------------------------------
@@ -138,8 +141,25 @@ w("worldgen/placed_feature/sculk_patch_surface_dense.json", {"feature": E + "scu
 
 CARVERS = ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]
 
+# deep canyons: the vanilla canyon, but far more often, starting near the surface and cut much deeper and wider
+w("worldgen/carver/deep_canyon.json", {
+    "type": "minecraft:canyon",
+    "probability": 0.22,
+    "shape": {
+        "distance_factor": {"type": "minecraft:uniform", "min_inclusive": 0.9, "max_exclusive": 1.2},
+        "horizontal_radius_factor": {"type": "minecraft:uniform", "min_inclusive": 1.1, "max_exclusive": 1.6},
+        "thickness": {"type": "minecraft:trapezoid", "min": 2.0, "max": 9.0, "plateau": 4.0},
+        "vertical_radius_center_factor": 0.0,
+        "vertical_radius_default_factor": 1.0,
+        "width_smoothness": 3,
+        "y_scale": 5.0,
+    },
+    "vertical_rotation": {"type": "minecraft:uniform", "min_inclusive": -0.08, "max_exclusive": 0.08},
+    "y": {"type": "minecraft:uniform", "min_inclusive": {"absolute": 30}, "max_inclusive": {"absolute": 72}},
+})
 
-def biome(name, fog, fog_end, particle, chance, vegetation):
+
+def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS):
     w(f"worldgen/biome/{name}.json", {
         "attributes": {
             "minecraft:visual/fog_color": fog,
@@ -148,7 +168,7 @@ def biome(name, fog, fog_end, particle, chance, vegetation):
             "minecraft:visual/fog_end_distance": fog_end,
             "minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": particle}, "probability": chance}], "modifier": "append"},
         },
-        "carvers": CARVERS,
+        "carvers": carvers,
         "downfall": 0.0,
         "effects": {"water_color": "#1c2a2e", "grass_color": "#4a4f45", "foliage_color": "#3d4239", "dry_foliage_color": "#4b4b44"},
         "features": [[], [], [], [], [], [], [], [], [], vegetation, []],
@@ -157,8 +177,12 @@ def biome(name, fog, fog_end, particle, chance, vegetation):
     })
 
 
-biome("sculk_barrens", "#1b1f20", 96.0, "minecraft:white_ash", 0.006,
+biome("sculk_barrens", "#1b1f20", 176.0, "minecraft:white_ash", 0.006,
       [E + "dead_tree_sparse", E + "sculk_patch_surface", "minecraft:patch_dead_bush"])
-biome("withered_woods", "#101415", 48.0, "minecraft:ash", 0.012,
+biome("withered_woods", "#101415", 112.0, "minecraft:ash", 0.012,
       [E + "dead_tree_dense", E + "sculk_patch_surface_dense", "minecraft:pale_moss_patch"])
+biome("sculk_peaks", "#181c1e", 192.0, "minecraft:white_ash", 0.004,
+      [E + "dead_tree_sparse", E + "sculk_patch_surface"])
+biome("sculk_canyons", "#16191a", 160.0, "minecraft:ash", 0.006,
+      [E + "dead_tree_sparse", E + "sculk_patch_surface_dense", "minecraft:patch_dead_bush"], CARVERS + [E + "deep_canyon"])
 print("sculk dimension data written")

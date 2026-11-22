@@ -23,7 +23,12 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.45.0)
+## Tartalom (0.46.0)
+- **Sculk-dimenzió átalakítva**: nincs benne víz (a tengerek helyén kiszáradt, mély medencék), sokkal több sculk, új blokkok: Sculk-talaj (sculk-szerű, de földes) és alatta Sculk-kő mélypala-sávokkal; ritkább köd
+- **Két új biom**: Csonka ormok (a hegyvidékeken, csupasz sötét kő) és Hasadékföld (sok mély, széles kanyon); a négy biom a felszíni világ biomtérképét követi, így a hegyes biom tényleg a hegyekre esik
+- **Sculk előrelépés-fül**: rejtett, csak az első belépés után jelenik meg (7 előrelépés, köztük a „Minden sculk-biom” kihívás)
+- **/astra locate end|sculk**: először a dimenziót kell választani, és csak annak a biomjai (és Endnél a szerkezetei) jelennek meg; mindig abban a dimenzióban keres
+- **Panel összesítés 30 napra és 1 évre**: órák és a hét napjai szerinti hőtérkép, játékosonként játékidő, napok száma és utolsó belépés
 - **Sculk-dimenzió (1. fázis)**: új, a felszíni világhoz hasonló, de halott, sötét és nyomasztó dimenzió (örök éjszaka, sűrű sötét köd, nincs zene, csak suttogó szél), két biommal: Néma puszta (sculk-foltok, durva föld, elszórt elhalt fák, száraz bokrok) és Elhalt erdő (sűrű csupasz fák, sculk, sápadt moha); belépés egyelőre a Sculk-portállal (/astra sculk portal:summon), a túloldalon visszavezető portál készül
 - **Ki mikor volt fent**: a panel Játékosok fülén napi idővonal (az elmúlt 7 napra) játékosonként, és egy összesítő hőtérkép arról, melyik órákban játszanak a legtöbben; a régebbi napokat a szerver naplóiból tölti vissza (sessions.json)
 - **Fehérlista fül a panelen**: listázza az engedélyezett játékosokat (online, utoljára mikor játszott), egy kattintással hozzáadás és törlés, be- és kikapcsolás; külön mutatja, kit zárt ki nemrég a szerver, és ki játszott már, de nincs a listán. Offline módban helyes azonosítóval veszi fel a neveket (a sima whitelist add parancs ilyenkor rossz azonosítót írna)

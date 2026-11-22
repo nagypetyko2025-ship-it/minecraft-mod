@@ -235,20 +235,36 @@ function wlAdd(){const n=$('wladd').value.trim();if(!/^[A-Za-z0-9_]{1,16}$/.test
   act('whitelist-add',{player:n}).then(()=>$('wladd').value='')}
 $('wladdbtn').onclick=wlAdd;
 $('wladd').onkeydown=e=>{if(e.key==='Enter')wlAdd()};
-let TL=null,TLDAY=0;
+let TL=null,TLDAY=0,TLSUM={};
+/** A longer stretch summed up: which hours and which weekdays people play, and each player's time, days and last visit. */
+function summary(t,label){
+  const hours=new Array(24).fill(0),week=new Array(7).fill(0),per={};
+  for(const s of t.sessions){const a=Math.max(s.from,t.since),b=s.to;if(b<=a)continue;
+    const p=per[s.name]=per[s.name]||{ms:0,days:new Set(),last:0};p.ms+=b-a;p.last=Math.max(p.last,b);
+    for(let m=a;m<b;m+=60000){const d=new Date(m);hours[d.getHours()]++;week[(d.getDay()+6)%7]++;p.days.add(d.toDateString())}}
+  const total=Object.values(per).reduce((x,p)=>x+p.ms,0);
+  if(!total)return '<div class="empty">Ebben az időszakban senki sem játszott.</div>';
+  const heat=(arr,names)=>{const max=Math.max(1,...arr);return `<div class="tlheat" style="grid-template-columns:repeat(${arr.length},1fr)">${arr.map((v,i)=>`<div title="${names[i]} · ${(v/60).toLocaleString('hu-HU',{maximumFractionDigits:1})} játékosóra" style="background:color-mix(in srgb,var(--good) ${Math.round(v/max*85)}%,transparent)"><span>${names[i]}</span></div>`).join('')}</div>`};
+  const hn=[...Array(24).keys()].map(String),wn=['hétfő','kedd','szerda','csütörtök','péntek','szombat','vasárnap'];
+  const rows=Object.entries(per).sort((x,y)=>y[1].ms-x[1].ms);
+  return `<p class="hint">Az elmúlt ${label}: összesen ${(total/3600000).toLocaleString('hu-HU',{maximumFractionDigits:1})} játékosóra, ${rows.length} játékos. A halvány órák és napok a legjobbak újraindításra, frissítésre.</p>`
+    +`<h3 style="margin:6px 0">Órák szerint</h3>${heat(hours,hn)}<h3 style="margin:14px 0 6px">A hét napjai szerint</h3>${heat(week,wn)}`
+    +`<h3 style="margin:14px 0 6px">Játékosok</h3><table><tr><th>Név</th><th>Játékidő</th><th>Napok</th><th>Utoljára</th></tr>`
+    +rows.map(([n,p])=>`<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${color(n)};margin-right:6px"></span>${esc(n)}</td><td>${dur(Math.round(p.ms/1000))}</td><td>${p.days.size}</td><td>${new Date(p.last).toLocaleString('hu-HU')}</td></tr>`).join('')+'</table>'}
 const color=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return `hsl(${h} 65% 58%)`};
-async function timeline(){TL=await api('timeline?days=7');drawTimeline()}
+async function timeline(){TL=await api('timeline?days=7');TLSUM={};drawTimeline()}
 function drawTimeline(){const t=TL;if(!t)return;
   const days=[];for(let i=0;i<7;i++){const d=new Date(t.now);d.setHours(0,0,0,0);d.setDate(d.getDate()-i);days.push(d)}
   const wd=['vasárnap','hétfő','kedd','szerda','csütörtök','péntek','szombat'];
   const label=(d,i)=>i===0?'Ma':i===1?'Tegnap':`${wd[d.getDay()]}, ${d.getMonth()+1}. ${d.getDate()}.`;
-  const btns=days.map((d,i)=>`<button class="b${TLDAY===i?' on':''}" data-tl="${i}">${label(d,i)}</button>`).join('')+`<button class="b${TLDAY==='sum'?' on':''}" data-tl="sum">Összesítés (7 nap)</button>`;
+  const SUMS=[[7,'7 nap'],[30,'30 nap'],[365,'1 év']];
+  const btns=days.map((d,i)=>`<button class="b${TLDAY===i?' on':''}" data-tl="${i}">${label(d,i)}</button>`).join('')
+    +`<span style="color:var(--muted);margin:0 4px 0 10px">Összesítés:</span>`+SUMS.map(([n,l])=>`<button class="b${TLDAY==='sum'+n?' on':''}" data-tl="sum${n}">${l}</button>`).join('');
   let body;
-  if(TLDAY==='sum'){
-    const h=new Array(24).fill(0);
-    for(const s of t.sessions)for(let m=Math.max(s.from,t.since);m<s.to;m+=60000)h[new Date(m).getHours()]++;
-    const max=Math.max(1,...h);
-    body=`<p class="hint">Az elmúlt 7 napban melyik órában mennyit játszottak összesen (játékosóra). Ahol halvány, ott jó újraindítani vagy frissíteni.</p><div class="tlheat">${h.map((v,i)=>`<div title="${i}:00–${i+1}:00 · ${(v/60).toLocaleString('hu-HU',{maximumFractionDigits:1})} játékosóra" style="background:color-mix(in srgb,var(--good) ${Math.round(v/max*85)}%,transparent)"><span>${i}</span></div>`).join('')}</div>`;
+  if(String(TLDAY).startsWith('sum')){
+    const n=+String(TLDAY).slice(3),s=TLSUM[n];
+    if(!s){body='<div class="empty">Betöltés…</div>';api('timeline?days='+n).then(r=>{TLSUM[n]=r;drawTimeline()}).catch(x=>toast('Hiba: '+x.message))}
+    else body=summary(s,SUMS.find(x=>x[0]===n)[1]);
   }else{
     const d0=days[TLDAY].getTime(),d1=d0+86400000,rows={};
     for(const s of t.sessions){const a=Math.max(s.from,d0),b=Math.min(s.to,d1);if(b>a)(rows[s.name]=rows[s.name]||[]).push([a,b,s.online])}
@@ -267,7 +283,7 @@ async function load(){try{await LOAD[tab]();$('conn').textContent='● fut';$('c
 setInterval(()=>{if(tab==='home'||tab==='console'||!on)load()},2500);
 document.body.addEventListener('click',e=>{const d=e.target.dataset;if(!d)return;
   if(d.a)act(d.a);
-  if(d.tl!==undefined){TLDAY=d.tl==='sum'?'sum':+d.tl;drawTimeline()}
+  if(d.tl!==undefined){TLDAY=d.tl.startsWith('sum')?d.tl:+d.tl;drawTimeline()}
   if(d.wl&&(d.wl==='whitelist-on'||confirm('Kikapcsolod a fehérlistát? Utána bárki beléphet, aki ismeri a szerver címét.')))act(d.wl);
   if(d.wladd)act('whitelist-add',{player:d.wladd});
   if(d.wlrm&&confirm('Törlöd a fehérlistáról: '+d.wlrm+'? Ha most fent van, kidobja a szerver.'))act('whitelist-remove',{player:d.wlrm});

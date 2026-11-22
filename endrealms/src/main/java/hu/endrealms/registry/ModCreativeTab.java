@@ -47,7 +47,7 @@ public final class ModCreativeTab {
 				ModBlocks.ASTRAL_LOG, ModBlocks.ASTRAL_WOOD, ModBlocks.STRIPPED_ASTRAL_LOG, ModBlocks.STRIPPED_ASTRAL_WOOD,
 				ModBlocks.ASTRAL_PLANKS, ModBlocks.ASTRAL_SLAB, ModBlocks.ASTRAL_STAIRS, ModBlocks.ASTRAL_FENCE, ModBlocks.ASTRAL_FENCE_GATE,
 				ModBlocks.ASTRAL_DOOR, ModBlocks.ASTRAL_TRAPDOOR, ModBlocks.ASTRAL_LEAVES, ModBlocks.ASTRAL_SAPLING,
-				ModBlocks.END_SOIL, ModBlocks.VOIDBLOOM, ModBlocks.STARREED, ModBlocks.MOONBELL, ModBlocks.STARWEED, ModBlocks.VOID_CORAL, ModFluids.ASTRAL_WATER_BUCKET,
+				ModBlocks.END_SOIL, ModBlocks.SCULK_SOIL, ModBlocks.SCULK_STONE, ModBlocks.VOIDBLOOM, ModBlocks.STARREED, ModBlocks.MOONBELL, ModBlocks.STARWEED, ModBlocks.VOID_CORAL, ModFluids.ASTRAL_WATER_BUCKET,
 		});
 		tab("materials", () -> ModItems.CHORUSITE_INGOT, () -> new ItemLike[] {
 				ModBlocks.CHORUSITE_ORE, ModBlocks.VOIDSTONE_CHORUSITE_ORE, ModBlocks.PHASITE_ORE, ModBlocks.DEEPGLOW_ORE, ModItems.DEEPGLOW_SHARD,

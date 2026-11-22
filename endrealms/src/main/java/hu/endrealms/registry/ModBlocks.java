@@ -269,6 +269,14 @@ public final class ModBlocks {
 					.lightLevel(state -> 5).sound(net.minecraft.world.level.block.SoundType.SCULK)
 					.pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE));
 
+	/** The ground of the Sculk dimension: looks like sculk, but it is crumbly earth, dug with a shovel. */
+	public static final Block SCULK_SOIL = register("sculk_soil", Block::new,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).mapColor(MapColor.COLOR_BLACK).sound(SoundType.SCULK));
+
+	/** The rock under the Sculk dimension: deepslate-dark, veined with sculk. */
+	public static final Block SCULK_STONE = register("sculk_stone", Block::new,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).mapColor(MapColor.COLOR_BLACK));
+
 	private ModBlocks() {
 	}
 

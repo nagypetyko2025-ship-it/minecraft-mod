@@ -3,7 +3,7 @@
     "minecraft:visual/fog_color": "#1b1f20",
     "minecraft:visual/sky_color": "#060708",
     "minecraft:visual/water_fog_color": "#0a1214",
-    "minecraft:visual/fog_end_distance": 96.0,
+    "minecraft:visual/fog_end_distance": 176.0,
     "minecraft:visual/ambient_particles": {
       "argument": [
         {
