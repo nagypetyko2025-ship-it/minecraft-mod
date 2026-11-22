@@ -41,6 +41,8 @@
     "endrealms:chorusite_block",
     "endrealms:phase_mailbox",
     "endrealms:gravity_stone",
-    "endrealms:sculk_stone"
+    "endrealms:sculk_stone",
+    "endrealms:sculk_stone_bricks",
+    "endrealms:bell_core"
   ]
 }

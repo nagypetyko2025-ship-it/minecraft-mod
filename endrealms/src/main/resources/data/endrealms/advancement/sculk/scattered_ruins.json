@@ -1,0 +1,38 @@
+{
+  "parent": "endrealms:sculk/root",
+  "display": {
+    "icon": {
+      "id": "endrealms:sculk_stone_bricks"
+    },
+    "title": {
+      "translate": "advancements.endrealms.sculk.scattered_ruins.title"
+    },
+    "description": {
+      "translate": "advancements.endrealms.sculk.scattered_ruins.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "visit": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:scattered_ruins"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "visit"
+    ]
+  ]
+}

@@ -171,6 +171,20 @@ public final class ModItems {
 	public static final Item DRAGON_BONE = register("dragon_bone", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 	/** From the Echo Flower. */
 	public static final Item ECHO_DUST = register("echo_dust", Item::new, new Item.Properties());
+	/** From the Hanging Woods: you rise a little, then float down slowly - and the light goes for a moment. */
+	public static final Item DANGLE_BERRY = register("dangle_berry", Item::new, new Item.Properties().food(new FoodProperties(2, 0.2F, true),
+			Consumables.defaultFood().consumeSeconds(0.8F).onConsume(new ApplyStatusEffectsConsumeEffect(List.of(
+					new MobEffectInstance(MobEffects.LEVITATION, 30), new MobEffectInstance(MobEffects.SLOW_FALLING, 240),
+					new MobEffectInstance(MobEffects.DARKNESS, 60)))).build()));
+	/** From the Thorn Vine: you see in the dark, but the world sways for a while. */
+	public static final Item THORN_BERRY = register("thorn_berry", Item::new, new Item.Properties().food(new FoodProperties(2, 0.2F, true),
+			Consumables.defaultFood().consumeSeconds(0.8F).onConsume(new ApplyStatusEffectsConsumeEffect(List.of(
+					new MobEffectInstance(MobEffects.NIGHT_VISION, 600), new MobEffectInstance(MobEffects.NAUSEA, 100)))).build()));
+	public static final Item DANGLER_SPAWN_EGG = register("dangler_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.DANGLER));
+	public static final Item SHADE_SPAWN_EGG = register("shade_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SHADE));
+	public static final Item BELLRINGER_SPAWN_EGG = register("bellringer_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.BELLRINGER));
+	public static final Item PILLAR_CRAWLER_SPAWN_EGG = register("pillar_crawler_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.PILLAR_CRAWLER));
+	public static final Item SPIRE_NESTER_SPAWN_EGG = register("spire_nester_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SPIRE_NESTER));
 	/** Lights the portal frame in the heart of an Ancient City: the way into the Sculk dimension. */
 	public static final Item ECHO_KEY = register("echo_key", hu.endrealms.sculk.EchoKeyItem::new,
 			new Item.Properties().durability(8).rarity(Rarity.RARE));

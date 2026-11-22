@@ -8,7 +8,12 @@
       "barrens": "endrealms:sculk_barrens",
       "woods": "endrealms:withered_woods",
       "peaks": "endrealms:sculk_peaks",
-      "canyons": "endrealms:sculk_canyons"
+      "canyons": "endrealms:sculk_canyons",
+      "hanging": "endrealms:hanging_woods",
+      "city": "endrealms:shadow_city",
+      "bells": "endrealms:bell_valley",
+      "pillars": "endrealms:listening_pillars",
+      "ruins": "endrealms:scattered_ruins"
     }
   }
 }

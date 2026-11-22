@@ -43,6 +43,7 @@ public class EndRealmsClient implements ClientModInitializer {
 		hu.endrealms.client.update.ClientUpdate.init();
 		hu.endrealms.client.sculk.SculkSky.init();
 		hu.endrealms.client.sculk.WillMoths.init();
+		hu.endrealms.client.sculk.SculkAmbience.init();
 		// Passing out at Drunkenness IV: the whole screen goes black, fading in over half a second (see Blackout).
 		net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry.addLast(hu.endrealms.EndRealms.id("blackout"), (g, delta) -> {
 			net.minecraft.client.player.LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
@@ -65,6 +66,14 @@ public class EndRealmsClient implements ClientModInitializer {
 		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.BoneStagRenderer.LAYER, hu.endrealms.client.entity.BoneStagModel::createBodyLayer);
 		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.BoneStagRenderer.BABY_LAYER, hu.endrealms.client.entity.BoneStagRenderer::createBabyLayer);
 		EntityRendererRegistry.register(ModEntities.BONE_STAG, hu.endrealms.client.entity.BoneStagRenderer::new);
+		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.SculkMobRenderers.DANGLER, hu.endrealms.client.entity.SculkMobRenderers::thinLayer);
+		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.SculkMobRenderers.BELLRINGER, hu.endrealms.client.entity.SculkMobRenderers::thinLayer);
+		ModelLayerRegistry.registerModelLayer(hu.endrealms.client.entity.SculkMobRenderers.SHADE, hu.endrealms.client.entity.SculkMobRenderers::humanLayer);
+		EntityRendererRegistry.register(ModEntities.DANGLER, hu.endrealms.client.entity.SculkMobRenderers.DanglerRenderer::new);
+		EntityRendererRegistry.register(ModEntities.SHADE, hu.endrealms.client.entity.SculkMobRenderers.ShadeRenderer::new);
+		EntityRendererRegistry.register(ModEntities.BELLRINGER, hu.endrealms.client.entity.SculkMobRenderers.BellringerRenderer::new);
+		EntityRendererRegistry.register(ModEntities.PILLAR_CRAWLER, hu.endrealms.client.entity.SculkMobRenderers.PillarCrawlerRenderer::new);
+		EntityRendererRegistry.register(ModEntities.SPIRE_NESTER, hu.endrealms.client.entity.SculkMobRenderers.SpireNesterRenderer::new);
 
 		ModelLayerRegistry.registerModelLayer(VoidSentinelRenderer.LAYER, VoidSentinelRenderer::createLayer);
 		EntityRendererRegistry.register(ModEntities.VOID_SENTINEL, VoidSentinelRenderer::new);

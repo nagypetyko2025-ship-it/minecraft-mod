@@ -79,7 +79,8 @@ w("dimension/sculk.json", {
         # the Overworld's own biome map, each vanilla biome standing in for one of ours (SculkBiomeSource): the peaks land
         # on the real mountains, the woods where forests grow, the canyons on badlands and deserts, the barrens elsewhere
         "biome_source": {"type": E + "sculk", "barrens": E + "sculk_barrens", "woods": E + "withered_woods",
-                         "peaks": E + "sculk_peaks", "canyons": E + "sculk_canyons"},
+                         "peaks": E + "sculk_peaks", "canyons": E + "sculk_canyons", "hanging": E + "hanging_woods",
+                         "city": E + "shadow_city", "bells": E + "bell_valley", "pillars": E + "listening_pillars", "ruins": E + "scattered_ruins"},
     },
 })
 
@@ -154,6 +155,23 @@ placed("echo_flowers", "echo_flower_patch", rarity=2)
 placed("soul_mushrooms", "soul_mushroom_patch", count=2)
 placed("soul_mushrooms_rare", "soul_mushroom_patch", rarity=3)
 
+# the stranger lands: each piece is drawn by one feature (SculkLands)
+for name in ("hanging_island", "city_building", "bone_bell", "listening_pillar", "sculk_ruin"):
+    w(f"worldgen/feature/{name}.json", {"type": E + name})
+placed("hanging_islands", "hanging_island", count=1)
+placed("city_buildings", "city_building", count=1)
+placed("bone_bells", "bone_bell", rarity=2)
+placed("listening_pillars", "listening_pillar", count=5)
+placed("sculk_ruins", "sculk_ruin", rarity=3)
+
+
+def spawns(**categories):
+    """natural_mob_spawns: category -> [(entity, weight, min, max)]"""
+    return {"argument": {"spawn_costs": {}, "spawns_by_category": {
+        cat: [{"type": E + e, "count": {"type": "minecraft:uniform", "min_inclusive": lo, "max_inclusive": hi}, "weight": wgt}
+              for e, wgt, lo, hi in lst] for cat, lst in categories.items()}}, "modifier": "overlay"}
+
+
 STAGS = {"argument": {"spawn_costs": {}, "spawns_by_category": {"creature": [
     {"type": E + "bone_stag", "count": {"type": "minecraft:uniform", "min_inclusive": 1, "max_inclusive": 3}, "weight": 10}]}},
     "modifier": "overlay"}
@@ -178,14 +196,22 @@ w("worldgen/carver/deep_canyon.json", {
 })
 
 
-def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS, stags=True):
+# Every biome must list its features in the same relative order, or the game finds a "feature order cycle" and the
+# chunk never finishes - the server then hangs. So each biome's list is sorted by this one order.
+ORDER = [E + n for n in ("hanging_islands", "city_buildings", "bone_bells", "listening_pillars", "sculk_ruins", "dead_tree_dense", "dead_tree_sparse",
+                         "sculk_patch_surface_dense", "sculk_patch_surface", "watcher_grass_dense", "watcher_grass", "watcher_grass_sparse",
+                         "echo_flowers", "soul_mushrooms", "soul_mushrooms_rare")] + ["minecraft:pale_moss_patch", "minecraft:patch_dead_bush"]
+
+
+def biome(name, fog, fog_end, particle, chance, vegetation, carvers=CARVERS, stags=True, mobs=None):
+    vegetation = sorted(vegetation, key=ORDER.index)
     w(f"worldgen/biome/{name}.json", {
         "attributes": {
             "minecraft:visual/fog_color": fog,
             "minecraft:visual/sky_color": "#060708",
             "minecraft:visual/water_fog_color": "#0a1214",
             "minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": particle}, "probability": chance}], "modifier": "append"},
-            **({"minecraft:gameplay/natural_mob_spawns": STAGS} if stags else {}),
+            **({"minecraft:gameplay/natural_mob_spawns": mobs} if mobs else {"minecraft:gameplay/natural_mob_spawns": STAGS} if stags else {}),
         },
         "carvers": carvers,
         "downfall": 0.0,
@@ -205,4 +231,19 @@ biome("sculk_peaks", "#181c1e", 192.0, "minecraft:white_ash", 0.004,
 biome("sculk_canyons", "#16191a", 160.0, "minecraft:ash", 0.006,
       [E + "dead_tree_sparse", E + "sculk_patch_surface_dense", E + "watcher_grass_sparse", E + "echo_flowers", E + "soul_mushrooms_rare", "minecraft:patch_dead_bush"],
       CARVERS + [E + "deep_canyon"])
+biome("hanging_woods", "#0d1112", 0, "minecraft:ash", 0.02,
+      [E + "hanging_islands", E + "dead_tree_sparse", E + "watcher_grass_sparse", E + "soul_mushrooms_rare"],
+      mobs=spawns(monster=[("dangler", 30, 1, 1)], creature=[("bone_stag", 8, 1, 2)]))
+biome("shadow_city", "#15181c", 0, "minecraft:white_ash", 0.008,
+      [E + "city_buildings", E + "echo_flowers", E + "watcher_grass_sparse"],
+      mobs=spawns(ambient=[("shade", 20, 1, 3)]))
+biome("bell_valley", "#14171a", 0, "minecraft:white_ash", 0.01,
+      [E + "bone_bells", E + "sculk_patch_surface_dense", E + "watcher_grass_sparse"],
+      mobs=spawns(monster=[("bellringer", 20, 1, 1)]))
+biome("listening_pillars", "#121518", 0, "minecraft:ash", 0.008,
+      [E + "listening_pillars", E + "sculk_patch_surface", E + "soul_mushrooms_rare"],
+      mobs=spawns(monster=[("pillar_crawler", 30, 1, 2)]))
+biome("scattered_ruins", "#181b1d", 0, "minecraft:white_ash", 0.006,
+      [E + "sculk_ruins", E + "dead_tree_sparse", E + "sculk_patch_surface", E + "watcher_grass", E + "echo_flowers"],
+      mobs=spawns(monster=[("pillar_crawler", 10, 1, 1), ("bellringer", 8, 1, 1)], creature=[("bone_stag", 6, 1, 2)]))
 print("sculk dimension data written")

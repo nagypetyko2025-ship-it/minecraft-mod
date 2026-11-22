@@ -36,7 +36,8 @@ public final class AstraCommand {
 	/** End biome names offered by the command (ids in the endrealms namespace). */
 	private static final List<String> END_BIOMES = List.of("astral_forest", "astral_basin", "prism_wastes", "scorched_barrens", "dragon_graveyard");
 	/** Biomes of the Sculk dimension. */
-	private static final List<String> SCULK_BIOMES = List.of("sculk_barrens", "withered_woods", "sculk_peaks", "sculk_canyons");
+	private static final List<String> SCULK_BIOMES = List.of("sculk_barrens", "withered_woods", "sculk_peaks", "sculk_canyons",
+			"hanging_woods", "shadow_city", "bell_valley", "listening_pillars", "scattered_ruins");
 
 	private AstraCommand() {
 	}

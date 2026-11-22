@@ -23,7 +23,13 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.48.0)
+## Tartalom (0.49.0)
+- **Fordított erdő**: a föld fölött lebegő sculk-tömbökből lefelé nőnek az elhalt fák, lombjuk lent lóg, róla sápadt moha és **Csüngő bogyó** lóg (lebegés, lassú esés, egy pillanatra sötétség); a lombok között **Lógók** csüngenek ágnak álcázva, és rád vetődnek, ha alájuk sétálsz
+- **Árnyváros**: sötét téglából és füstös **Visszhangüvegből** épült félig romos házak, tornyok és oszlopsorok, ládákkal; **Árnyalakok** járják, közelről szétfoszlanak; ajtócsapódás, léptek, suttogás forrás nélkül
+- **Harangvölgy** (a kiszáradt folyóvölgyekben): ívek, karmok, ferde gerincek és csavarodó csontok, róluk láncon lógó repedt óriásharangok; csak akkor kondulnak, ha nincs ott senki, és a kongás odahívja a **Harangozókat** (sötétséget hozó ütés)
+- **Hallgató oszlopok**: sík vidék sűrű, magas, hegyes oszlopokkal (vékonyak és vastagok, a vastagokon szélfútta lyukak), orgonaszerű búgás; **Tüskeinda** (mászható, kék Tüskebogyó: éjjellátás, kis szédülés), **Hamuvirág** (hamufelhő); **Oszlopjárók** az oszlopokon, **Csúcsfészkelők** köröznek a fészkeik fölött; ritka **Remete-oszlop** csigalépcsővel, kincses szobával és egy naplóval
+- **Szétszórt romok**: falmaradványok, házsarkok, oszlopsorok, ívek, kiszáradt kút, semmibe vezető lépcső, ledőlt torony, eldőlt szobor, oltár - néhol ládával, néhol őrrel
+- A szörnyek a Chorusit-felszereléshez vannak igazítva; új blokkok: Sculk-kőtégla, Visszhangüveg; 6 új küldetés és 5 új előrelépés
 - **Visszhangkulcs**: az End-barkácsasztalon készül (visszhangszilánk, sculk, sculk-katalizátor, visszatérő iránytű); az Ókori város közepén álló megerősített mélypala kereten használva a keret megtelik Sculk-portállal (8 használat)
 - **Endjáró kalauz új elrendezés**: felül két fő fül (End és Sculk), a fejezetek bal oldalt listában, mindkettőnek saját „Teljes út” fája
 - **Sculk-küldetések**: 15 küldetés három fejezetben (Érkezés, Tájak, Élővilág) és három szintben a Teljes úton; új előrelépés: Csontagancsos szarvas szaporítása

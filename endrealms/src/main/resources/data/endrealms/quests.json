@@ -4494,7 +4494,7 @@
       "chapter": "sculk_lands",
       "icon": "minecraft:dead_bush",
       "x": 0.0,
-      "y": 1.0,
+      "y": 3.75,
       "requires": [
         "sculk_enter"
       ],
@@ -4517,7 +4517,7 @@
       "xp": 150,
       "recipes": [],
       "path_x": 5.0,
-      "path_y": 0.0,
+      "path_y": 0.25,
       "tier": 7,
       "after": "sculk_escape"
     },
@@ -4526,7 +4526,7 @@
       "chapter": "sculk_lands",
       "icon": "minecraft:stripped_dark_oak_log",
       "x": 1.0,
-      "y": 0.0,
+      "y": 0.5,
       "requires": [
         "sculk_barrens"
       ],
@@ -4549,7 +4549,7 @@
       "xp": 200,
       "recipes": [],
       "path_x": 6.0,
-      "path_y": -1.0,
+      "path_y": -3.0,
       "tier": 7
     },
     {
@@ -4557,7 +4557,7 @@
       "chapter": "sculk_lands",
       "icon": "minecraft:sculk_vein",
       "x": 1.0,
-      "y": 1.0,
+      "y": 2.0,
       "requires": [
         "sculk_barrens"
       ],
@@ -4580,7 +4580,7 @@
       "xp": 250,
       "recipes": [],
       "path_x": 6.0,
-      "path_y": 0.0,
+      "path_y": -1.5,
       "tier": 7
     },
     {
@@ -4588,7 +4588,7 @@
       "chapter": "sculk_lands",
       "icon": "endrealms:sculk_stone",
       "x": 1.0,
-      "y": 2.0,
+      "y": 3.0,
       "requires": [
         "sculk_barrens"
       ],
@@ -4611,7 +4611,162 @@
       "xp": 300,
       "recipes": [],
       "path_x": 6.0,
-      "path_y": 1.0,
+      "path_y": -0.5,
+      "tier": 7
+    },
+    {
+      "id": "sculk_hanging",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:pale_hanging_moss",
+      "x": 2.0,
+      "y": 0.0,
+      "requires": [
+        "sculk_woods"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/hanging_woods"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "endrealms:dangle_berry",
+          "count": 8
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 2
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 7.0,
+      "path_y": -3.5,
+      "tier": 7
+    },
+    {
+      "id": "sculk_city",
+      "chapter": "sculk_lands",
+      "icon": "endrealms:echo_glass",
+      "x": 1.0,
+      "y": 4.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/shadow_city"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 16
+        }
+      ],
+      "xp": 300,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 0.5,
+      "tier": 7
+    },
+    {
+      "id": "sculk_bells",
+      "chapter": "sculk_lands",
+      "icon": "minecraft:bell",
+      "x": 1.0,
+      "y": 5.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/bell_valley"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:copper_ingot",
+          "count": 16
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 2
+        }
+      ],
+      "xp": 350,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 1.5,
+      "tier": 7
+    },
+    {
+      "id": "sculk_pillars",
+      "chapter": "sculk_lands",
+      "icon": "endrealms:sculk_stone",
+      "x": 1.0,
+      "y": 6.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/listening_pillars"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:ladder",
+          "count": 32
+        },
+        {
+          "item": "endrealms:thorn_berry",
+          "count": 8
+        }
+      ],
+      "xp": 350,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 2.5,
+      "tier": 7
+    },
+    {
+      "id": "sculk_ruins",
+      "chapter": "sculk_lands",
+      "icon": "endrealms:sculk_stone_bricks",
+      "x": 1.0,
+      "y": 7.0,
+      "requires": [
+        "sculk_barrens"
+      ],
+      "objectives": [
+        {
+          "type": "advancement",
+          "id": "endrealms:sculk/scattered_ruins"
+        }
+      ],
+      "rewards": [
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 16
+        },
+        {
+          "item": "minecraft:experience_bottle",
+          "count": 16
+        }
+      ],
+      "xp": 250,
+      "recipes": [],
+      "path_x": 6.0,
+      "path_y": 3.5,
       "tier": 7
     },
     {
@@ -4619,11 +4774,16 @@
       "chapter": "sculk_lands",
       "icon": "minecraft:sculk_shrieker",
       "x": 2.0,
-      "y": 0.0,
+      "y": 1.0,
       "requires": [
         "sculk_woods",
         "sculk_canyons",
-        "sculk_peaks"
+        "sculk_peaks",
+        "sculk_hanging",
+        "sculk_city",
+        "sculk_bells",
+        "sculk_pillars",
+        "sculk_ruins"
       ],
       "objectives": [
         {
@@ -4647,8 +4807,8 @@
       ],
       "xp": 600,
       "recipes": [],
-      "path_x": 7.0,
-      "path_y": -1.0,
+      "path_x": 8.0,
+      "path_y": -2.5,
       "tier": 7
     },
     {

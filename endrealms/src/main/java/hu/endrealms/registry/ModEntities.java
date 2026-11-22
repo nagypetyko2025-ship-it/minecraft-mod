@@ -45,6 +45,55 @@ public final class ModEntities {
 					.clientTrackingRange(10)
 					.build(BONE_STAG_KEY));
 
+	private static final ResourceKey<EntityType<?>> DANGLER_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("dangler"));
+	public static final EntityType<hu.endrealms.entity.Dangler> DANGLER = Registry.register(BuiltInRegistries.ENTITY_TYPE, DANGLER_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.Dangler::new, MobCategory.MONSTER, mob -> mob
+							.spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, net.minecraft.world.entity.monster.Monster::checkAnyLightMonsterSpawnRules)
+							.defaultAttributes(hu.endrealms.entity.Dangler::createAttributes))
+					.sized(0.7F, 2.6F)
+					.eyeHeight(2.3F)
+					.clientTrackingRange(10)
+					.build(DANGLER_KEY));
+
+	private static final ResourceKey<EntityType<?>> SHADE_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("shade"));
+	public static final EntityType<hu.endrealms.entity.Shade> SHADE = Registry.register(BuiltInRegistries.ENTITY_TYPE, SHADE_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.Shade::new, MobCategory.AMBIENT, mob -> mob
+							.spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, hu.endrealms.entity.Shade::checkSpawnRules)
+							.defaultAttributes(hu.endrealms.entity.Shade::createAttributes))
+					.sized(0.6F, 1.9F)
+					.eyeHeight(1.7F)
+					.clientTrackingRange(10)
+					.build(SHADE_KEY));
+
+	private static final ResourceKey<EntityType<?>> BELLRINGER_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("bellringer"));
+	public static final EntityType<hu.endrealms.entity.Bellringer> BELLRINGER = Registry.register(BuiltInRegistries.ENTITY_TYPE, BELLRINGER_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.Bellringer::new, MobCategory.MONSTER, mob -> mob
+							.spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, net.minecraft.world.entity.monster.Monster::checkAnyLightMonsterSpawnRules)
+							.defaultAttributes(hu.endrealms.entity.Bellringer::createAttributes))
+					.sized(0.7F, 2.5F)
+					.eyeHeight(2.2F)
+					.clientTrackingRange(10)
+					.build(BELLRINGER_KEY));
+
+	private static final ResourceKey<EntityType<?>> PILLAR_CRAWLER_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("pillar_crawler"));
+	public static final EntityType<hu.endrealms.entity.PillarCrawler> PILLAR_CRAWLER = Registry.register(BuiltInRegistries.ENTITY_TYPE, PILLAR_CRAWLER_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.PillarCrawler::new, MobCategory.MONSTER, mob -> mob
+							.spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, net.minecraft.world.entity.monster.Monster::checkAnyLightMonsterSpawnRules)
+							.defaultAttributes(hu.endrealms.entity.PillarCrawler::createAttributes))
+					.sized(1.5F, 1.2F)
+					.eyeHeight(0.8F)
+					.clientTrackingRange(10)
+					.build(PILLAR_CRAWLER_KEY));
+
+	private static final ResourceKey<EntityType<?>> SPIRE_NESTER_KEY = ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("spire_nester"));
+	public static final EntityType<hu.endrealms.entity.SpireNester> SPIRE_NESTER = Registry.register(BuiltInRegistries.ENTITY_TYPE, SPIRE_NESTER_KEY,
+			FabricEntityType.Builder.createMob(hu.endrealms.entity.SpireNester::new, MobCategory.AMBIENT, mob -> mob
+							.defaultAttributes(hu.endrealms.entity.SpireNester::createAttributes))
+					.sized(1.4F, 0.6F)
+					.eyeHeight(0.3F)
+					.clientTrackingRange(10)
+					.build(SPIRE_NESTER_KEY));
+
 	private static final ResourceKey<EntityType<?>> VOID_SENTINEL_KEY =
 			ResourceKey.create(Registries.ENTITY_TYPE, EndRealms.id("void_sentinel"));
 	public static final EntityType<VoidSentinel> VOID_SENTINEL = Registry.register(BuiltInRegistries.ENTITY_TYPE,

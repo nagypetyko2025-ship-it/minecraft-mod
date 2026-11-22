@@ -1,0 +1,68 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#15181c",
+    "minecraft:visual/sky_color": "#060708",
+    "minecraft:visual/water_fog_color": "#0a1214",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:white_ash"
+          },
+          "probability": 0.008
+        }
+      ],
+      "modifier": "append"
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "ambient": [
+            {
+              "type": "endrealms:shade",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 20
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#1c2a2e",
+    "grass_color": "#4a4f45",
+    "foliage_color": "#3d4239",
+    "dry_foliage_color": "#4b4b44"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "endrealms:city_buildings",
+      "endrealms:watcher_grass_sparse",
+      "endrealms:echo_flowers"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}

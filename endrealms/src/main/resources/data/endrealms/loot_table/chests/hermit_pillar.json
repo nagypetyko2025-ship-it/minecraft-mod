@@ -1,0 +1,141 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 4,
+        "max": 7
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "weight": 4,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 1,
+              "max": 3
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "weight": 6,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 2,
+              "max": 6
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:echo_shard",
+          "weight": 5,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 2,
+              "max": 4
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_golden_apple",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple",
+          "weight": 5,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 1,
+              "max": 2
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle",
+          "weight": 6,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 3,
+              "max": 8
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:thorn_berry",
+          "weight": 5,
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 2,
+              "max": 6
+            }
+          }
+        },
+        {
+          "type": "minecraft:item",
+          "name": "endrealms:sculk_antler",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:recovery_compass",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spyglass",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:written_book",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "title": "Napló",
+              "author": "Ismeretlen",
+              "generation": 3
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                "Harmincadik nap. Az oszlopok ma este is énekeltek. A szél nem fúj, mégis szólnak.",
+                "Valami jár odakint az oszlopok között. Nem a földön. Fent, a köveken. Hallom a karmait.",
+                "A madarak nem esznek. Nem isznak. Csak köröznek. Ma megszámoltam őket: eggyel többen vannak, mint tegnap.",
+                "Ha valaki ezt olvassa: ne nézz fel éjjel. Az égen van valami. Akkor is figyel, amikor nem látod.",
+                "Lezártam az ajtót. A lépcsőn léptek jönnek fel. Az én lépteim. Pedig én itt fent ülök."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "endrealms:chests/hermit_pillar"
+}

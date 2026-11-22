@@ -298,6 +298,34 @@ public final class ModBlocks {
 					.offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(net.minecraft.world.level.material.PushReaction.POPPED)
 					.lightLevel(state -> 10));
 
+	/** Smoky blue-grey glass the Shadow City is built of; you can almost see the people who lived behind it. */
+	public static final Block ECHO_GLASS = register("echo_glass", Block::new,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.COLOR_CYAN));
+
+	/** Bricks of Sculk Stone, the walls of the old ruins of the Sculk dimension. */
+	public static final Block SCULK_STONE_BRICKS = register("sculk_stone_bricks", Block::new,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS).mapColor(MapColor.COLOR_BLACK));
+
+	/** Pale berries hanging under the upside-down canopies of the Hanging Woods. */
+	public static final Block DANGLE_BERRY_BUSH = register("dangle_berry_bush", hu.endrealms.sculk.SculkWilds.HangingBerry::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollision().instabreak().sound(SoundType.CAVE_VINES)
+					.pushReaction(net.minecraft.world.level.material.PushReaction.POPPED).lightLevel(state -> 4));
+
+	/** Black climbing vine of the Listening Pillars; carries glowing blue berries now and then. */
+	public static final Block THORN_VINE = register("thorn_vine", hu.endrealms.sculk.SculkWilds.ThornVine::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollision().strength(0.3F).sound(SoundType.CAVE_VINES)
+					.pushReaction(net.minecraft.world.level.material.PushReaction.POPPED).randomTicks()
+					.lightLevel(state -> state.getValue(hu.endrealms.sculk.SculkWilds.ThornVine.BERRIES) ? 7 : 0));
+
+	/** Grey flower at the feet of the Listening Pillars that bursts into ash when brushed. */
+	public static final Block ASH_FLOWER = register("ash_flower", hu.endrealms.sculk.SculkWilds.AshFlower::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollision().instabreak().sound(SoundType.GRASS)
+					.offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(net.minecraft.world.level.material.PushReaction.POPPED));
+
+	/** The hidden heart of the great bells of the Bell Valley, which makes them toll. */
+	public static final Block BELL_CORE = register("bell_core", hu.endrealms.sculk.SculkWilds.BellCore::new,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().oxidized()).mapColor(MapColor.WARPED_NYLIUM).randomTicks());
+
 	private ModBlocks() {
 	}
 

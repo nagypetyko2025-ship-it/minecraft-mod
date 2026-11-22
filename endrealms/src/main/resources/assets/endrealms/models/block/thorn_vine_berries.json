@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/ladder",
+  "textures": {
+    "particle": "endrealms:block/thorn_vine_berries",
+    "texture": "endrealms:block/thorn_vine_berries"
+  }
+}

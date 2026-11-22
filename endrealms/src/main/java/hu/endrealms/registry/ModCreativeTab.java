@@ -68,7 +68,10 @@ public final class ModCreativeTab {
 		tab("sculk", () -> ModBlocks.SCULK_PORTAL, () -> new ItemLike[] {
 				ModItems.ECHO_KEY, ModBlocks.SCULK_PORTAL, ModBlocks.SCULK_SOIL, ModBlocks.SCULK_STONE,
 				ModBlocks.WATCHER_GRASS, ModBlocks.ECHO_FLOWER, ModBlocks.SOUL_MUSHROOM,
-				ModItems.ECHO_DUST, ModItems.SCULK_ANTLER, ModItems.BONE_STAG_SPAWN_EGG,
+				ModBlocks.SCULK_STONE_BRICKS, ModBlocks.ECHO_GLASS, ModBlocks.THORN_VINE, ModBlocks.ASH_FLOWER, ModBlocks.DANGLE_BERRY_BUSH, ModBlocks.BELL_CORE,
+				ModItems.ECHO_DUST, ModItems.SCULK_ANTLER, ModItems.DANGLE_BERRY, ModItems.THORN_BERRY,
+				ModItems.BONE_STAG_SPAWN_EGG, ModItems.DANGLER_SPAWN_EGG, ModItems.SHADE_SPAWN_EGG, ModItems.BELLRINGER_SPAWN_EGG,
+				ModItems.PILLAR_CRAWLER_SPAWN_EGG, ModItems.SPIRE_NESTER_SPAWN_EGG,
 		});
 		tab("creatures", () -> ModItems.GLIMMERHOOF_SPAWN_EGG, () -> new ItemLike[] {
 				ModItems.GLIMMERHOOF_SPAWN_EGG, ModItems.STARFIN_SPAWN_EGG, ModItems.VOID_EEL_SPAWN_EGG, ModItems.GLOWGILL_SPAWN_EGG,

@@ -70,6 +70,76 @@
           }
         }
       }
+    },
+    "hanging_woods": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:hanging_woods"
+            }
+          }
+        }
+      }
+    },
+    "shadow_city": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:shadow_city"
+            }
+          }
+        }
+      }
+    },
+    "bell_valley": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:bell_valley"
+            }
+          }
+        }
+      }
+    },
+    "listening_pillars": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:listening_pillars"
+            }
+          }
+        }
+      }
+    },
+    "scattered_ruins": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "endrealms:scattered_ruins"
+            }
+          }
+        }
+      }
     }
   },
   "requirements": [
@@ -84,6 +154,21 @@
     ],
     [
       "sculk_canyons"
+    ],
+    [
+      "hanging_woods"
+    ],
+    [
+      "shadow_city"
+    ],
+    [
+      "bell_valley"
+    ],
+    [
+      "listening_pillars"
+    ],
+    [
+      "scattered_ruins"
     ]
   ],
   "rewards": {

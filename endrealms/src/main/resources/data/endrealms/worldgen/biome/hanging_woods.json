@@ -1,0 +1,80 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#0d1112",
+    "minecraft:visual/sky_color": "#060708",
+    "minecraft:visual/water_fog_color": "#0a1214",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:ash"
+          },
+          "probability": 0.02
+        }
+      ],
+      "modifier": "append"
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "endrealms:dangler",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 30
+            }
+          ],
+          "creature": [
+            {
+              "type": "endrealms:bone_stag",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 8
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#1c2a2e",
+    "grass_color": "#4a4f45",
+    "foliage_color": "#3d4239",
+    "dry_foliage_color": "#4b4b44"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "endrealms:hanging_islands",
+      "endrealms:dead_tree_sparse",
+      "endrealms:watcher_grass_sparse",
+      "endrealms:soul_mushrooms_rare"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}

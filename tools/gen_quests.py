@@ -368,7 +368,22 @@ Q("sculk_canyons", "sculk_lands", M + "sculk_vein", ["sculk_barrens"], [adv("scu
 Q("sculk_peaks", "sculk_lands", E + "sculk_stone", ["sculk_barrens"], [adv("sculk/sculk_peaks")], [give(M + "golden_apple", 4), give(M + "diamond", 4)], 300, [],
   ("Broken Peaks", "Bare dark rock where the mountains rise. They are far apart, and far away.", "Climb among the Broken Peaks"),
   ("Csonka ormok", "Csupasz sötét kő ott, ahol a hegyek emelkednek. Messze vannak egymástól, és messze tőled.", "Mássz fel a Csonka ormok közé"))
-Q("sculk_all_biomes", "sculk_lands", M + "sculk_shrieker", ["sculk_woods", "sculk_canyons", "sculk_peaks"], [adv("sculk/all_biomes")],
+Q("sculk_hanging", "sculk_lands", M + "pale_hanging_moss", ["sculk_woods"], [adv("sculk/hanging_woods")], [give(E + "dangle_berry", 8), give(M + "golden_apple", 2)], 300, [],
+  ("Where Trees Grow Down", "Masses of sculk float over the ground with dead trees growing down from them, their crowns hanging at the bottom. Look up before you walk under one: Danglers hang there like branches.", "Walk beneath the Hanging Woods"),
+  ("Ahol a fák lefelé nőnek", "Sculk-tömbök lebegnek a föld fölött, és lefelé nőnek belőlük az elhalt fák, a lombjuk lent lóg. Mielőtt alájuk sétálsz, nézz fel: a Lógók ágnak látszanak.", "Járj a Fordított erdő fái alatt"))
+Q("sculk_city", "sculk_lands", E + "echo_glass", ["sculk_barrens"], [adv("sculk/shadow_city")], [give(M + "emerald", 8), give(M + "experience_bottle", 16)], 300, [],
+  ("Uninhabited", "A city of dark brick and smoky glass that nobody ever lived in. Its people walk it anyway, as shadows, and come apart when you come close.", "Walk the Shadow City"),
+  ("Lakatlan", "Sötét téglából és füstös üvegből épült város, amelyben soha senki nem lakott. A lakói mégis járják, árnyként, és szétfoszlanak, ha közel mész.", "Járj az Árnyvárosban"))
+Q("sculk_bells", "sculk_lands", M + "bell", ["sculk_barrens"], [adv("sculk/bell_valley")], [give(M + "copper_ingot", 16), give(M + "golden_apple", 2)], 350, [],
+  ("For Whom the Bell Tolls", "Along the dry valleys great cracked bells hang from shapes of bone. They toll only when nobody stands near them, and whoever hears them is found by the Bellringers.", "Go down into the Bell Valley"),
+  ("Kinek szól a harang", "A kiszáradt völgyekben repedt óriásharangok lógnak csontalakokról. Csak akkor kondulnak meg, ha nincs ott senki, és akit meghallják, azt megtalálják a Harangozók.", "Ereszkedj le a Harangvölgybe"))
+Q("sculk_pillars", "sculk_lands", E + "sculk_stone", ["sculk_barrens"], [adv("sculk/listening_pillars")], [give(M + "ladder", 32), give(E + "thorn_berry", 8)], 350, [],
+  ("The Listeners", "A flat land crowded with tall stone spires that hum in the still air. Something climbs them. Thorn Vine helps you climb too.", "Walk among the Listening Pillars"),
+  ("Hallgatózók", "Sík vidék, amelyet magas kőtűk zsúfolnak tele, és szélcsendben is búgnak. Valami mászik rajtuk. A Tüskeindán te is felmászhatsz.", "Járj a Hallgató oszlopok között"))
+Q("sculk_ruins", "sculk_lands", E + "sculk_stone_bricks", ["sculk_barrens"], [adv("sculk/scattered_ruins")], [give(M + "iron_ingot", 16), give(M + "experience_bottle", 16)], 250, [],
+  ("Nothing Fits", "Ruins of things that never belonged together, scattered across the plain. Some hide a chest. Some are watched.", "Wander the Scattered Ruins"),
+  ("Semmi sem illik össze", "Soha össze nem tartozó dolgok romjai, szétszórva a síkságon. Némelyik ládát rejt. Némelyiket őrzik.", "Járd be a Szétszórt romokat"))
+Q("sculk_all_biomes", "sculk_lands", M + "sculk_shrieker", ["sculk_woods", "sculk_canyons", "sculk_peaks", "sculk_hanging", "sculk_city", "sculk_bells", "sculk_pillars", "sculk_ruins"], [adv("sculk/all_biomes")],
   [give(M + "diamond", 8), give(M + "enchanted_golden_apple", 1), give(M + "experience_bottle", 32)], 600, [],
   ("Seen Too Much", "Walk every land of the Sculk dimension.", "Visit every biome of the Sculk dimension"),
   ("Aki túl sokat látott", "Járd be a Sculk-dimenzió minden táját.", "Járd be a Sculk-dimenzió minden biomját"))
@@ -429,7 +444,7 @@ TIERS = [(("First Steps", "Első lépések"), "enter_end dragon gateway end_city
          (("Endgame", "Végjáték"), "chorusite_block mailbox gravity_stone sanctum rift_lord riftblade citadel citadel_guards void_king crownstone"),
          # the Sculk dimension's Whole Path
          (("Into the Silence", "A csendbe"), "sculk_key sculk_enter sculk_escape sculk_soil sculk_stone"),
-         (("The Dead Lands", "A halott tájak"), "sculk_barrens sculk_woods sculk_canyons sculk_peaks sculk_all_biomes"),
+         (("The Dead Lands", "A halott tájak"), "sculk_barrens sculk_woods sculk_canyons sculk_peaks sculk_hanging sculk_city sculk_bells sculk_pillars sculk_ruins sculk_all_biomes"),
          (("What Lives There", "Ami ott él"), "sculk_watcher_grass sculk_echo sculk_mushroom sculk_stag sculk_breed")]
 TIER_REALM = {t: ("sculk" if ids.split()[0].startswith("sculk_") else "end") for t, (_, ids) in enumerate(TIERS, 1)}
 tier_of = {i: t for t, (_, ids) in enumerate(TIERS, 1) for i in ids.split()}

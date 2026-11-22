@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "berries=false,facing=north": {
+      "model": "endrealms:block/thorn_vine"
+    },
+    "berries=true,facing=north": {
+      "model": "endrealms:block/thorn_vine_berries"
+    },
+    "berries=false,facing=east": {
+      "model": "endrealms:block/thorn_vine",
+      "y": 90
+    },
+    "berries=true,facing=east": {
+      "model": "endrealms:block/thorn_vine_berries",
+      "y": 90
+    },
+    "berries=false,facing=south": {
+      "model": "endrealms:block/thorn_vine",
+      "y": 180
+    },
+    "berries=true,facing=south": {
+      "model": "endrealms:block/thorn_vine_berries",
+      "y": 180
+    },
+    "berries=false,facing=west": {
+      "model": "endrealms:block/thorn_vine",
+      "y": 270
+    },
+    "berries=true,facing=west": {
+      "model": "endrealms:block/thorn_vine_berries",
+      "y": 270
+    }
+  }
+}
