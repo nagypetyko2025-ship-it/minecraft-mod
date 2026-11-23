@@ -100,8 +100,45 @@ public final class SculkBiomeSource extends BiomeSource {
 		return Stream.of(barrens, woods, peaks, canyons, hanging, city, bells, pillars, ruins);
 	}
 
+	/** How far (in quarter-blocks, so 20 blocks) the special lands reach out past where the Overworld map puts them. */
+	private static final int GROW = 5;
+
+	private boolean special(Holder<Biome> biome) {
+		return biome == hanging || biome == city || biome == bells || biome == pillars || biome == ruins;
+	}
+
+	/**
+	 * The Overworld map, with two touches to the special lands (Hanging Woods, Shadow City, Bell Valley, Listening
+	 * Pillars, Scattered Ruins): each reaches {@link #GROW} further out, so they are a little bigger; and where two
+	 * different ones would meet, the Silent Barrens lie between them instead, so they never run into each other. The
+	 * peaks and canyons stay exactly where the terrain is. Every answer depends only on the world's noise, so
+	 * neighbouring chunks always agree.
+	 */
 	@Override
 	public BiomeResolver createResolver(Climate.Sampler sampler) {
-		return (x, y, z) -> parameters.findValue(sampler.sample(x, y, z));
+		java.util.Map<Long, Holder<Biome>> cache = new java.util.HashMap<>();
+		java.util.function.LongFunction<Holder<Biome>> at = key -> cache.computeIfAbsent(key, k -> parameters.findValue(
+				sampler.sample(net.minecraft.core.BlockPos.getX(k), net.minecraft.core.BlockPos.getY(k), net.minecraft.core.BlockPos.getZ(k))));
+		return (x, y, z) -> {
+			Holder<Biome> real = at.apply(net.minecraft.core.BlockPos.asLong(x, y, z));
+			if (real == peaks || real == canyons) {
+				return real;
+			}
+			Holder<Biome> found = special(real) ? real : null;
+			int diagonal = GROW * 3 / 4;
+			int[][] around = {{GROW, 0}, {-GROW, 0}, {0, GROW}, {0, -GROW},
+					{diagonal, diagonal}, {diagonal, -diagonal}, {-diagonal, diagonal}, {-diagonal, -diagonal}};
+			for (int[] d : around) {
+				Holder<Biome> near = at.apply(net.minecraft.core.BlockPos.asLong(x + d[0], y, z + d[1]));
+				if (special(near)) {
+					if (found == null) {
+						found = near;
+					} else if (found != near) {
+						return barrens;          // two different special lands close together: open barrens between them
+					}
+				}
+			}
+			return found != null ? found : real;
+		};
 	}
 }

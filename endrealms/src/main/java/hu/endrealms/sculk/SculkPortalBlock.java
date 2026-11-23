@@ -64,7 +64,7 @@ public class SculkPortalBlock extends Block implements Portal {
 
 	@Override
 	public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-		return SculkDimension.destination(level, entity);
+		return SculkDimension.destination(level, entity, pos);
 	}
 
 	@Override

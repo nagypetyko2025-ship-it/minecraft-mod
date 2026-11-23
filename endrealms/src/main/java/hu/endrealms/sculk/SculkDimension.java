@@ -31,21 +31,106 @@ public final class SculkDimension {
 	private SculkDimension() {
 	}
 
-	/** Where a portal in {@code from} leads: the Sculk dimension, or back to the Overworld from there. */
-	static TeleportTransition destination(ServerLevel from, Entity entity) {
-		ServerLevel to = from.dimension() == LEVEL ? from.getServer().overworld() : from.getServer().getLevel(LEVEL);
+	private static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome> BARRENS =
+			net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME, EndRealms.id("sculk_barrens"));
+	/** How far out the search for open Silent Barrens goes, and how high its ground may lie (no mountain tops). */
+	private static final int BARRENS_SEARCH = 4000;
+	private static final int BARRENS_STEP = 48;
+	private static final int MAX_GROUND = 100;
+
+	/**
+	 * Where a portal in {@code from} leads. Into the Sculk dimension: the portal linked to this one, or else a new one
+	 * on open ground in the nearest Silent Barrens. Out of it: back to the Overworld portal it was reached from, or, for
+	 * a portal made in the Sculk dimension itself, the same spot in the Overworld.
+	 */
+	static TeleportTransition destination(ServerLevel from, Entity entity, BlockPos through) {
+		net.minecraft.server.MinecraftServer server = from.getServer();
+		boolean leaving = from.dimension() == LEVEL;
+		ServerLevel to = leaving ? server.overworld() : server.getLevel(LEVEL);
 		if (to == null) {
 			return null;                // the dimension is missing (an old world without its data)
 		}
-		int x = net.minecraft.util.Mth.floor(entity.getX());
-		int z = net.minecraft.util.Mth.floor(entity.getZ());
-		BlockPos portal = findPortal(to, x, z);
-		if (portal == null) {
-			portal = makePortal(to, x, z);
+		SculkLinks links = SculkLinks.get(server);
+		BlockPos portal = null;
+		if (leaving) {
+			BlockPos home = links.overworldFor(through);
+			if (home != null) {
+				portal = portalNear(to, home);
+			}
+			if (portal == null) {
+				int x = home != null ? home.getX() : net.minecraft.util.Mth.floor(entity.getX());
+				int z = home != null ? home.getZ() : net.minecraft.util.Mth.floor(entity.getZ());
+				portal = findPortal(to, x, z);
+				if (portal == null) {
+					portal = makePortal(to, x, z);
+				}
+				if (home == null) {
+					links.link(portal, through);
+				}
+			}
+		} else {
+			BlockPos there = links.sculkFor(through);
+			if (there != null) {
+				portal = portalNear(to, there);
+			}
+			if (portal == null) {
+				BlockPos ground = barrensNear(to, through.getX(), through.getZ());
+				portal = findPortal(to, ground.getX(), ground.getZ());
+				if (portal == null) {
+					portal = makePortal(to, ground.getX(), ground.getZ());
+				}
+				links.link(through, portal);
+			}
 		}
 		BlockPos stand = standingSpotBeside(to, portal);
+		EndRealms.LOGGER.debug("Sculk portal: {} at {} -> {} portal {}, arriving at {}", entity.getName().getString(), through,
+				to.dimension().identifier(), portal, stand);
 		return new TeleportTransition(to, Vec3.atBottomCenterOf(stand), Vec3.ZERO, entity.getYRot(), entity.getXRot(),
 				arrived -> to.playSound(null, arrived.getX(), arrived.getY(), arrived.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 1.0F, 0.6F));
+	}
+
+	/** A portal block at or right next to {@code pos}, if it is still there. */
+	private static BlockPos portalNear(ServerLevel level, BlockPos pos) {
+		level.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
+		BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
+		for (int dx = -3; dx <= 3; dx++) {
+			for (int dy = -3; dy <= 3; dy++) {
+				for (int dz = -3; dz <= 3; dz++) {
+					if (level.getBlockState(p.setWithOffset(pos, dx, dy, dz)).is(ModBlocks.SCULK_PORTAL)) {
+						return p.immutable();
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * The nearest open ground of the Silent Barrens: searched in widening rings from the arrival point, by the terrain
+	 * the generator would make (nothing is generated for it), taking the first spot whose surface is Silent Barrens and
+	 * not up a mountain. Falls back to the arrival point itself.
+	 */
+	private static BlockPos barrensNear(ServerLevel level, int x, int z) {
+		net.minecraft.world.level.chunk.ChunkGenerator generator = level.getChunkSource().getGenerator();
+		net.minecraft.world.level.levelgen.RandomState random = level.getChunkSource().randomState();
+		net.minecraft.world.level.biome.BiomeResolver biomes = generator.getBiomeSource().createUncachedResolver(random);
+		for (int r = 0; r <= BARRENS_SEARCH; r += BARRENS_STEP) {
+			int points = Math.max(1, (int) (2 * Math.PI * r / BARRENS_STEP));
+			for (int i = 0; i < points; i++) {
+				double angle = 2 * Math.PI * i / points;
+				int px = x + (int) Math.round(Math.cos(angle) * r);
+				int pz = z + (int) Math.round(Math.sin(angle) * r);
+				int ground = generator.getBaseHeight(px, pz, Heightmap.Types.WORLD_SURFACE_WG, level, random);
+				if (ground < level.getSeaLevel() - 8 || ground > MAX_GROUND) {
+					continue;
+				}
+				var biome = biomes.getNoiseBiome(px >> 2, ground >> 2, pz >> 2);
+				if (biome.is(BARRENS)) {
+					return new BlockPos(px, ground, pz);
+				}
+			}
+		}
+		return new BlockPos(x, 64, z);
 	}
 
 	private static BlockPos findPortal(ServerLevel level, int x, int z) {

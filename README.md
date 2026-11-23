@@ -23,7 +23,10 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.49.0)
+## Tartalom (0.49.1)
+- **Érkezés a Sculk-dimenzióba**: a portál mindig a legközelebbi Néma puszta felszínére visz (nem hegyre, nem a föld alá), és a két portál összekapcsolódik: visszafelé oda jutsz, ahonnan elindultál (például az Ókori városhoz)
+- **Visszhangkulcs**: a keretben lévő sculk-erek helyére is kerül portál
+- **Biomok**: a különleges biomok (Fordított erdő, Árnyváros, Harangvölgy, Hallgató oszlopok, Szétszórt romok) kb. 20 blokkal nagyobbak, és két különböző nem érintkezik egymással: közéjük Néma puszta kerül
 - **Fordított erdő**: a föld fölött lebegő sculk-tömbökből lefelé nőnek az elhalt fák, lombjuk lent lóg, róla sápadt moha és **Csüngő bogyó** lóg (lebegés, lassú esés, egy pillanatra sötétség); a lombok között **Lógók** csüngenek ágnak álcázva, és rád vetődnek, ha alájuk sétálsz
 - **Árnyváros**: sötét téglából és füstös **Visszhangüvegből** épült félig romos házak, tornyok és oszlopsorok, ládákkal; **Árnyalakok** járják, közelről szétfoszlanak; ajtócsapódás, léptek, suttogás forrás nélkül
 - **Harangvölgy** (a kiszáradt folyóvölgyekben): ívek, karmok, ferde gerincek és csavarodó csontok, róluk láncon lógó repedt óriásharangok; csak akkor kondulnak, ha nincs ott senki, és a kongás odahívja a **Harangozókat** (sötétséget hozó ütés)

@@ -111,9 +111,16 @@ public class EchoKeyItem extends Item {
 		return found;
 	}
 
-	/** Air, or something thin that the portal may take the place of (sculk veins, candles' light, snow). */
+	/**
+	 * Air, or something thin that the portal takes the place of: sculk veins (the Ancient City's frame is full of them),
+	 * moss, snow, cobwebs - anything you could walk through. Not the frame itself, and not water or lava.
+	 */
 	private static boolean open(ServerLevel level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos);
-		return state.isAir() || (state.canBeReplaced() && state.getFluidState().isEmpty());
+		if (state.isAir() || state.is(Blocks.SCULK_VEIN)) {
+			return true;
+		}
+		return state.getFluidState().isEmpty() && !state.is(ModBlocks.SCULK_PORTAL)
+				&& (state.canBeReplaced() || state.getCollisionShape(level, pos).isEmpty());
 	}
 }
