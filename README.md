@@ -23,7 +23,9 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.49.1)
+## Tartalom (0.49.2)
+- **/name <név> <üzenet>** (csak adminoknak): a chatbe úgy kerül az üzenet, mintha az a játékos írta volna; a szervernaplóba bekerül, ki küldte valójában
+- Javítva (kísérleti): teleport után (/tp, /tpa, gyöngy) a megérkező játékos nem látta a másikat, csak újra-belépés után; most a szerver teleport után újraküldi egymásnak a közelben lévő játékosokat
 - **Érkezés a Sculk-dimenzióba**: a portál mindig a legközelebbi Néma puszta felszínére visz (nem hegyre, nem a föld alá), és a két portál összekapcsolódik: visszafelé oda jutsz, ahonnan elindultál (például az Ókori városhoz)
 - **Visszhangkulcs**: a keretben lévő sculk-erek helyére is kerül portál
 - **Biomok**: a különleges biomok (Fordított erdő, Árnyváros, Harangvölgy, Hallgató oszlopok, Szétszórt romok) kb. 20 blokkal nagyobbak, és két különböző nem érintkezik egymással: közéjük Néma puszta kerül
