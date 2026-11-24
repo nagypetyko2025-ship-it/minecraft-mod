@@ -68,6 +68,7 @@ public class AdminPanel implements DedicatedServerModInitializer {
 		ServerLifecycleEvents.SERVER_STOPPING.register(s -> stop());
 		history.register();
 		timeline.register();
+		Ranks.register();
 		AutoRestart.register();
 		if (Worlds.available()) {
 			MultiWorlds.register();
@@ -162,6 +163,15 @@ public class AdminPanel implements DedicatedServerModInitializer {
 				case "/api/status" -> onServer(this::status);
 				case "/api/players" -> onServer(this::players);
 				case "/api/whitelist" -> onServer(this::whitelist);
+				case "/api/ranks" -> onServer(() -> Ranks.describe(server));
+				case "/api/rank-save" -> onServer(() -> {
+					Ranks.put(server, body);
+					return Map.of("ok", true);
+				});
+				case "/api/rank-delete" -> onServer(() -> {
+					Ranks.delete(server, body.get("id").getAsString());
+					return Map.of("ok", true);
+				});
 				case "/api/timeline" -> {
 					String query = exchange.getRequestURI().getQuery();
 					int days = 7;

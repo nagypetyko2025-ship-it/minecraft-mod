@@ -23,7 +23,9 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.49.2)
+## Tartalom (0.50.0)
+- **Rangok**: új „Rangok” fül a szerverpanelen („+ Új rang” gomb): név, szín (színválasztóval), félkövér, sorrend, tagok és parancsok; a rang a játékos neve előtt látszik a Tab-listában, a chatben és a névcédulán, a magasabb rang feljebb a Tab-listában; a bejelölt parancsokat a tagjai operátori jog nélkül is használhatják (azonnal érvényes)
+- **/fly [játékos]**: repülés be/ki túlélő módban is (dupla ugrással indul); alapból operátoroknak, rangonként kiosztható; levegőben kikapcsolva lassú esést ad
 - **/name <név> <üzenet>** (csak adminoknak): a chatbe úgy kerül az üzenet, mintha az a játékos írta volna; a szervernaplóba bekerül, ki küldte valójában
 - Javítva (kísérleti): teleport után (/tp, /tpa, gyöngy) a megérkező játékos nem látta a másikat, csak újra-belépés után; most a szerver teleport után újraküldi egymásnak a közelben lévő játékosokat
 - **Érkezés a Sculk-dimenzióba**: a portál mindig a legközelebbi Néma puszta felszínére visz (nem hegyre, nem a föld alá), és a két portál összekapcsolódik: visszafelé oda jutsz, ahonnan elindultál (például az Ókori városhoz)

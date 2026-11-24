@@ -60,6 +60,7 @@ public class EndRealms implements ModInitializer {
 						.filter(recipe -> recipe.id().identifier().getNamespace().equals(MOD_ID)).toList()));
 		CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, selection) -> hu.endrealms.command.TeleportRequests.register(dispatcher));
 		CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, selection) -> hu.endrealms.command.NameCommand.register(dispatcher));
+		CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, selection) -> hu.endrealms.command.FlyCommand.register(dispatcher));
 		hu.endrealms.command.TrackingRefresh.init();
 		hu.endrealms.command.TeleportRequests.init();
 		ServerTickEvents.END_SERVER_TICK.register(AshWraithSpawner::tick);

@@ -69,6 +69,17 @@ button.b.on{border-color:var(--accent);color:var(--accent)}
 .tlheat div{height:46px;border:1px solid var(--line);border-radius:5px;display:flex;align-items:flex-end;justify-content:center}
 .tlheat span{font-size:11px;color:var(--muted);padding-bottom:2px}
 @media (max-width:640px){.tlname,.tlaxis{width:90px}.tlaxis{margin-left:90px}}
+/* ranks */
+.rk{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--panel2)}
+.rk .tag2{font-weight:600;padding:2px 8px;border-radius:6px;background:#0008}
+.rk .meta{color:var(--muted);font-size:13px;flex:1}
+.rkform{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;align-items:center}
+.rkform input[type=text],.rkform input[type=number]{width:100%}
+.rkcmds{max-height:220px;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 10px;padding:6px;border:1px solid var(--line);border-radius:6px}
+.rkcmds label{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:2px 8px;font-size:13px}
+.chip b{cursor:pointer;color:var(--bad);margin-left:6px}
 </style>
 </head>
 <body>
@@ -90,6 +101,11 @@ button.b.on{border-color:var(--accent);color:var(--accent)}
   <div class="box pad row"><button class="b" id="restart">Újraindítás</button><button class="b danger" id="shutdown">Leállítás</button></div>
 </section>
 <section id="players"><div id="pdetail" style="display:none"></div><div id="timeline"></div><h2 id="allhead">Minden játékos</h2><div class="box" id="allplayers"></div></section>
+<section id="ranks">
+  <div class="row" style="justify-content:space-between;margin-bottom:10px"><span style="color:var(--muted)">A rang a Tab-listában, a chatben és a névcédulán is a játékos neve előtt látszik, a saját színével. A bejelölt parancsokat a tagjai operátori jog nélkül is használhatják.</span><button class="b" id="rknew">+ Új rang</button></div>
+  <div class="box" id="rklist"></div>
+  <div id="rkedit" style="display:none;margin-top:14px"></div>
+</section>
 <section id="whitelist">
   <div class="box pad row" id="wlstate" style="justify-content:space-between"></div>
   <div class="row" style="margin:12px 0"><input type="text" id="wladd" placeholder="Játékosnév pontosan, kis- és nagybetűvel, például: Tomi" maxlength="16" style="flex:1"><button class="b" id="wladdbtn">Hozzáadás</button></div>
@@ -122,7 +138,7 @@ async function api(p,b){const r=await fetch('/api/'+p,{method:b?'POST':'GET',hea
   const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j}
 function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._);t._=setTimeout(()=>t.style.display='none',2600)}
 const act=(a,e={})=>api('action',{action:a,...e}).then(()=>{toast('Kész');setTimeout(load,500)}).catch(x=>toast('Hiba: '+x.message));
-const TABS=[['home','Áttekintés'],['players','Játékosok'],['whitelist','Fehérlista'],['worlds','Világok'],['rules','Világszabályok'],['settings','Beállítások'],['console','Konzol']];
+const TABS=[['home','Áttekintés'],['players','Játékosok'],['whitelist','Fehérlista'],['ranks','Rangok'],['worlds','Világok'],['rules','Világszabályok'],['settings','Beállítások'],['console','Konzol']];
 let tab='home';
 $('tabs').innerHTML=TABS.map(([i,n])=>`<button data-t="${i}">${n}</button>`).join('');
 function show(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));load()}
@@ -277,12 +293,52 @@ function drawTimeline(){const t=TL;if(!t)return;
       :'<div class="empty">Ezen a napon senki sem volt fent.</div>';
   }
   $('timeline').innerHTML=`<h2>Ki mikor volt fent</h2><div class="box pad"><div class="row" style="flex-wrap:wrap;margin-bottom:12px">${btns}</div>${body}</div>`}
-const LOAD={home,players:()=>Promise.all([players(),timeline()]),whitelist,worlds,rules,settings,console:log};
+let RK=null,RKEDIT=null;
+async function ranks(){RK=await api('ranks');drawRanks()}
+function rkTag(r){return `<span class="tag2" style="color:${esc(r.color)};${r.bold?'font-weight:800':''}">[${esc(r.name)}]</span>`}
+function drawRanks(){
+  $('rklist').innerHTML=RK.ranks.length?RK.ranks.map(r=>`<div class="rk">${rkTag(r)}<span class="meta">${r.members.length} tag · ${r.commands.length} parancs · sorrend: ${r.order}</span><button class="b" data-rked="${esc(r.id)}">Szerkesztés</button></div>`).join('')
+    :'<div class="empty">Még nincs rang. Hozz létre egyet az „Új rang” gombbal.</div>'}
+function rkOpen(r){
+  RKEDIT=r?JSON.parse(JSON.stringify(r)):{id:'',name:'',color:'#7FE0E8',order:100,bold:false,commands:[],members:[]};
+  const isNew=!r;
+  $('rkedit').style.display='block';
+  $('rkedit').innerHTML=`<h2>${isNew?'Új rang':'Rang szerkesztése'}</h2><div class="box pad"><div class="rkform">
+    <span>Név (ezt írja ki)</span><input type="text" id="rkname" maxlength="24" value="${esc(RKEDIT.name)}" placeholder="például VIP">
+    <span>Azonosító</span><input type="text" id="rkid" maxlength="24" value="${esc(RKEDIT.id)}" ${isNew?'':'disabled'} placeholder="kisbetű, szám, _ (például vip)">
+    <span>Szín</span><div class="row"><input type="color" id="rkcolor" value="${esc(RKEDIT.color)}"><label><input type="checkbox" id="rkbold" ${RKEDIT.bold?'checked':''}> félkövér</label></div>
+    <span>Sorrend</span><input type="number" id="rkorder" min="0" max="9999" value="${RKEDIT.order}" title="Kisebb szám = feljebb a Tab-listában">
+    <span>Előnézet</span><div id="rkprev"></div>
+    <span>Tagok</span><div><div class="chips" id="rkmembers"></div><div class="row" style="margin-top:6px"><input type="text" id="rkadd" list="rkplayers" maxlength="16" placeholder="Játékosnév pontosan" style="flex:1"><datalist id="rkplayers"></datalist><button class="b" id="rkaddbtn">Hozzáadás</button></div></div>
+    <span>Parancsok</span><div><input type="text" id="rkcmdq" placeholder="Keresés a parancsok között…" style="width:100%;margin-bottom:6px"><div class="rkcmds" id="rkcmds"></div></div>
+  </div><div class="row" style="margin-top:12px"><button class="b" id="rksave">Mentés</button><button class="b" id="rkcancel">Mégse</button>${isNew?'':'<button class="b danger" id="rkdel" style="margin-left:auto">Rang törlése</button>'}</div></div>`;
+  api('players').then(l=>{$('rkplayers').innerHTML=l.map(p=>`<option value="${esc(p.name)}">`).join('')}).catch(()=>{});
+  const prev=()=>{RKEDIT.name=$('rkname').value;RKEDIT.color=$('rkcolor').value;RKEDIT.bold=$('rkbold').checked;
+    $('rkprev').innerHTML=`<span style="background:#000a;padding:4px 10px;border-radius:6px;font-family:monospace">${rkTag({...RKEDIT,name:RKEDIT.name||'Rang'})} Játékos</span>`};
+  const members=()=>{$('rkmembers').innerHTML=RKEDIT.members.length?RKEDIT.members.map(m=>`<span class="chip">${esc(m)}<b data-rkrm="${esc(m)}" title="Eltávolítás">✕</b></span>`).join(''):'<span style="color:var(--muted)">Még nincs tagja.</span>'};
+  const cmds=()=>{const q=$('rkcmdq').value.toLowerCase();
+    $('rkcmds').innerHTML=RK.commands.filter(c=>c.includes(q)).map(c=>`<label title="/${esc(c)}"><input type="checkbox" data-rkcmd="${esc(c)}" ${RKEDIT.commands.includes(c)?'checked':''}> /${esc(c)}</label>`).join('')};
+  ['rkname','rkcolor'].forEach(i=>$(i).oninput=prev);$('rkbold').onchange=prev;$('rkcmdq').oninput=cmds;
+  const add=()=>{const n=$('rkadd').value.trim();if(!/^[A-Za-z0-9_]{1,16}$/.test(n)){toast('Érvénytelen név');return}
+    if(!RKEDIT.members.some(m=>m.toLowerCase()===n.toLowerCase()))RKEDIT.members.push(n);$('rkadd').value='';members()};
+  $('rkaddbtn').onclick=add;$('rkadd').onkeydown=e=>{if(e.key==='Enter')add()};
+  $('rkcancel').onclick=()=>{$('rkedit').style.display='none';RKEDIT=null};
+  $('rksave').onclick=()=>{RKEDIT.name=$('rkname').value.trim();RKEDIT.id=($('rkid').value||'').trim().toLowerCase();RKEDIT.color=$('rkcolor').value;
+    RKEDIT.bold=$('rkbold').checked;RKEDIT.order=+$('rkorder').value||0;
+    api('rank-save',RKEDIT).then(()=>{toast('Rang elmentve');$('rkedit').style.display='none';RKEDIT=null;ranks()}).catch(x=>toast('Hiba: '+x.message))};
+  if(!isNew)$('rkdel').onclick=()=>{if(confirm('Törlöd ezt a rangot: '+RKEDIT.name+'? A tagjai rang nélkül maradnak.'))
+    api('rank-delete',{id:RKEDIT.id}).then(()=>{toast('Rang törölve');$('rkedit').style.display='none';RKEDIT=null;ranks()}).catch(x=>toast('Hiba: '+x.message))};
+  prev();members();cmds();$('rkedit').scrollIntoView({behavior:'smooth'})}
+$('rknew').onclick=()=>rkOpen(null);
+const LOAD={home,players:()=>Promise.all([players(),timeline()]),whitelist,ranks,worlds,rules,settings,console:log};
 let on=true;
 async function load(){try{await LOAD[tab]();$('conn').textContent='● fut';$('conn').style.color='var(--good)';on=true}catch(e){$('conn').textContent='● nem elérhető';$('conn').style.color='var(--bad)';on=false}}
 setInterval(()=>{if(tab==='home'||tab==='console'||!on)load()},2500);
 document.body.addEventListener('click',e=>{const d=e.target.dataset;if(!d)return;
   if(d.a)act(d.a);
+  if(d.rked)rkOpen(RK.ranks.find(r=>r.id===d.rked));
+  if(d.rkrm&&RKEDIT){RKEDIT.members=RKEDIT.members.filter(m=>m!==d.rkrm);e.target.parentElement.remove()}
+  if(d.rkcmd!==undefined&&RKEDIT){const c=d.rkcmd;RKEDIT.commands=e.target.checked?[...new Set([...RKEDIT.commands,c])]:RKEDIT.commands.filter(x=>x!==c)}
   if(d.tl!==undefined){TLDAY=d.tl.startsWith('sum')?d.tl:+d.tl;drawTimeline()}
   if(d.wl&&(d.wl==='whitelist-on'||confirm('Kikapcsolod a fehérlistát? Utána bárki beléphet, aki ismeri a szerver címét.')))act(d.wl);
   if(d.wladd)act('whitelist-add',{player:d.wladd});
