@@ -29,6 +29,11 @@ pack = os.path.join(ROOT, "server", "jatekos-csomag.zip")      # the players' de
 if not os.path.isfile(pack):
     sys.exit("missing server/jatekos-csomag.zip: run tools/make_player_pack.py first")
 shutil.copy2(pack, updates)
+# The server machine's agent (Szerverugynok.exe) reads this every 10 minutes and fetches the jar when it is newer.
+with open(os.path.join(updates, "latest.txt"), "w", encoding="utf-8", newline="
+") as f:
+    f.write(version + "
+")
 
 
 def git(*args):
