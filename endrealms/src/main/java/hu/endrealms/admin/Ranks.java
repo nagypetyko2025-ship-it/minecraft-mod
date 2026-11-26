@@ -39,10 +39,11 @@ import net.minecraft.world.scores.Team;
 /**
  * Ranks: named, coloured groups of players, kept in config/endrealms-ranks.json and edited in the control panel.
  * <p>
- * Each rank is a scoreboard team behind the scenes, so its tag shows before the player's name in the Tab list, in chat
- * and on the name tag above their head, with no client mod needed; higher ranks (lower order number) sort first in the
- * Tab list. A rank may also open commands to its members that would otherwise need operator rights: every top-level
- * command's requirement is widened once to "the old rule, or the player's rank allows this command".
+ * A player may have any number of ranks. Their tags show before the player's name in the Tab list, in chat and on the
+ * name tag above their head (through a scoreboard team of their own), with no client mod needed; higher ranks (lower
+ * order number) sort first in the Tab list. Ranks may also open commands to their members that would otherwise need
+ * operator rights: every top-level command's requirement is widened once to "the old rule, or one of the player's
+ * ranks allows this command".
  */
 public final class Ranks {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -56,8 +57,8 @@ public final class Ranks {
 	}
 
 	private static final Map<String, Rank> RANKS = new LinkedHashMap<>();
-	/** Lower-case player name -> rank id, for the command checks. */
-	private static final Map<String, String> MEMBER_OF = new HashMap<>();
+	/** Lower-case player name -> their rank ids, highest rank first. */
+	private static final Map<String, List<String>> MEMBER_OF = new HashMap<>();
 	private static Path file;
 	private static boolean wrapped;
 
@@ -115,7 +116,10 @@ public final class Ranks {
 		MEMBER_OF.clear();
 		for (Rank rank : sorted()) {
 			for (String member : rank.members()) {
-				MEMBER_OF.putIfAbsent(member.toLowerCase(Locale.ROOT), rank.id());
+				List<String> ids = MEMBER_OF.computeIfAbsent(member.toLowerCase(Locale.ROOT), k -> new ArrayList<>());
+				if (!ids.contains(rank.id())) {
+					ids.add(rank.id());
+				}
 			}
 		}
 	}
@@ -199,18 +203,9 @@ public final class Ranks {
 		return answer;
 	}
 
-	/** Adds or replaces a rank; a player belongs to one rank only, so they leave any other they were in. */
+	/** Adds or replaces a rank. A player may be in any number of ranks. */
 	static synchronized void put(MinecraftServer server, JsonObject body) {
 		Rank rank = parse(body);
-		for (Rank other : new ArrayList<>(RANKS.values())) {
-			if (!other.id().equals(rank.id())) {
-				List<String> kept = new ArrayList<>(other.members());
-				kept.removeIf(m -> rank.members().stream().anyMatch(n -> n.equalsIgnoreCase(m)));
-				if (kept.size() != other.members().size()) {
-					RANKS.put(other.id(), new Rank(other.id(), other.name(), other.color(), other.order(), other.bold(), other.commands(), kept));
-				}
-			}
-		}
 		RANKS.put(rank.id(), rank);
 		reindex();
 		save();
@@ -227,72 +222,84 @@ public final class Ranks {
 		}
 	}
 
-	/** The rank of a player, or null. */
-	public static synchronized Rank of(String player) {
-		String id = MEMBER_OF.get(player.toLowerCase(Locale.ROOT));
-		return id == null ? null : RANKS.get(id);
+	/** Every rank of a player, highest (smallest order) first; empty if none. */
+	public static synchronized List<Rank> of(String player) {
+		List<Rank> list = new ArrayList<>();
+		for (String id : MEMBER_OF.getOrDefault(player.toLowerCase(Locale.ROOT), List.of())) {
+			list.add(RANKS.get(id));
+		}
+		return list;
 	}
 
 	// ---------------------------------------------------------------- applying: teams and command access
 
-	/** Brings the scoreboard teams in line with the ranks and re-sends everyone their command tree. */
+	/**
+	 * Brings the scoreboard teams in line with the ranks and re-sends everyone their command tree. As a player can be
+	 * in several ranks but in one team only, every ranked player gets a team of their own, named after their highest
+	 * rank's order (so the Tab list sorts by it), its prefix all their rank tags in order: "[VIP] [Repülj] ".
+	 */
 	static synchronized void apply(MinecraftServer server) {
 		Scoreboard scoreboard = server.getScoreboard();
-		Map<String, String> teamOf = new HashMap<>();
-		for (Rank rank : sorted()) {
-			String teamName = String.format(Locale.ROOT, "%s%04d_%s", TEAM_PREFIX, rank.order(), rank.id());
-			teamOf.put(rank.id(), teamName);
+		Map<String, String> wanted = new HashMap<>();             // team name -> player
+		for (Map.Entry<String, List<String>> entry : MEMBER_OF.entrySet()) {
+			List<Rank> ranks = of(entry.getKey());
+			if (ranks.isEmpty()) {
+				continue;
+			}
+			String player = playerName(ranks.get(0), entry.getKey());
+			String teamName = String.format(Locale.ROOT, "%s%04d_%s", TEAM_PREFIX, ranks.get(0).order(), entry.getKey());
+			wanted.put(teamName, player);
 			PlayerTeam team = scoreboard.getPlayerTeam(teamName);
 			if (team == null) {
 				team = scoreboard.addPlayerTeam(teamName);
 			}
-			Component tag = Component.literal("[" + rank.name() + "]").withStyle(style -> style
-					.withColor(TextColor.parseColor(rank.color()).getOrThrow()).withBold(rank.bold()));
-			team.setDisplayName(Component.literal(rank.name()));
-			team.setPlayerPrefix(Component.empty().append(tag).append(Component.literal(" ")));
-			team.setSeeFriendlyInvisibles(false);       // a rank must not let its members see each other invisible
+			net.minecraft.network.chat.MutableComponent prefix = Component.empty();
+			for (Rank rank : ranks) {
+				prefix.append(Component.literal("[" + rank.name() + "]").withStyle(style -> style
+						.withColor(TextColor.parseColor(rank.color()).getOrThrow()).withBold(rank.bold())));
+				prefix.append(Component.literal(" "));
+			}
+			team.setDisplayName(Component.literal(player));
+			team.setPlayerPrefix(prefix);
+			team.setSeeFriendlyInvisibles(false);
 			team.setAllowFriendlyFire(true);
 			team.setCollisionRule(Team.CollisionRule.ALWAYS);
+			if (scoreboard.getPlayersTeam(player) != team) {
+				scoreboard.addPlayerToTeam(player, team);
+			}
 		}
-		for (PlayerTeam team : new ArrayList<>(scoreboard.getPlayerTeams())) {          // ranks that are gone
-			if (team.getName().startsWith(TEAM_PREFIX) && !teamOf.containsValue(team.getName())) {
+		for (PlayerTeam team : new ArrayList<>(scoreboard.getPlayerTeams())) {          // teams nobody needs any more
+			if (team.getName().startsWith(TEAM_PREFIX) && !wanted.containsKey(team.getName())) {
 				scoreboard.removePlayerTeam(team);
-			}
-		}
-		for (Rank rank : sorted()) {
-			PlayerTeam team = scoreboard.getPlayerTeam(teamOf.get(rank.id()));
-			for (String member : rank.members()) {
-				if (!rank.id().equals(MEMBER_OF.get(member.toLowerCase(Locale.ROOT)))) {
-					continue;
-				}
-				PlayerTeam current = scoreboard.getPlayersTeam(member);
-				if (current != team) {
-					scoreboard.addPlayerToTeam(member, team);
-				}
-			}
-		}
-		for (PlayerTeam team : new ArrayList<>(scoreboard.getPlayerTeams())) {          // people taken out of a rank
-			if (!team.getName().startsWith(TEAM_PREFIX)) {
-				continue;
-			}
-			for (String member : new ArrayList<>(team.getPlayers())) {
-				String id = MEMBER_OF.get(member.toLowerCase(Locale.ROOT));
-				if (id == null || !team.getName().equals(teamOf.get(id))) {
-					scoreboard.removePlayerFromTeam(member, team);
-				}
 			}
 		}
 		server.getPlayerList().getPlayers().forEach(p -> server.getCommands().sendCommands(p));
 	}
 
-	/** Whether the rank of whoever runs a command lets them use this top-level command. */
+	/** The player's name as written in a rank's member list (the team entry must match the real name's case). */
+	private static String playerName(Rank rank, String lower) {
+		for (Rank r : RANKS.values()) {
+			for (String m : r.members()) {
+				if (m.toLowerCase(Locale.ROOT).equals(lower)) {
+					return m;
+				}
+			}
+		}
+		return lower;
+	}
+
+	/** Whether any of the ranks of whoever runs a command lets them use this top-level command. */
 	private static boolean allows(CommandSourceStack source, String command) {
 		ServerPlayer player = source.getPlayer();
 		if (player == null) {
 			return false;
 		}
-		Rank rank = of(player.getGameProfile().name());
-		return rank != null && rank.commands().contains(command);
+		for (Rank rank : of(player.getGameProfile().name())) {
+			if (rank.commands().contains(command)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

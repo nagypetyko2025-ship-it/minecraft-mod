@@ -23,7 +23,8 @@ export JAVA_HOME="D:/minecraft mod/tools/jdk-25.0.5+8"
 2. A `mods` mappába: Fabric API (0.165.2+26.3) + `endrealms-<verzió>.jar`
 3. A modnak kliensen ÉS szerveren is fent kell lennie (új blokk/item van benne).
 
-## Tartalom (0.50.0)
+## Tartalom (0.50.1)
+- **Több rang egy játékosnak**: bárkinek bármennyi rangja lehet; a neve előtt mind látszik sorrendben ([VIP] [Repülj] Név), a parancsjogok összeadódnak, a Tab-listában a legmagasabb rangja szerint áll
 - **Rangok**: új „Rangok” fül a szerverpanelen („+ Új rang” gomb): név, szín (színválasztóval), félkövér, sorrend, tagok és parancsok; a rang a játékos neve előtt látszik a Tab-listában, a chatben és a névcédulán, a magasabb rang feljebb a Tab-listában; a bejelölt parancsokat a tagjai operátori jog nélkül is használhatják (azonnal érvényes)
 - **/fly [játékos]**: repülés be/ki túlélő módban is (dupla ugrással indul); alapból operátoroknak, rangonként kiosztható; levegőben kikapcsolva lassú esést ad
 - **/name <név> <üzenet>** (csak adminoknak): a chatbe úgy kerül az üzenet, mintha az a játékos írta volna; a szervernaplóba bekerül, ki küldte valójában
